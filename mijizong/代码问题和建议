@@ -1,0 +1,49 @@
+
+2020年5月24日7点24分
+1）首先看懂我发的keras的代码（API方式构建模型），房价预测这些
+2）将这些代码修改为Keras的Sequential和Class方式实现
+3）将这些代码重新修改为Pytorc实现
+建议：
+1）用Keras的Sequential和Class方式也修改下代码
+2）看liuxuheng、gaoqiang、wangyuanyuan的Keras的Class实现方式
+
+
+发现的问题：
+1）调试过程中报：“ModuleNotFoundError: No module named 'numpy.testing.nosetester'”的错，百度之后让
+更新numpy、scikit-learn、scipy、joblib到最新版本，实际更新后并没有用。后来将numpy等做降级处理，设置成1.17.0后
+程序调通。环境版本问题查起错来真的很麻烦。
+回答：需要看python版本和对应的其他包版本，过高或者过低都会存在问题。
+
+2)HousePredict_model_class.py中引入keras包出现新的问题，代码第32行“from tensorflow import keras”无法编译通过，
+尝试了很多方法，没有解决，明天继续搞。
+回答：keras是一个高级API，它可以作为tensorflow、Theano等作为backend。
+     在使用的时候，不需要from tensorflow import keras。至于backend可以参考https://keras.io/zh/backend/
+
+
+2020年5月27日 8：06
+1）开始写房价预测的kears三种方式，很棒
+2）写写pytroch的相应代码，熟悉一下pytorch的实现方法
+
+2020年5月27日 18：06
+1）坚持，加油
+
+2020年5月28日19点15分
+1）实现了房价预测的Pytroch代码，加油
+
+2020年5月29日7点52分
+1）完成了招聘分类的Keras的quential代码Security，加油
+
+2020年6月1日8点15分
+1）代码一定修改完，让代码跑起来。边发现自己的问题，边修改。
+
+2020年6月2日14点2分
+1）测试米继宗目录是否正常
+
+
+2020年6月3日晚
+受亚楠启发，成功搭建Pytorch GPU环境，提升模型训练效率。
+
+2020年6月5日
+1)图像分类CNN——Keras——class继承程序报错如下：
+“RuntimeError: You must compile your model before using it.”
+暂时未能解决。

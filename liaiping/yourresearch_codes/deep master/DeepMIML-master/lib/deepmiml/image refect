@@ -1,0 +1,24 @@
+from keras.models import Sequential
+from keras.layers.core import Reshape, Permute, Activation
+from util import date_dimension_reduction
+def creat_cate_model(base_model, name="cate"):
+    model = Sequential(layers=base_model.layers, name=name)
+    model.add(Convolution(3*3, 80, 2, 1))
+    model.add(Activation('relu'))
+    model.add(Convolution(3*3, 320, 2 ,1))
+    model.add(Activation('relu'))
+    model.add(Convolution(3*3, 320, 2 ,1))
+    model.add(Activation('relu'))
+    model.add(Convolution(3*3, 80, 2 ,1))
+    model.add(Activation('relu'))
+    model.add(Convolution(3*3, 80, 2 ,1))
+    model.add(Activation('relu'))
+    model.add(MaxPooling2D((1, n_instances), strides=(1, 1)))
+    return model
+class CATE(object):
+    def __init__(self,  base_model=None, model=None):
+        if model is None:
+            self.model = creat_cate_model(base_model,)
+        else:
+            self.model = model
+        date_dimension_reduction():

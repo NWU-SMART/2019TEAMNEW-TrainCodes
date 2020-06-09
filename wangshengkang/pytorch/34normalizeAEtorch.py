@@ -13,7 +13,8 @@ import torch
 import torch.nn as nn
 import numpy as np
 import matplotlib.pyplot as plt
-from torch.utils.data import DataLoader,Dataset,TensorDataset
+from torch.utils.data import DataLoader, Dataset, TensorDataset
+
 # ------------------------------------1引入包-----------------------------------------------
 # ------------------------------------2数据处理------------------------------------------
 
@@ -23,8 +24,8 @@ X_train = f['x_train']
 X_test = f['x_test']
 f.close()
 
-print(X_train.shape)#(60000, 28, 28)
-print(X_test.shape)#(10000, 28, 28)
+print(X_train.shape)  # (60000, 28, 28)
+print(X_test.shape)  # (10000, 28, 28)
 
 X_train = X_train.astype('float32') / 255.  # 归一化
 X_test = X_test.astype('float32') / 255.
@@ -32,14 +33,16 @@ X_test = X_test.astype('float32') / 255.
 print('X_train shape:', X_train.shape)
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
-print(X_train.shape[1:])
+print(X_train.shape[1:])  # (28, 28)
 
 X_train = X_train.reshape((len(X_train), np.prod(X_train.shape[1:])))  # (60000,784)
 X_test = X_test.reshape((len(X_test), np.prod(X_test.shape[1:])))  # (10000,784)
 X_train = torch.from_numpy(X_train)  # 转为tensor
 X_test = torch.from_numpy(X_test)
-set=TensorDataset(X_train,X_train)
-loader=DataLoader(dataset=set,batch_size=128,shuffle=False)
+set = TensorDataset(X_train, X_train)  # 将数据集包装为TensorDataset
+loader = DataLoader(dataset=set, batch_size=128, shuffle=False)  # 使用dataloader类
+
+
 # ------------------------------------2数据处理------------------------------------------
 # ------------------------------------3建立模型------------------------------------------
 
@@ -47,16 +50,14 @@ loader=DataLoader(dataset=set,batch_size=128,shuffle=False)
 class normalize(nn.Module):
     def __init__(self):
         super(normalize, self).__init__()
-        self.fc1 = nn.Linear(784, 32)
+        self.fc1 = nn.Linear(784, 32)  # 32
         self.relu1 = nn.ReLU()
-        self.normalize=nn.BatchNorm1d(32)
-        self.fc2 = nn.Linear(32, 784)
+        self.fc2 = nn.Linear(32, 784)  # 784
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
         out = self.fc1(x)
         out = self.relu1(out)
-        out=self.normalize(out)
         out = self.fc2(out)
         out = self.sigmoid(out)
 
@@ -69,44 +70,49 @@ loss = nn.MSELoss()
 
 # ------------------------------------3建立模型------------------------------------------
 # ------------------------------------4训练模型，预测结果------------------------------------------
-loss_total = []
+loss_total = []  # 放置损失函数的列表
 epoch_total = []
 
 epochs = 5
 for epoch in range(epochs):
-    train_loss=0.0
-    for i,data in enumerate(loader):
-        pre = model(data[0])
-        train_loss = loss(pre, data[1])
-        loss_total.append(train_loss)
-        epoch_total.append(epoch)
-        optimizer.zero_grad()
-        train_loss.backward()
-        optimizer.step()
-        train_loss+=train_loss
-    print('epoch %3d, loss %10f' % (epoch, train_loss/len(loader)))
+    train_loss = 0.0  # 初始化损失函数的值
+    for i, data in enumerate(loader):  # 挨个batch训练
+        regularization_loss = 0
+        for param in model.parameters():  # l1正则化 L1范数是参数矩阵W中元素的绝对值之和
+            regularization_loss += torch.sum(torch.abs(param))
+        pre = model(data[0])  # data[0]为训练图像
+        train_loss = loss(pre, data[1])  # data[1]为真实图像
+        loss_regularize = train_loss + 0.000001 * regularization_loss
+        optimizer.zero_grad()  # 梯度清零
+        loss_regularize.backward()  # 损失函数反向传播
+        optimizer.step()  # 优化器更新
+        loss_regularize += loss_regularize  # 一个epoch内的所有loss加起来
+    print('epoch %3d, train_loss %10f, loss_regularize %10f' % (
+        epoch, train_loss / len(loader), loss_regularize / len(loader)))
+    loss_total.append(loss_regularize / len(loader))  # 每个epoch的loss加进来
+    epoch_total.append(epoch)
 
 # ------------------------------------4训练模型，预测结果------------------------------------------
 # ------------------------------------5可视化------------------------------------------
 # RuntimeError: Can't call numpy() on Variable that requires grad. Use var.detach().numpy() instead.
 pre = model(X_test).detach().numpy()
-n=10
+n = 10
 plt.figure(figsize=(20, 6))
 for i in range(10):
     ax = plt.subplot(3, n, i + 1)
-    plt.imshow(X_test[i].reshape(28, 28))
+    plt.imshow(X_test[i].reshape(28, 28))  # 打印真实图片
     plt.gray()
-    ax.get_xaxis().set_visible(False)
+    ax.get_xaxis().set_visible(False)  # 隐藏坐标轴
     ax.get_yaxis().set_visible(False)
 
     ax = plt.subplot(3, n, i + n + 1)
-    plt.imshow(pre[i].reshape(28, 28))
+    plt.imshow(pre[i].reshape(28, 28))  # 打印模型解码的图片
     plt.gray()
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
-
 plt.show()
 
+# 画出loss曲线
 plt.plot(epoch_total, loss_total, label='loss')
 plt.title('torch loss')  # 题目
 plt.xlabel('Epoch')  # 横坐标

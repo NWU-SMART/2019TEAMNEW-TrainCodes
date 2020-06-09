@@ -20,7 +20,6 @@ import keras
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import Sequential
-from keras.layers import Activation
 from keras.layers import Dense
 from keras import Model
 from keras.layers import Input

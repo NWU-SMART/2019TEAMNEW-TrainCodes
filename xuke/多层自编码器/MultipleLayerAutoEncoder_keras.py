@@ -17,13 +17,14 @@
 # ----------------------   代码布局： ----------------------
 #  --------------------- 1、导入需要包 ---------------------
 import keras
+import numpy as np
+import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Activation
-from keras.layers import Input
 from keras.layers import Dense
 from keras import Model
 from keras.layers import Input
-from keras.layers import output
+
 
 #  --------------------- 1、导入需要包 ---------------------
 
@@ -106,7 +107,7 @@ class MultipleLayerAutoencoder(keras.Model):
 from IPython.display import SVG
 from keras.utils.vis_utils import model_to_dot
 
-SVG(model_to_dot(autoencoder).create(prog='dot', format='svg'))
+SVG(model_to_dot(model).create(prog='dot', format='svg'))
 
 #  --------------------- 4、模型可视化 ---------------------
 
@@ -117,7 +118,7 @@ epochs = 5
 batch_size = 128
 
 # 训练模型
-history = autoencoder.fit(X_train, X_train, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(X_test, X_test))
+history = model.fit(X_train, X_train, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(X_test, X_test))
 
 #  --------------------- 5、训练 ---------------------
 
@@ -144,7 +145,7 @@ plt.show()
 #  --------------------- 7、查看自编码器的解码效果 ---------------------
 
 # decoded_imgs 为输出层的结果
-decoded_imgs = autoencoder.predict(X_test)
+decoded_imgs = model.predict(X_test)
 
 n = 10
 plt.figure(figsize=(20, 6))

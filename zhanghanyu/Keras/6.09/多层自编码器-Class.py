@@ -1,10 +1,11 @@
-#--------------         开发者信息--------------------------
-#开发者：徐珂
-#开发日期：2020.6.9
-#software：pycharm
-#项目名称：单层自编码器（keras）
-#--------------         开发者信息--------------------------
-
+# ----------------开发者信息--------------------------------#
+# 开发者：张涵毓
+# 开发日期：2020年6月09日
+# 内容：多层自编码器-Class
+# 修改日期：
+# 修改人：
+# 修改内容：
+# ----------------开发者信息--------------------------------#
 # ----------------------   代码布局： ----------------------
 # 1、导入 Keras, matplotlib, numpy, sklearn 和 panda的包
 # 2、读取手写体数据及与图像预处理
@@ -15,27 +16,39 @@
 # 7、查看自编码器的解码效果
 # 8、训练过程可视化
 # ----------------------   代码布局： ----------------------
-#  --------------------- 1、导入需要包 ---------------------
+
+#  -------------------------- 1、导入需要包 -------------------------------
 import keras
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.models import Sequential
-from keras.layers import Dense
-from keras import Model
-from keras.layers import Input
-
-
-#  --------------------- 1、导入需要包 ---------------------
+from keras.datasets import mnist
+from keras.models import Model
+from keras.layers import Input, add
+from keras.layers.core import Layer, Dense, Dropout, Activation, Flatten, Reshape
+from keras import regularizers
+from keras.regularizers import l2
+from keras.layers.convolutional import Conv2D, MaxPooling2D, UpSampling2D, ZeroPadding2D
+from keras.utils import np_utils
+#  -------------------------- 1、导入需要包 -------------------------------
 
 #  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
-path = 'D:\\keras\\编码器\\mnist.npz'           # 数据集路径
-f = np.load(path)                              # 打开文件  以npz结尾的数据集是压缩文件，里面还有其他的文件
-# 取出60000个训练集，10000个测试集
-X_train=f['x_train']        # 训练数据
-X_test=f['x_test']          # 测试数据
-f.close()                   # 关闭文件
 
-# 输出观察下X_train和X_test维度
+# 导入mnist数据
+# (X_train, _), (X_test, _) = mnist.load_data() 服务器无法访问
+# 本地读取数据
+path = 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'
+f = np.load(path)
+####  以npz结尾的数据集是压缩文件，里面还有其他的文件
+####  使用：f.files 命令进行查看,输出结果为 ['x_test', 'x_train', 'y_train', 'y_test']
+# 60000个训练，10000个测试
+# 训练数据
+X_train=f['x_train']
+# 测试数据
+X_test=f['x_test']
+f.close()
+# 数据放到本地路径
+
+# 观察下X_train和X_test维度
 print(X_train.shape)  # 输出X_train维度  (60000, 28, 28)
 print(X_test.shape)   # 输出X_test维度   (10000, 28, 28)
 
@@ -43,61 +56,54 @@ print(X_test.shape)   # 输出X_test维度   (10000, 28, 28)
 #  归一化
 X_train = X_train.astype("float32")/255.
 X_test = X_test.astype("float32")/255.
-# 输出
+
 print('X_train shape:', X_train.shape)
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 
+##### --------- 输出语句结果 --------
+#    X_train shape: (60000, 28, 28)
+#    60000 train samples
+#    10000 test samples
+##### --------- 输出语句结果 --------
+
 # 数据准备
+
 # np.prod是将28X28矩阵转化成1X784，方便BP神经网络输入层784个神经元读取
 # len(X_train) --> 6000, np.prod(X_train.shape[1:])) 784 (28*28)
-# X_train 60000*784, X_test10000*784
-X_train = X_train.reshape((len(X_train), np.prod(X_train.shape[1:])))     #numpy中reshape函数的三种常见相关用法：reshape(1,-1)转化成1行：reshape(2,-1)转换成两行：reshape(-1,1)转换成1列：reshape(-1,2)转化成两列
+X_train = X_train.reshape((len(X_train), np.prod(X_train.shape[1:])))
 X_test = X_test.reshape((len(X_test), np.prod(X_test.shape[1:])))
+
 
 #  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
 
+
 #  --------------------- 3、构建多层自编码器模型 ---------------------
+
 # 输入、隐藏和输出层神经元个数 (3个隐藏层)
 input_size = 784
 hidden_size = 128
-code_size = 64  # dimenskion 784 = (28*28) --> 128 --> 64 --> 128 --> 784 = (28*28)
+code_size = 64  # dimension 784 = (28*28) --> 128 --> 64 --> 128 --> 784 = (28*28)
 
-#  --------------------- 3.1、Sequential() ---------------------
-model = Sequential()
-model.add(Dense(units = 128,activation='relu',input_shape=(input,)))
-model.add(Dense(units = 64,activation='relu'))
-model.add(Dense(units = 128,activation='relu'))
-model.add(Dense(units = 784,activation='softmax'))
-
-
-#  ------------------------- 3.2 API-----------------------------
-
-input = Input(shape=(784,))
-hidden1 = Dense(128,activation = 'relu')(input)          # 编码
-hidden2 = Dense(64,activation = 'relu')(hidden1)
-hidden3 = Dense(128,activation = 'relu')(hidden2)        # 解码
-output = Dense(784,activation = 'sigmoid')(hidden3)
-model = Model(inputs=input, outputs=output)
-Model.compile(optimizer='adam', loss='mse')              # 模型编译
-
-#  ------------------------- 3.2 API-----------------------------
-
-#  ------------------------- 3.3 类继承-----------------------------
-class MultipleLayerAutoencoder(keras.Model):
+# 定义神经网络层数
+x = Input(shape=(input_size,))
+class MLPautoencoder(keras.Model):
     def __init__(self):
-        super(MultipleLayerAutoencoder, self).__init__()
-        self.hidden1 = keras.layers.Dense(128, activation='relu')
-        self.hidden2 = keras.layers.Dense(64, activation='relu')
-        self.hidden3 = keras.layers.Dense(128, activation='relu')
-        self.output = keras.layers.Dense(784, activation='softmax')
+        super (MLPautoencoder,self).__init__()
+        self.dense1=Dense(hidden_size, activation='relu')
+        self.dense2=Dense(code_size, activation='relu')
+        self.dense3=Dense(hidden_size, activation='relu')
+        self.dense4=Dense(input_size, activation='sigmoid')
+    def call(self, inputs, mask=None):
+        l1 = self.dense1(x)
+        h = self.dense2(l1)
+        l3 = self.dense3(h)
+        r = self.dense4(l3)
+        return r
 
-    def call(self, input):
-        hidden1 = self.hidden1(input)
-        hidden2 = self.hidden2(hidden1)
-        hidden3 = self.hidden3(hidden2)
-        output  = self.output(hidden3)
-#  ------------------------- 3.3 类继承-----------------------------
+# 构建模型，给定模型优化参数
+autoencoder = MLPautoencoder()
+autoencoder.compile(optimizer='adam', loss='mse')
 
 #  --------------------- 3、构建多层自编码器模型 ---------------------
 
@@ -106,7 +112,7 @@ class MultipleLayerAutoencoder(keras.Model):
 from IPython.display import SVG
 from keras.utils.vis_utils import model_to_dot
 
-SVG(model_to_dot(model).create(prog='dot', format='svg'))
+SVG(model_to_dot(autoencoder).create(prog='dot', format='svg'))
 
 #  --------------------- 4、模型可视化 ---------------------
 
@@ -117,15 +123,31 @@ epochs = 5
 batch_size = 128
 
 # 训练模型
-history = model.fit(X_train, X_train, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(X_test, X_test))
+history = autoencoder.fit(X_train, X_train,
+                          batch_size=batch_size,
+                          epochs=epochs,
+                          verbose=1,
+                          validation_data=(X_test, X_test)
+                         )
 
 #  --------------------- 5、训练 ---------------------
 
 #  --------------------- 6、查看自编码器的压缩效果 ---------------------
-
+x = Input(shape=(input_size,))
+class MLPa(keras.Model):
+    def __init__(self):
+        super (MLPa,self).__init__()
+        self.dense1=Dense(hidden_size, activation='relu')
+        self.dense2=Dense(code_size, activation='relu')
+        self.dense3=Dense(hidden_size, activation='relu')
+        self.dense4=Dense(input_size, activation='sigmoid')
+    def call(self, inputs, mask=None):
+        l1 = self.dense1(x)
+        h = self.dense2(l1)
+        return h
 
 # 为隐藏层的结果 (encoder的最后一层)
-conv_encoder = Model(x, h)  # 只取编码器做模型
+conv_encoder = MLPa()  # 只取编码器做模型
 encoded_imgs = conv_encoder.predict(X_test)
 
 # 打印10张测试集手写体的压缩效果
@@ -144,7 +166,7 @@ plt.show()
 #  --------------------- 7、查看自编码器的解码效果 ---------------------
 
 # decoded_imgs 为输出层的结果
-decoded_imgs = model.predict(X_test)
+decoded_imgs = autoencoder.predict(X_test)
 
 n = 10
 plt.figure(figsize=(20, 6))

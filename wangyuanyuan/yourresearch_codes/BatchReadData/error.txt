@@ -1,3 +1,5 @@
 
 还是类别个数问题：
 ValueError: Error when checking target: expected fc5 to have shape (266,) but got array with shape (221,)
+
+问题已解决！

@@ -75,21 +75,23 @@ epoch_total = []
 
 epochs = 5
 for epoch in range(epochs):
+    noregular_loss = 0.0
     train_loss = 0.0  # 初始化损失函数的值
     for i, data in enumerate(loader):  # 挨个batch训练
         regularization_loss = 0
         for param in model.parameters():  # l1正则化 L1范数是参数矩阵W中元素的绝对值之和
             regularization_loss += torch.sum(torch.abs(param))
         pre = model(data[0])  # data[0]为训练图像
-        train_loss = loss(pre, data[1])  # data[1]为真实图像
-        loss_regularize = train_loss + 0.000001 * regularization_loss
+        batch_loss = loss(pre, data[1])  # data[1]为真实图像
+        loss_regularize = batch_loss + 0.000001 * regularization_loss
         optimizer.zero_grad()  # 梯度清零
         loss_regularize.backward()  # 损失函数反向传播
         optimizer.step()  # 优化器更新
-        loss_regularize += loss_regularize  # 一个epoch内的所有loss加起来
-    print('epoch %3d, train_loss %10f, loss_regularize %10f' % (
-        epoch, train_loss / len(loader), loss_regularize / len(loader)))
-    loss_total.append(loss_regularize / len(loader))  # 每个epoch的loss加进来
+        noregular_loss += batch_loss
+        train_loss += loss_regularize  # 一个epoch内的所有loss加起来
+    print('epoch %3d, noregular_loss %10f, train_loss %10f' % (
+        epoch+1, noregular_loss / len(loader), train_loss / len(loader)))
+    loss_total.append(train_loss / len(loader))  # 每个epoch的loss加进来
     epoch_total.append(epoch)
 
 # ------------------------------------4训练模型，预测结果------------------------------------------

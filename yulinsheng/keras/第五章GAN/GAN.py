@@ -73,6 +73,7 @@ K.image_data_format()
 
 
 # 生成器建立
+# 通过输入噪声200维度，生成1*28*28的图像
 from keras.layers import Dense,\
     BatchNormalization,Activation,\
     Conv2D,Input,Reshape,UpSampling2D
@@ -114,6 +115,7 @@ generator.summary()
 
 
 # 判别器建立(提取特征)
+# 输入1*28*28的图像特征输出2维的判别0,1
 # 通过将特征转换维度最终输出一个两位的数据判断是否是真或假
 from keras.layers import LeakyReLU,Dropout,Flatten,MaxPool2D
 d_input = Input(shape=(1,28,28))
@@ -123,7 +125,9 @@ H = Conv2D(filters=256,kernel_size=(3,3),
            padding='same')(d_input)
 # 256*28*28->256*14*14
 H = MaxPool2D(pool_size=2,padding='same')(H)
-# relu函数的一种变体
+# Relu的输入值为负的时候，输出始终为0，其一阶导数也始终为0，
+# 这样会导致神经元不能更新参数，也就是神经元不学习了
+# relu函数的一种变体，Leaky ReLU是给所有负值赋予一个非零斜率
 H = LeakyReLU(0.2)(H)
 H = Dropout(0.25)(H)
 # 256*14*14->512*14*14
@@ -152,24 +156,37 @@ discrimination.summary()
 
 # --------------------- 构造GAN ---------------------
 
-#
+#Keras中冻结或者解冻一个预先训练的网络
+# 当val=True解冻，当val=False冻结
 def make_trainable(net, val):
+    # 编译模型之前
     net.trainable = val
+
     for l in net.layers:
         l.trainable = val
+
+# 冻结辨别器参数
 make_trainable(discrimination,False)
+
+
+
 # 构建GAN网络
+# 输入200维噪声
 input_gan = Input(shape=[200])
 # 通过生成器生成新图像1*28*28
 new_gen = generator(input_gan)
-# 通过判别器判断生成器生成的图像1*28*28->2
+# 通过判别器判断生成器生成的图像  1*28*28->2
 result_last = discrimination(new_gen)
-# 根据输入输出构建模型
+
+# 根据输入输出构建GAN模型
 GAN = Model(input_gan,result_last)
+# 损失函数和优化函数
 GAN.compile(loss='categorical_crossentropy',optimizer=opt)
 GAN.summary()
 
 # --------------------- 构造GAN ---------------------
+
+
 
 # ---------------------结果显示---------------------
 import matplotlib.pyplot as plt
@@ -178,21 +195,30 @@ from IPython import display
 # 定义显示损失函数
 def plt_loss(loss_):
     display.clear_output(wait=True)
+    # 返回当前图表
     display.display(plt.gcf())
+    # 定义当前图片大小
     plt.figure(figsize=(10, 8))
-    plt.plot(loss_["d"], label='discriminitive loss')
-    plt.plot(loss_["g"], label='generative loss')
-    plt.legend()
+    # 打印损失
+    plt.plot(loss_["d"], label='discriminitive loss',c='blue')
+    plt.plot(loss_["g"], label='generative loss',c='red')
+    # 图例
+    plt.legend(['discriminitive loss','generative loss'])
+    # 保存损失图片
+    plt.savefig('loss.png')
     plt.show()
+
 #  描绘生成器生成图像
 def plot_gen(n_ex=16, dim=(4, 4), figsize=(10, 10)):
-    # 随机生成0-1的随机数
+
+    # 随机生成0-1的随机数16*200，显式图片也是16个
     noise = np.random.uniform(0, 1, size=[n_ex, 200])
     # 将噪声输入到生成器中
     generated_images = generator.predict(noise)
     plt.figure(figsize=figsize)
-    # 将结果显示
+    # 将结果显示16个图片
     for i in range(generated_images.shape[0]):
+        # 将一张图片分成4*4个图片
         plt.subplot(dim[0], dim[1], i + 1)
         img = generated_images[i, 0, :, :]
         plt.imshow(img)
@@ -202,24 +228,29 @@ def plot_gen(n_ex=16, dim=(4, 4), figsize=(10, 10)):
     plt.show()
 
 
-# 预训练辨别器,生成1万个随机样本
+# 预训练辨别器,生成10000*200个随机样本
 noise_gen = np.random.uniform(0,1,size=[10000,200]) # 生成XT.shape[0]个随机样本
 generated_images = generator.predict(noise_gen)  # 生成器产生图片样本
 # 取出10000个真实样本
 ntrain = 10000
 import random
+# 随机从原始数据中选择10000的id
 trainidx = random.sample(range(0,x_train.shape[0]), ntrain)
+# 通过id获得训练数据
 XT = x_train[trainidx,:,:,:]
 # 将真实图像和判别图像通过判别器判断
 x = np.concatenate((XT, generated_images))
+
 n = XT.shape[0]
 # 构建标签
 y = np.zeros([2*n,2])  # 构造辨别器标签 one-hot encode
 y[:n,1] = 1  # 真实图像标签 [1 0]
 y[n:,0] = 1  # 生成图像标签 [0 1]
+# 打开判别器训练层
 make_trainable(discrimination,True)
+# 利用GAN训练
 predict = discrimination.fit(x,y,epochs=1,batch_size=32)
-
+# 预测x
 y_hat = discrimination.predict(x)
 
 #  计算辨别器的准确率

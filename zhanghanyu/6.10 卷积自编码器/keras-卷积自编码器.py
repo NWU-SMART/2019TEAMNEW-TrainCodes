@@ -1,7 +1,7 @@
 # ----------------开发者信息--------------------------------#
 # 开发者：张涵毓
-# 开发日期：2020年6月09日
-# 内容：多层自编码器-Class
+# 开发日期：2020年6月10日
+# 内容：卷积自编码器-API
 # 修改日期：
 # 修改人：
 # 修改内容：
@@ -12,9 +12,8 @@
 # 3、构建自编码器模型
 # 4、模型可视化
 # 5、训练
-# 6、查看自编码器的压缩效果
-# 7、查看自编码器的解码效果
-# 8、训练过程可视化
+# 6、查看解码效果
+# 7、训练过程可视化
 # ----------------------   代码布局： ----------------------
 
 #  -------------------------- 1、导入需要包 -------------------------------
@@ -36,6 +35,7 @@ from keras.utils import np_utils
 # 导入mnist数据
 # (X_train, _), (X_test, _) = mnist.load_data() 服务器无法访问
 # 本地读取数据
+# 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'(本地路径)
 path = 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'
 f = np.load(path)
 ####  以npz结尾的数据集是压缩文件，里面还有其他的文件
@@ -48,64 +48,56 @@ X_test=f['x_test']
 f.close()
 # 数据放到本地路径
 
-# 观察下X_train和X_test维度
-print(X_train.shape)  # 输出X_train维度  (60000, 28, 28)
-print(X_test.shape)   # 输出X_test维度   (10000, 28, 28)
+# 数据格式进行转换
+X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
+X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
 
-# 数据预处理
+#  数据预处理
 #  归一化
 X_train = X_train.astype("float32")/255.
 X_test = X_test.astype("float32")/255.
-
+# 输出X_train和X_test维度
 print('X_train shape:', X_train.shape)
 print(X_train.shape[0], 'train samples')
 print(X_test.shape[0], 'test samples')
 
+
 ##### --------- 输出语句结果 --------
-#    X_train shape: (60000, 28, 28)
+#    X_train shape: (60000, 28, 28, 1)
 #    60000 train samples
 #    10000 test samples
 ##### --------- 输出语句结果 --------
 
-# 数据准备
-
-# np.prod是将28X28矩阵转化成1X784，方便BP神经网络输入层784个神经元读取
-# len(X_train) --> 6000, np.prod(X_train.shape[1:])) 784 (28*28)
-X_train = X_train.reshape((len(X_train), np.prod(X_train.shape[1:])))
-X_test = X_test.reshape((len(X_test), np.prod(X_test.shape[1:])))
-
-
 #  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
 
 
-#  --------------------- 3、构建多层自编码器模型 ---------------------
+#  --------------------- 3、构建卷积自编码器模型 ---------------------
 
-# 输入、隐藏和输出层神经元个数 (3个隐藏层)
-input_size = 784
-hidden_size = 128
-code_size = 64  # dimension 784 = (28*28) --> 128 --> 64 --> 128 --> 784 = (28*28)
+# 输入维度为 1*28*28
+x = Input(shape=(28, 28,1))
 
-# 定义神经网络层数
-x = Input(shape=(input_size,))
-class MLPautoencoder(keras.Model):
-    def __init__(self):
-        super (MLPautoencoder,self).__init__()
-        self.dense1=Dense(hidden_size, activation='relu')
-        self.dense2=Dense(code_size, activation='relu')
-        self.dense3=Dense(hidden_size, activation='relu')
-        self.dense4=Dense(input_size, activation='sigmoid')
-    def call(self, inputs, mask=None):
-        l1 = self.dense1(x)
-        h = self.dense2(l1)
-        l3 = self.dense3(h)
-        r = self.dense4(l3)
-        return r
+# 编码器
+conv1_1 = Conv2D(16, (3, 3), activation='relu', padding='same')(x)  # 1*28*28 --> 16*28*28
+pool1 = MaxPooling2D((2, 2), padding='same')(conv1_1)  # 16*28*28 --> 16*14*14
+conv1_2 = Conv2D(8, (3, 3), activation='relu', padding='same')(pool1)  # 16*14*14 --> 8*14*14
+pool2 = MaxPooling2D((2, 2), padding='same')(conv1_2) # 8*14*14 --> 8*7*7
+conv1_3 = Conv2D(8, (3, 3), activation='relu', padding='same')(pool2)  # 8*7*7 --> 8*7*7
+h = MaxPooling2D((2, 2), padding='same')(conv1_3) # 8*7*7 --> 8*4*4
 
-# 构建模型，给定模型优化参数
-autoencoder = MLPautoencoder()
-autoencoder.compile(optimizer='adam', loss='mse')
 
-#  --------------------- 3、构建多层自编码器模型 ---------------------
+# 解码器
+conv2_1 = Conv2D(8, (3, 3), activation='relu', padding='same')(h) # 8*4*4 --> 8*4*4
+up1 = UpSampling2D((2, 2))(conv2_1)  # 8*4*4 --> 8*8*8
+conv2_2 = Conv2D(8, (3, 3), activation='relu', padding='same')(up1) # 8*8*8 --> 8*8*8
+up2 = UpSampling2D((2, 2))(conv2_2) # 8*8*8 --> 8*16*16
+conv2_3 = Conv2D(16, (3, 3), activation='relu')(up2) # 8*16*16 --> 16*14*14 (not same)
+up3 = UpSampling2D((2, 2))(conv2_3) # 16*14*14 --> 16*28*28
+r = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(up3) # 16*28*28 --> 1*28*28
+
+autoencoder = Model(inputs=x, outputs=r)
+autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
+
+#  --------------------- 3、构建卷积自编码器模型 ---------------------
 
 #  --------------------- 4、模型可视化 ---------------------
 
@@ -119,51 +111,18 @@ SVG(model_to_dot(autoencoder).create(prog='dot', format='svg'))
 #  --------------------- 5、训练 ---------------------
 
 # 设定peochs和batch_size大小
-epochs = 5
+epochs = 3
 batch_size = 128
 
-# 训练模型
 history = autoencoder.fit(X_train, X_train,
                           batch_size=batch_size,
-                          epochs=epochs,
-                          verbose=1,
+                          epochs=epochs, verbose=1,
                           validation_data=(X_test, X_test)
                          )
 
 #  --------------------- 5、训练 ---------------------
 
-#  --------------------- 6、查看自编码器的压缩效果 ---------------------
-x = Input(shape=(input_size,))
-class MLPa(keras.Model):
-    def __init__(self):
-        super (MLPa,self).__init__()
-        self.dense1=Dense(hidden_size, activation='relu')
-        self.dense2=Dense(code_size, activation='relu')
-        self.dense3=Dense(hidden_size, activation='relu')
-        self.dense4=Dense(input_size, activation='sigmoid')
-    def call(self, inputs, mask=None):
-        l1 = self.dense1(x)
-        h = self.dense2(l1)
-        return h
-
-# 为隐藏层的结果 (encoder的最后一层)
-conv_encoder = MLPa()  # 只取编码器做模型
-encoded_imgs = conv_encoder.predict(X_test)
-
-# 打印10张测试集手写体的压缩效果
-n = 10
-plt.figure(figsize=(20, 8))
-for i in range(n):
-    ax = plt.subplot(1, n, i+1)
-    plt.imshow(encoded_imgs[i].reshape(4, 16).T)
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-plt.show()
-
-#  --------------------- 6、查看自编码器的压缩效果 ---------------------
-
-#  --------------------- 7、查看自编码器的解码效果 ---------------------
+#  --------------------- 6、查看解码效果 ---------------------
 
 # decoded_imgs 为输出层的结果
 decoded_imgs = autoencoder.predict(X_test)
@@ -187,9 +146,10 @@ for i in range(n):
 
 plt.show()
 
-#  --------------------- 7、查看自编码器的解码效果 ---------------------
+#  --------------------- 6、查看解码效果 ---------------------
 
-#  --------------------- 8、训练过程可视化 ---------------------
+
+#  --------------------- 7、训练过程可视化 ---------------------
 
 print(history.history.keys())
 
@@ -201,5 +161,4 @@ plt.xlabel('epoch')
 plt.legend(['train', 'validation'], loc='upper right')
 plt.show()
 
-
-#  --------------------- 8、训练过程可视化 ---------------------
+#  --------------------- 7、训练过程可视化 ---------------------

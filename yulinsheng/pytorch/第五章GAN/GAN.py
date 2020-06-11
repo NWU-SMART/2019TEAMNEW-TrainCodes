@@ -76,7 +76,7 @@ class generation(torch.nn.Module):
         img_generator = self.generator(x)
         return img_generator
 # 判别器模型
-# 输入784，输出2维
+# 输入784，输出1维
 class discriminator(torch.nn.Module):
     def __init__(self):
         super(discriminator,self).__init__()
@@ -91,7 +91,7 @@ class discriminator(torch.nn.Module):
             Sigmoid()
         )
     def forward(self, x):
-        x = torch.FloatTensor(x)
+        # x = torch.FloatTensor(x)
         img_dicrimination = self.dicrimination(x)
         return img_dicrimination
 # 创建对象
@@ -103,50 +103,55 @@ if torch.cuda.is_available():
     G = G.cuda()
 # 定义损失函数
 criterion = torch.nn.BCELoss()
+# 定义优化函数
 d_optim = torch.optim.Adam(D.parameters(),lr=1e-5)
 g_optim = torch.optim.Adam(G.parameters(),lr=1e-4)
 
 # /------------------ 生成器和判别器模型建立 --------------------*/
-# 训练报错
-from torch.autograd import Variable
+# 训练有点问题，
 
+
+from torch.autograd import Variable
 import torch
 import matplotlib.pyplot as plt
 import numpy as np
+print(x_train.shape)
+img = {}
 for epoch in range(200):
-    for i in range(10000):
-        img = x_train[i,:]
-        img = torch.tensor(img)
-        img = Variable(img).cuda()
-        real_label = Variable(torch.ones(1)).cuda()  # 定义真实的图片label为1
-        fake_label = Variable(torch.zeros(1)).cuda()  # 定义假的图片的label为0
-        real_out = D(img)
-        d_loss_true = criterion(real_out,real_label)
-        noise = np.random.uniform(0,1,size=[10000,200])
-        noise = torch.tensor(noise)
-        noise = Variable(noise).cuda()  # 随机生成一些噪声
-        fake_img = G(noise).detach()  # 随机噪声放入生成网络中，生成一张假的图片。 # 避免梯度传到G，因为G不用更新, detach分离
-        fake_out = D(fake_img)  # 判别器判断假的图片，
-        d_loss_fake = criterion(fake_out, fake_label)  # 得到假的图片的loss
-        fake_scores = fake_out  # 得到假图片的判别值，对于判别器来说，假图片的损失越接近0越好
-        # 损失函数和优化
-        d_loss = d_loss_true + d_loss_fake  # 损失包括判真损失和判假损失
-        d_optim.zero_grad()  # 在反向传播之前，先将梯度归0
-        d_loss.backward()  # 将误差反向传播
-        d_optim.step()  # 更新参数
-        z = np.random.uniform(0,1,size=[10000,200])
-        z = torch.tensor(z)
-        z = Variable(z).cuda()  # 得到随机噪声
-        fake_img = G(z)  # 随机噪声输入到生成器中，得到一副假的图片
-        output = D(fake_img)  # 经过判别器得到的结果
-        g_loss = criterion(output, real_label)  # 得到的假的图片与真实的图片的label的loss
-        # bp and optimize
-        g_optim.zero_grad()  # 梯度归0
-        g_loss.backward()  # 进行反向传播
-        g_optim.step()  # .step()一般用在反向传播后面,用于更新生成网络的参数
-        plt.plot(g_loss.data.item())
-        plt.plot(d_loss.data.item())
-        plt.savefig('loss.png')
-    plt.show()
+    # img = x_train[i,:]
+    # print(img.shape)
+    img = torch.tensor(x_train)
+    img = Variable(img).cuda()
+    real_label = Variable(torch.ones(60000)).cuda()  # 定义真实的图片label为1
+    fake_label = Variable(torch.zeros(60000)).cuda()  # 定义假的图片的label为0
+    # 训练判别器
+    real_out = D(img)
+    d_loss_true = criterion(real_out,real_label)
+    real_scores = real_out
+    noise = Variable(torch.randn(60000,200)).cuda()  # 随机生成一些噪声
+    fake_img = G(noise).detach()  # 随机噪声放入生成网络中，生成一张假的图片。 # 避免梯度传到G，因为G不用更新, detach分离
+    fake_out = D(fake_img)  # 判别器判断假的图片，
+    d_loss_fake = criterion(fake_out, fake_label)  # 得到假的图片的loss
+    fake_scores = fake_out  # 得到假图片的判别值，对于判别器来说，假图片的损失越接近0越好
+    # 损失函数和优化
+    d_loss = d_loss_true + d_loss_fake  # 损失包括判真损失和判假损失
+    d_optim.zero_grad()  # 在反向传播之前，先将梯度归0
+    d_loss.backward()  # 将误差反向传播
+    d_optim.step()  # 更新参数
+
+    z = Variable(torch.randn(60000,200)).cuda()  # 得到随机噪声
+    fake_img = G(z)  # 随机噪声输入到生成器中，得到一副假的图片
+    output = D(fake_img)  # 经过判别器得到的结果
+    g_loss = criterion(output, real_label)  # 得到的假的图片与真实的图片的label的loss
+    # bp and optimize
+    g_optim.zero_grad()  # 梯度归0
+    g_loss.backward()  # 进行反向传播
+    g_optim.step()  # .step()一般用在反向传播后面,用于更新生成网络的参数
+    print(g_loss.item())
+    print(d_loss.item())
+#     plt.plot(g_loss.item())
+#     plt.plot(d_loss.item())
+#     plt.savefig('loss.png')
+# plt.show()
 
 

@@ -10,7 +10,7 @@ https://github.com/thenomemac/IMDB-LSTM-Tutorial
 https://blog.csdn.net/Einstellung/article/details/82683652
 
 #  此数据集是imdb的电影评论数据集，可以看到程序40-43行的输出结果，这个数据集已经事先做过单词转换为数字的处理
-   不同的一串数字代表不同的单词，所以只需要将所有数据填充到同样长度再送入Embedding就可以了
+   不同的一串数字代表不同的单词，所以只需要将所有数据填充到同样长度再送入Embedding就可以了。
 '''
 
 

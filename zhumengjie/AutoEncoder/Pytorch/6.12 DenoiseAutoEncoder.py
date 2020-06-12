@@ -1,5 +1,5 @@
 # 开发者：朱梦婕
-# 开发日期：2020年6月11日
+# 开发日期：2020年6月12日
 # 开发框架：pytorch
 #----------------------------------------------------------#
 
@@ -35,34 +35,27 @@ X_train=f['x_train']
 # 测试数据
 X_test=f['x_test']
 f.close()
-# 数据放到本地路径test
+# 数据放到本地路径
 
-# 数据预处理
-# 数据格式进行转换
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
 
-# 观察下X_train和X_test维度
-print(X_train.shape)  # 输出X_train维度  (60000, 28, 28)
-print(X_test.shape)   # 输出X_test维度   (10000, 28, 28)
-
-# 数据预处理
-#  归一化
 X_train = X_train.astype("float32")/255.
 X_test = X_test.astype("float32")/255.
 
-print('X_train shape:', X_train.shape)
-print(X_train.shape[0], 'train samples')
-print(X_test.shape[0], 'test samples')
+# 加入噪声数据
 
-##### --------- 输出语句结果 --------
-#    X_train shape: (60000, 28, 28)
-#    60000 train samples
-#    10000 test samples
-##### --------- 输出语句结果 --------
+noise_factor = 0.5
+X_train_noisy = X_train + noise_factor * np.random.normal(loc=0.0, scale=1.0, size=X_train.shape)
+X_test_noisy = X_test + noise_factor * np.random.normal(loc=0.0, scale=1.0, size=X_test.shape)
+
+X_train_noisy = np.clip(X_train_noisy, 0., 1.)
+X_test_noisy = np.clip(X_test_noisy, 0., 1.)
 
 x_train = torch.Tensor(X_train)
 x_test = torch.Tensor(X_test)
+
+#  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
 
 #  --------------------- 读取手写体数据及与图像预处理 ---------------------
 

@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
+from keras import Input,Model
 
 #  -------------------------- 1、导入需要包 -------------------------------
 
@@ -31,8 +32,8 @@ import pandas as pd
 
 # 数据放到本地路径
 # D:\\keras_datasets\\boston_housing.npz(本地路径)
-path = 'D:\\keras_datasets\\boston_housing.npz'
-f = np.load(path)
+path = 'C:\\Users\\Administrator\\Desktop\\代码\\boston_housing.npz'
+f=np.load(path)
 # 404个训练，102个测试
 # 训练数据
 x_train = f['x'][:404]  # 下标0到下标403
@@ -73,6 +74,17 @@ y_valid = min_max_scaler.transform(y_valid_pd)
 
 #  -------------------------- 4、模型训练   -------------------------------
 # 单CPU or GPU版本，若有GPU则自动切换
+
+
+
+#input =Input(shape=(x_train_pd.shape[1:]),)
+#x=Dense(10,activation='relu')(input)
+#x=Dropout(0.2)(x)
+#x=Dense(15,activation='relu')(x)
+#output=Dense(1,activation='linear')(x)
+#model=Model(inputs=input,outputs=output)
+
+
 model = Sequential()  # 初始化，很重要！
 model.add(Dense(units=10,  # 输出大小
                 activation='relu',  # 激励函数
@@ -94,43 +106,32 @@ model.add(Dense(units=1,
                 activation='linear'  # 线性激励函数 回归一般在输出层用这个激励函数
                 )
           )
+
 """
-API
-input =keras.input(shape=x_train_pd.shape[1],)
-x=keras.layers.Dense(10,activation='relu[)()(input)
-x=keras.layers.Dropout(0.2)
-x=keras.layers.Dense(15,activation='relu')()(x)
-output=keras.layers.Dense(1,activation='linear')()(x)
-model=keras.Model(input,output)
 
-
-CLASS
-class SimpleMLP(keras.Model):
-    def __init__(self, use_bn=False, use_dp=False, num_classes=1):
+class SimpleMLP(Model):
+    def __init__(self):
        super(SimpleMLP, self).__init__(name='mlp')
-       self.use_bn = use_bn
-       self.use_dp = use_dp
-       self.num_classes = num_classes
-       self.dense1=keras.layers.Dense(10,activation='relu')
-       self.dense2=keras.layers.Dense(15,activation=''relu')
-       self.dense3=keras.layers.Dense(1,activation=''linear')
-       if self.use_dp:
-          self.dp = keras.layers.Dropout(0.2)
-       if self.use_bn:
-          self.bn = keras.layers.BatchNormalization(axis=-1)
-    def forward(self,input):
+
+
+       self.dense1=Dense(10,activation='relu')
+       self.dense2=Dense(15,activation='relu')
+       self.dense3=Dense(1,activation='linear')
+       self.dp = Dropout(0.2)
+
+    def call(self,input):
        x=self.dense1(input)
+       x=self.dp(x)
        x=self.dense2(x)
        x=self.dense3(x)
-    return x
+       return x
 model=SimpleMLP()
-
-
-
-
-
 """
-print(model.summary())  # 打印网络层次结构
+
+
+
+
+#print(model.summary())  # 打印网络层次结构
 
 model.compile(loss='mse',  # 损失均方误差
               optimizer='adam',  # 优化器

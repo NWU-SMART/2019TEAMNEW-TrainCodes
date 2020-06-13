@@ -17,7 +17,9 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 import os
+from keras import Input,Model
 import functools
+
 
 
 # os.environ["CUDA_VISIBLE_DEVICES"] = "2"  # 使用第3块显卡
@@ -29,8 +31,10 @@ import functools
 # 数据集和代码放一起即可
 def load_data():
     paths = [
-        'D:\\keras_datasets\\train-labels-idx1-ubyte.gz', 'D:\\keras_datasets\\train-images-idx3-ubyte.gz',
-        'D:\\keras_datasets\\t10k-labels-idx1-ubyte.gz', 'D:\\keras_datasets\\t10k-images-idx3-ubyte.gz'
+        'C:\\Users\\Administrator\\Desktop\\代码\\CNN数据集\\train-labels-idx1-ubyte.gz',
+        'C:\\Users\\Administrator\\Desktop\\代码\\CNN数据集\\train-images-idx3-ubyte.gz',
+        'C:\\Users\\Administrator\\Desktop\\代码\\CNN数据集\\t10k-labels-idx1-ubyte.gz',
+        'C:\\Users\\Administrator\\Desktop\\代码\\CNN数据集\\t10k-images-idx3-ubyte.gz'
     ]
 
     with gzip.open(paths[0], 'rb') as lbpath:
@@ -52,7 +56,7 @@ def load_data():
 (x_train, y_train), (x_test, y_test) = load_data()
 batch_size = 32
 num_classes = 10
-epochs = 5
+epoch = 1
 data_augmentation = True  # 图像增强
 num_predictions = 20
 save_dir = os.path.join(os.getcwd(), 'saved_models_cnn')
@@ -71,9 +75,9 @@ x_test /= 255  # 归一化
 #  -------------------------- 2、读取数据与数据预处理 -------------------------------
 
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
-
-model = Sequential()
-model.add(Conv2D(32, (3, 3), padding='same',  # 32，(3,3)是卷积核数量和大小
+"""
+#model = Sequential()
+#model.add(Conv2D(32, (3, 3), padding='same',  # 32，(3,3)是卷积核数量和大小
                  input_shape=x_train.shape[1:]))  # 第一层需要指出图像的大小
 model.add(Activation('relu'))
 model.add(Conv2D(32, (3, 3)))
@@ -94,73 +98,55 @@ model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(num_classes))
 model.add(Activation('softmax'))
-"""
-imputs=keras.input(shape=(28,28,1))
-x=keras.layers.conv2D(32,3,1,1,activation='relu')(inputs)
-x=keras.layers.conv2D(32,3,activation='relu')(x)
-x = keras.layers.MaxPooling2D(2)(x)
-x=keras.layers.Dropout(0.25)(x)
-x=keras.layers.conv2D(64,3,1,1,activation='relu')(x)
-x=keras.layers.conv2D(64,3,activation='relu')(x)
-x = keras.layers.MaxPooling2D(2)(x)
-x=keras.layers.Dropout(0.25)(x)
-x=keras.layers.GlobalMaxPooling2D()(x)
-x=leras.layers.Dense(512,activation='relu')（x)
-x=keras.layers.Dropout(0.5)(x)
-predict=leras.layers.Dense(num_classes,actication='softmax)(x)
+
+inputs=Input(shape=(28,28,1))
+x=Conv2D(32,kernel_size=3,padding='same',activation='relu')(inputs)
+x=Conv2D(32,kernel_size=3,activation='relu')(x)
+x =MaxPooling2D(pool_size=(2,2))(x)
+x=Dropout(0.25)(x)
+x=Conv2D(64,kernel_size=3,padding='same',activation='relu')(x)
+x=Conv2D(64,kernel_size=3,activation='relu')(x)
+x =MaxPooling2D(pool_size=(2,2))(x)
+x=Dropout(0.25)(x)
+x=Flatten()(x)
+x=Dense(512,activation='relu')(x)
+x=Dropout(0.5)(x)
+predict=Dense(num_classes,activation='softmax')(x)
 model=keras.Model(inputs=inputs, outputs=predict, name='classfier')
 
+"""
+inputs=Input(shape=(28,28,1))
+class SimpleMLP(Model):
+    def __init__(self ):
+       super(SimpleMLP, self).__init__()
 
-class SimpleMLP(keras.Model):
-    def __init__(self, use_bn=False, use_dp=False, num_classes=10):
-       super(SimpleMLP, self).__init__(name='mlp')
-       self.use_bn = use_bn
-       self.use_dp = use_dp
-       self.num_classes = num_classes
-       self.conv2d1=keras.layers.conv2D(32,3,1,1,activation='relu')
-       self.cinv2d2=keras.layers.conv2D(32,3,activation='relu')
-       self.maxpooling2d1=keras.layers.MaxPooling2D(2)
-       self.conv2d3=keras.layers.conv2D(64,3,1,1,activation='relu')
-       self.conv2d4=keras.layers.conv2D(64,3,activation='relu')
-       self.maxpooling2d2 = keras.layers.MaxPooling2D(2)
-       self.dense1=keras.layers.GlobalMaxPooling2D()
-       self.dense2=leras.layers.Dense(512,activation='relu')
-       self.dropout=keras.layers.Dropout(0.5)
-       self.dense3=leras.layers.Dense(num_classes,actication='softmax)(x)
-       if if self.use_dp:
-       self.dp = keras.layers.Dropout(0.25)
-       if self.use_bn:
-       self.bn = keras.layers.BatchNormalization(axis=-1)
-    def call(self,imput):
-        x=self.conv2d1(input)
+
+       self.conv2d1=Conv2D(32,kernel_size=3,padding='same',activation='relu')
+       self.conv2d2=Conv2D(32,kernel_size=3,activation='relu')
+       self.maxpooling2d1=MaxPooling2D(pool_size=(2,2))
+       self.conv2d3=Conv2D(64,kernel_size=3,padding='same',activation='relu')
+       self.conv2d4=Conv2D(64,kernel_size=3,activation='relu')
+       self.maxpooling2d2 = MaxPooling2D(pool_size=(2,2))
+       self.dense1=Flatten()
+       self.dense2=Dense(512,activation='relu')
+       self.dropout=Dropout(0.5)
+       self.dense3=Dense(10,activation='softmax')
+
+    def call(self,inputs):
+        x=self.conv2d1(inputs)
         x= self.conv2d2(x)
         x=self.maxpooling2d1(x)
-        if self.use_dp:
-           x = self.dp(x)
-        if self.use_bn:
-           x = self.bn(x)
+
         x=self.conv2d3(x)
         x=self.conv2d4(x)
         x=self.maxpooling2d2(x)
-        if self.use_dp:
-           x = self.dp(x)
-        if self.use_bn:
-          x = self.bn(x)
+
         x= self.dense1(x)
         x= self.dense2(x)
         x=self.dropout(x)
         return self.dense3(x)
 model=SimpleMLP()
-
-
-
-
-
-"""
-# initiate RMSprop optimizer
 opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)
-
-# Let's train the model using RMSprop
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
@@ -173,7 +159,7 @@ if not data_augmentation:
     print('Not using data augmentation.')
     history = model.fit(x_train, y_train,
                         batch_size=batch_size,
-                        epochs=epochs,
+                        epochs=epoch,
                         validation_data=(x_test, y_test),
                         shuffle=True)
 else:
@@ -218,7 +204,7 @@ else:
                                                batch_size=batch_size),
                                   # flow_from_directory()从路径生成增强数据,和flow方法相比最大的优点在于不用
                                   # 一次将所有的数据读入内存当中,这样减小内存压力，这样不会发生OOM
-                                  epochs=epochs,
+                                  epochs=epoch,
                                   steps_per_epoch=x_train.shape[0] // batch_size,
                                   validation_data=(x_test, y_test),
                                   workers=10  # 在使用基于进程的线程时，最多需要启动的进程数量。
@@ -230,11 +216,11 @@ else:
 
 model.summary()
 # Save model and weights
-if not os.path.isdir(save_dir):
-    os.makedirs(save_dir)
-model_path = os.path.join(save_dir, model_name)
-model.save(model_path)
-print('Saved trained model at %s ' % model_path)
+#if not os.path.isdir(save_dir):
+#    os.makedirs(save_dir)
+#model_path = os.path.join(save_dir, model_name)
+#model.save(model_path)
+#print('Saved trained model at %s ' % model_path)
 
 #  -------------------------- 5、保存模型 -------------------------------
 
@@ -243,16 +229,6 @@ print('Saved trained model at %s ' % model_path)
 import matplotlib.pyplot as plt
 
 # 绘制训练 & 验证的准确率值
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
-plt.title('Model accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Valid'], loc='upper left')
-plt.savefig('tradition_cnn_valid_acc.png')
-plt.show()
-
-# 绘制训练 & 验证的损失值
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
 plt.title('Model loss')
@@ -261,5 +237,17 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')
 plt.savefig('tradition_cnn_valid_loss.png')
 plt.show()
+"""
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Model accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Valid'], loc='upper left')
+plt.savefig('tradition_cnn_valid_acc.png')
+plt.show()"""
+
+# 绘制训练 & 验证的损失值
+
 
 #  -------------------------- 6、保存模型，显示运行结果 -------------------------------

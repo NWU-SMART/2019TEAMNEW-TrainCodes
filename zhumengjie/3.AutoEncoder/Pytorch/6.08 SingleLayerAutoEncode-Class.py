@@ -44,10 +44,6 @@ print(X_test.shape)   # 输出X_test维度   (10000, 28, 28)
 X_train = X_train.astype("float32")/255.
 X_test = X_test.astype("float32")/255.
 
-print('X_train shape:', X_train.shape)
-print(X_train.shape[0], 'train samples')
-print(X_test.shape[0], 'test samples')
-
 ##### --------- 输出语句结果 --------
 #    X_train shape: (60000, 28, 28)
 #    60000 train samples

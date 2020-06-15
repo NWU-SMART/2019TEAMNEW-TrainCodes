@@ -16,6 +16,7 @@
 # ----------------------   代码布局： ----------------------
 
 #  -------------------------- 1、导入需要包 -------------------------------
+import keras
 import numpy as np
 from keras.models import Sequential
 import matplotlib.pyplot as plt
@@ -91,6 +92,24 @@ output = Dense(784,activation = 'sigmoid')(hidden)
 model = Model(inputs=input, outputs=output)
 model.compile(optimizer= 'adam',loss= 'mse')
 #  ------------------------ 3.2 API ----------------------------
+
+#  --------------------- 3.3、构建正则自编码器class继承模型 -----------------
+inputs = Input(shape=(input_size,))
+class Coder(keras.Model):
+    def __init__(self):
+        super(Coder,self).__init__()
+        self.dense1 = Dense(hidden_size,activation='relu',activity_regularizer=regularizers.l1(10e-5))
+        self.dense2 = Dense(output_size,activation='sigmoid')
+
+    def call(self, inputs):
+        x = self.dense1(inputs)
+        x = self.dense2(x)
+        return x
+autoencoder3 = Coder()
+#printf(autoencoder3)
+autoencoder3.compile(optimizer='adam',loss='mse')
+
+#  --------------------- 3.3、构建正则自编码器class继承模型 -----------------
 
 #  --------------------- 3、构建正则自编码器模型 ---------------------
 

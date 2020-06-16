@@ -95,19 +95,18 @@ model.compile(optimizer= 'adam',loss= 'mse')
 
 #  --------------------- 3.3、构建正则自编码器class继承模型 -----------------
 inputs = Input(shape=(input_size,))
-class Coder(keras.Model):
+class NormalAutoEncoder(keras.Model):
     def __init__(self):
-        super(Coder,self).__init__()
-        self.dense1 = Dense(hidden_size,activation='relu',activity_regularizer=regularizers.l1(10e-5))
-        self.dense2 = Dense(output_size,activation='sigmoid')
+        super(NormalAutoEncoder,self).__init__()
+        self.dense1 = Dense(32,activation='relu',activity_regularizer=regularizers.l1(10e-5))    # L1正则
+        self.dense2 = Dense(784,activation='sigmoid')
 
     def call(self, inputs):
         x = self.dense1(inputs)
         x = self.dense2(x)
         return x
-autoencoder3 = Coder()
-#printf(autoencoder3)
-autoencoder3.compile(optimizer='adam',loss='mse')
+model = NormalAutoEncoder()
+model.compile(optimizer='adam',loss='mse')
 
 #  --------------------- 3.3、构建正则自编码器class继承模型 -----------------
 
@@ -118,32 +117,28 @@ autoencoder3.compile(optimizer='adam',loss='mse')
 epochs = 15
 batch_size = 128
 history = model.fit(X_train, X_train,batch_size=batch_size, epochs=epochs,verbose=1,validation_data=(X_test, X_test))
-
+# 梯度下降  迭代次数  日志显示  验证集
 #  ------------------------------ 4、训练 ---------------------------
 
 #  --------------------- 5、查看解码效果 ---------------------
 
 # decoded_imgs 为输出层的结果
 decoded_imgs = model.predict(X_test)
-
 n = 10
-plt.figure(figsize=(20, 6))
+plt.figure(figsize=(20, 6))   # 图像的宽和高
 for i in range(n):
     # 原图
-    ax = plt.subplot(3, n, i+1)
-    plt.imshow(X_test[i].reshape(28, 28))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-
-
+    ax = plt.subplot(3, n, i+1)   # 创建成1*n的网格
+    plt.imshow(X_test[i].reshape(28, 28))   # 转化成28*28
+    plt.gray()    # 灰度显示
+    ax.get_xaxis().set_visible(False)   # 不显示x轴
+    ax.get_yaxis().set_visible(False)   # 不显示y轴
     # 解码效果图
     ax = plt.subplot(3, n, i+n+1)
     plt.imshow(decoded_imgs[i].reshape(28, 28))
     plt.gray()
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
-
 plt.show()
 
 #  --------------------- 5、查看解码效果 ---------------------
@@ -152,7 +147,6 @@ plt.show()
 #  --------------------- 6、训练过程可视化 --------------------
 
 print(history.history.keys())
-
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
 plt.title('model loss')

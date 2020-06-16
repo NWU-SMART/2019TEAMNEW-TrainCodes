@@ -57,8 +57,8 @@ model_name = 'torch_image_trained_model1.h5'
 def load_data():
     # 写入文件路径
     paths = [
-        'E:\\study\\mnist\\train-labels-idx1-ubyte.gz', 'E:\\study\\mnist\\train-images-idx3-ubyte.gz',
-        'E:\\study\\mnist\\t10k-labels-idx1-ubyte.gz', 'E:\\study\\mnist\\t10k-images-idx3-ubyte.gz'
+        'E:\\study\\kedata\\mnist\\train-labels-idx1-ubyte.gz', 'E:\\study\\kedata\\mnist\\train-images-idx3-ubyte.gz',
+        'E:\\study\\kedata\\mnist\\t10k-labels-idx1-ubyte.gz', 'E:\\study\\kedata\\mnist\\t10k-images-idx3-ubyte.gz'
     ]
 
     # 将文件解压并划分为数据集

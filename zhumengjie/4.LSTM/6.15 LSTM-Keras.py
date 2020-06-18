@@ -49,6 +49,11 @@ x_test = x_test.reshape(-1, 28, 28) / 255
 # 将类型信息进行one-hot编码(10类)
 y_train = np_utils.to_categorical(y_train, num_classes=10)
 y_test = np_utils.to_categorical(y_test, num_classes=10)
+
+print('x_train.shape',x_train.shape)
+print('y_train.shape',y_train.shape)
+print('x_test.shape',x_test.shape)
+print('y_test.shape',y_test.shape)
 #  -------------------------- 读取数据和数据处理-------------------------------
 
 #  -------------------------- 3、参数定义-------------------------------

@@ -1,117 +1,151 @@
+#=------------------2020.06.18------------------
+#导入包
+#导入数据
+#数据分析和处理
+#建模
+#评估
+#-------------------------------------------------导入包----------------------------------
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy import stats
 import sklearn
-import xgboost as xgb
-from sklearn.linear_model import LinearRegression 
+from sklearn.model_selection import cross_val_score
+#import xgboost as xgb
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import LabelEncoder,MinMaxScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.neural_network import MLPRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import AdaBoostRegressor
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import BaggingRegressor
+#-------------------------------------------------导入包----------------------------------
 
-
-traindata = pd.read_csv('D:\\Users\\linglly\\Desktop\\train.csv')
-testdata = pd.read_csv('D:\\Users\\linglly\\Desktop\\test_noLabel.csv')
-
+#-------------------------------------------------导入数据----------------------------------
+traindata = pd.read_csv('D:\\360安全浏览器下载\\MobileFile\\train.csv')
 # 了解数据具体信息
-traindata.info()
+#traindata.info()
+#-------------------------------------------------导入数据----------------------------------
 
+#-------------------------------------------------数据分析----------------------------------
 total = traindata.isnull().sum().sort_values(ascending=False)
-percent = (traindata.isnull().sum()/traindata.isnull().count()).sort_values(ascending=False)
-missing_data = pd.concat([total, percent], axis=1, keys=['Total', 'Percent'])
-missing_data.head(20)
 
-num_trainData = traindata.select_dtypes(include = ['int64', 'float64'])
+percent = (traindata.isnull().sum()/len(traindata)).sort_values(ascending=False)
 
+missing_data = pd.concat([total, percent], axis=1, keys=['total', 'percent'])
+#print(missing_data)
+traindata=traindata.drop(missing_data[missing_data['percent']>0.8].index,axis=1)
+#traindata.info()
 
-traindata_corr = num_trainData.corr()['price'][:-1]
-golden_feature_list = traindata_corr[abs(traindata_corr) > 0].sort_values(ascending = False)
+#计算相关性
+encoder=LabelEncoder()
+traindata['房屋朝向']=encoder.fit_transform(traindata['房屋朝向'].values)
+num_trainData = traindata.select_dtypes(include = ['int64', 'float64','int32'])
+traindata_corr = traindata.corr()['Label'][:-1]
+golden_feature_list = traindata_corr[abs(traindata_corr) > 0].\
+    sort_values(ascending = False)
 print("Below are {} correlated values with SalePrice:\n{}".format(len(golden_feature_list), golden_feature_list))
+traindata=traindata.drop(['时间','距离','ID'],axis=1)
+#traindata.info()
+fig,ax=plt.subplots()
+ax.scatter(x=traindata['房屋面积'],y=traindata['Label'],)
+plt.ylabel('Price')
+plt.xlabel('房屋面积')
+#plt.show()
+traindata=traindata.drop(traindata[traindata['房屋面积']>1500].index)
+#traindata.info()
+#相关系数最大的前三位做出他们的散点图，并且去除一些离群点
 
 
-traindata_corrheatmap = num_trainData.corr()
-cols = traindata_corrheatmap.nlargest(10, 'price')['price'].index
-cm = np.corrcoef(num_trainData[cols].values.T)
-sns.heatmap(cm, cbar=True, annot=True, square=True, fmt='.2f', 
-            annot_kws={'size': 10}, yticklabels=cols.values, xticklabels=cols.values)
+#补全数据
+traindata['位置']=traindata['位置'].fillna(traindata['位置'].mean())
+traindata['区']=traindata['区'].fillna(traindata['区'].mean())
+traindata['卧室数量']=traindata['卧室数量'].fillna(traindata['卧室数量'].mean())
+traindata['卫的数量']=traindata['卫的数量'].fillna(traindata['卫的数量'].mean())
+traindata['厅的数量']=traindata['厅的数量'].fillna(traindata['厅的数量'].mean())
+traindata['地铁站点']=traindata['地铁站点'].fillna(traindata['地铁站点'].mean())
+traindata['地铁线路']=traindata['地铁线路'].fillna(traindata['地铁线路'].mean())
+traindata['小区名']=traindata['小区名'].fillna(traindata['小区名'].mean())
+traindata['小区房屋出租数量']=traindata['小区房屋出租数量'].fillna(traindata['小区房屋出租数量'].mean())
+traindata['总楼层']=traindata['总楼层'].fillna(traindata['总楼层'].mean())
+traindata['房屋朝向']=traindata['房屋朝向'].fillna(traindata['房屋朝向'].mean())
+traindata['房屋面积']=traindata['房屋面积'].fillna(traindata['房屋面积'].mean())
+traindata['楼层']=traindata['楼层'].fillna(traindata['楼层'].mean())
+#traindata.info()
+#目标值处理处于正态分布
 
+#建立模型
+fig=plt.figure(figsize=(12,5))
 
+if traindata['位置'].skew()>0.75:
+    traindata['位置']=np.log1p(traindata['位置'])
+if traindata['区'].skew()>0.75:
+    traindata['区']=np.log1p(traindata['区'])
+if traindata['卧室数量'].skew()>0.75:
+    traindata['卧室数量']=np.log1p(traindata['卧室数量'])
+if traindata['卫的数量'].skew()>0.75:
+    traindata['卫的数量']=np.log1p(traindata['卫的数量'])
+if traindata['厅的数量'].skew()>0.75:
+    traindata['厅的数量']=np.log1p(traindata['厅的数量'])
+if traindata['地铁站点'].skew()>0.75:
+    traindata['地铁站点']=np.log1p(traindata['地铁站点'])
+if traindata['地铁线路'].skew()>0.75:
+    traindata['地铁线路']=np.log1p(traindata['地铁线路'])
+if traindata['小区名'].skew()>0.75:
+    traindata['小区名']=np.log1p(traindata['小区名'])
+if traindata['小区房屋出租数量'].skew()>0.75:
+    traindata['小区房屋出租数量']=np.log1p(traindata['小区房屋出租数量'])
+if traindata['总楼层'].skew()>0.75:
+    traindata['总楼层']=np.log1p(traindata['总楼层'])
+if traindata['房屋朝向'].skew()>0.75:
+    traindata['房屋朝向']=np.log1p(traindata['房屋朝向'])
+if traindata['房屋面积'].skew()>0.75:
+    traindata['房屋面积']=np.log1p(traindata['房屋面积'])
+if traindata['楼层'].skew()>0.75:
+    traindata['楼层']=np.log1p(traindata['楼层'])
+g1=sns.distplot(traindata['Label'],hist=True,
+                label='skewness:{:.2f}'.format(traindata['Label'].skew()))
+g1.legend()
+g1.set(xlabel='price')
+#plt.show()
+g2=sns.distplot(np.log1p(traindata['Label']),
+                hist=True,
+                label='skewness:{:.2f}'.format(np.log1p(traindata['Label']).skew()))
+g2.legend()
+g2.set(xlabel='log(Price+1)')
+#-------------------------------------------------数据分析----------------------------------
+#plt.show()
+traindata['Label']=np.log1p(traindata['Label'])
+ytrain=traindata['Label']
+xtrain=traindata.drop(['Label'],axis=1)
+#训练模型
+#-------------------------------------------------建模---------------------------------
+models=[LinearRegression(),KNeighborsRegressor(),
+        MLPRegressor(alpha=20),
+        DecisionTreeRegressor(),RandomForestRegressor(),
+        AdaBoostRegressor(),GradientBoostingRegressor(),BaggingRegressor()]
+models_str=['LinearRegression','KNNRegressor','MLPRegressor','DecisionTree',
+            'RandomForest','AdaBoost','GradientBoost','Bagging']
+score_=[]
+#-------------------------------------------------建模---------------------------------
 
-# 查看'pice'的分布情况
-traindata['price'].describe()
+#-------------------------------------------------评估--------------------------------
+for name,model in zip(models_str,models):
+    print('开始训练模型：'+name)
+    model=model#建立模型
+    model.fit(xtrain,ytrain)
+    score=model.score(xtrain,ytrain)
+    score_.append(str(score)[:5])
+    print(name +' 得分:'+str(score))
+lr= LinearRegression()
+lr.fit(xtrain,ytrain)
+print("LinearRegression交叉验证得分：",cross_val_score(lr,xtrain,ytrain,cv=3).mean())
+lr= DecisionTreeRegressor()
+lr.fit(xtrain,ytrain)
+print("DecisionTreeRegressor交叉验证得分：",cross_val_score(lr,xtrain,ytrain,cv=3).mean())
 
-sns.distplot(traindata['price'], color='b', bins=100)
-probmap = stats.probplot(traindata['price'], plot=plt)
-sns.distplot(np.log(traindata['price']), color='r', bins=100)
-res = stats.probplot(np.log(traindata['price']), plot=plt)
-res = stats.probplot(traindata['area_house'], plot=plt)
-sns.distplot(traindata['area_house'], color='b', bins=100)
-res = stats.probplot(np.log(traindata['area_house']), plot=plt)
-
-#把这些房屋特征和'price'的相关性可视化。
-traindata.plot.scatter(x='area_house', y='price')
-
-traindata.plot.scatter(x='floorage', y='price')
-
-traindata.plot.scatter(x='num_bathroom', y='price')
-
-traindata.plot.scatter(x='area_basement', y='price')
-
-#sns.boxplot(x='rating', y='price', data=traindata)
-
-#sns.boxplot(x='num_bedroom ', y='price', data=traindata)
-
-#sns.boxplot(x='latitude', y='price', data=traindata)
-
-#sns.boxplot(x='floor', y='price', data=traindata)
-
-#sns.boxplot(x='year_repair', y='price', data=traindata)
-
-#sns.boxplot(x='year_built', y='price', data=traindata)
-
-#sns.boxplot(x='area_parking', y='price', data=traindata)
-
-finaldata = traindata.filter(['area_house','rating', 'floorage', 'num_bathroom', 
-                              'area_basement', 'num_bedroom', 'latitude', 'floor', 
-                              'year_repair','area_parking', 'year_built ','price'], axis=1)
-finaltest = testdata.filter(['area_house','rating', 'floorage', 'num_bathroom',
-                             'area_basement', 'num_bedroom', 'latitude', 'floor', 
-                             'year_repair','area_parking','year_built '], axis=1)
-
-xtrain = finaldata.iloc[:,0:10].values
-ytrain = finaldata['price']
-xtest = finaltest.values
-
-# 创建预测模型
-regr = xgb.XGBRegressor()
-regr.fit(xtrain, ytrain)
-
-# 计算XGBoost模型得分0.91989295502373492
-regr.score(xtrain, ytrain)
-print(regr.score(xtrain, ytrain))
-# 用XGBoost运行模型
-y_pred = regr.predict(xtrain)
-
-# 用测试集预测房屋价格
-y_test = regr.predict(xtest)
-
-
-# 使用线性回归模型
-regressor = LinearRegression()
-regressor.fit(xtrain, ytrain)
-
-# 计算模型得分0.8769201701134044
-regressor.score(xtrain,ytrain)
-print(regressor.score(xtrain,ytrain))
-# 运行模型
-ytrainpred = regressor.predict(xtrain)
-
-# 预测价格
-ytestpred = regressor.predict(xtest)
-
-# 计算两种预测结果的平均值,使用exp将对数转换
-finalpred = (y_test + ytestpred) / 2
-#finalpred = np.exp(finalpred)
-
-
-pred_df = pd.DataFrame(finalpred, index=testdata["ID"], columns=["price"])
-pred_df.to_csv('Predicting_house_price_output.csv', header=True, index_label='ID')
 

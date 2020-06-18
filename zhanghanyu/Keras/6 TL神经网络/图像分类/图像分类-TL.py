@@ -185,8 +185,6 @@ else:
 
 #  --------------------- 4、训练 ---------------------
 
-
-
 #  --------------------- 5、保存模型 ---------------------
 
 model.summary()
@@ -219,7 +217,6 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')
 plt.savefig('tradition_cnn_valid_loss.png')
 plt.show()
-
 #  --------------------- 6、训练过程可视化 ---------------------
 
 

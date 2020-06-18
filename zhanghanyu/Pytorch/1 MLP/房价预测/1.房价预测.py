@@ -90,7 +90,7 @@ class MLPhp(nn.Module):
 #  --------------Method-1:早期最常用的方法------------------#
 #  --------------Method-2:利用torch.nn.Sequential()容器进行快速搭建------------------#
 '''
-class MLPhp(nn.module):
+class MLPhp(nn.Models):
     def __init__(self,input_size):
         super(MLPhp, self).__init__()
         self.dense = nn.Sequential(nn.linear(input_size, 10),
@@ -105,26 +105,26 @@ class MLPhp(nn.module):
         return y_pred
 '''
 #  ---Method-2:利用torch.nn.Sequential()容器进行快速搭建，但缺点是每层命名为默认阿拉伯数字，不易区分------------------#
-#  -------------Method-3：对方法2的改进，通过add.module()添加每一层------------------#
+#  -------------Method-3：对方法2的改进，通过add.Models()添加每一层------------------#
 '''
 class MLPhp(nn.model):
     def __init__(self):
         super(MLPhp,self).__init()
         self.dense = nn.Sequential()
-        self.dense.add.module('dense1', nn.linear(input_size,10)),
-        self.dense.add.module('relu1', nn.ReLU()),
-        self.dense.add.module('dense2', nn.linear(10,15)),
-        self.dense.add.module('relu2', nn.ReLU()),
-        self.dense.add.module('dense3', nn.linear(15, 1))
+        self.dense.add.Models('dense1', nn.linear(input_size,10)),
+        self.dense.add.Models('relu1', nn.ReLU()),
+        self.dense.add.Models('dense2', nn.linear(10,15)),
+        self.dense.add.Models('relu2', nn.ReLU()),
+        self.dense.add.Models('dense3', nn.linear(15, 1))
     def forward(self,x):
         y_pred = self.dense(x)
         return y_pred
 '''
-#  ---------Method-3：对方法2的改进，通过add.module()添加每一层，每一层可以有单独的名字------------------#
+#  ---------Method-3：对方法2的改进，通过add.Models()添加每一层，每一层可以有单独的名字------------------#
 #  -------------------------Method-4:方法3的另一种写法---------------------------#
 '''
 from collections import OrderedDict
-class MLPhp(nn.module):
+class MLPhp(nn.Models):
     def __init__(self,input_size):
         super(MLPhp,self).__init__()
         self.dense=nn.Sequential(

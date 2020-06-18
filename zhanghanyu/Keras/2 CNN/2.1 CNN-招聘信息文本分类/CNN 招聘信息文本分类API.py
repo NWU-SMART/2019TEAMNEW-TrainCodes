@@ -1,7 +1,7 @@
 # ----------------开发者信息----------------------------
 # 开发者：张涵毓
 # 开发日期：2020年6月1日
-# 内容：CNN-招聘信息文本分类-Sequential
+# 内容：2.1 CNN-招聘信息文本分类-API
 # 修改内容：
 # 修改者：
 # ----------------开发者信息----------------------------
@@ -18,6 +18,7 @@
 import pandas as pd
 import jieba
 import jieba.analyse as analyse
+import keras
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 from keras.models import Sequential
@@ -38,7 +39,7 @@ from keras.layers import BatchNormalization
 
 
 #  -------------------------- 2、招聘数据数据导入 -------------------------------
-path='D:\\研究生\\代码\\Keras代码\\1.Multi-Layer perceptron(MLP 多层感知器)\\job_detail_dataset.csv'
+path = 'D:\\研究生\\代码\\Keras代码\\1.Multi-Layer perceptron(MLP 多层感知器)\\job_detail_dataset.csv'
 job_detail_pd = pd.read_csv(path, encoding='UTF-8')
 print(job_detail_pd.head(5))
 label = list(job_detail_pd['PositionType'].unique())  # 标签
@@ -63,8 +64,10 @@ job_detail_pd.head(5)
 def chinese_word_cut(row):
     return " ".join(jieba.cut(row))
 
+
 job_detail_pd['Job_Description_jieba_cut'] = job_detail_pd.Job_Description.apply(chinese_word_cut)
 job_detail_pd.head(5)
+
 
 # 提取关键词
 def key_word_extract(texts):
@@ -89,29 +92,23 @@ y_train = job_detail_pd['label'].tolist()
 #  -------------------------- 4、建立字典，并使用 -------------------------------
 
 #  -------------------------- 5、训练模型 -------------------------------
-model = Sequential()
-model.add(Embedding(output_dim=32,  # 词向量的维度
-                    input_dim=2000,  # Size of the vocabulary 字典大小
-                    input_length=50  # 每个数字列表的长度
-                    )
-          )
-
-model.add(Conv1D(256,  # 输出大小
-                 3,  # 卷积核大小
-                 padding='same',
-                 activation='relu'))
-model.add(MaxPool1D(3, 3, padding='same'))
-model.add(Conv1D(32, 3, padding='same', activation='relu'))
-model.add(Flatten())
-model.add(Dropout(0.3))
-model.add(BatchNormalization())  # (批)规范化层
-model.add(Dense(256, activation='relu'))
-model.add(Dropout(0.2))
-model.add(Dense(units=10,
-                activation="softmax"))
-
 batch_size = 256
 epochs = 5
+from keras import Model,Input
+input = Input(shape=(50,))
+x = Embedding(2000, 32, input_length=50)(input)
+x = Conv1D(256, 3, padding='same', activation='relu')(x)
+x = MaxPool1D(3,3,padding='same')(x)
+x = Conv1D(32, 3, padding='same', activation='relu')(x)
+x = Flatten()(x)
+x = Dropout(0.3)(x)
+x = BatchNormalization()(x)
+x = Dense(256,activation='relu')(x)
+x = Dropout(0.2)(x)
+predict = Dense(units = 10,  activation = "softmax")(x)
+
+model = Model(inputs=input,outputs=predict)
+print(model)  # 打印网络层次结构
 
 # 单GPU版本
 model.summary()  # 可视化模型

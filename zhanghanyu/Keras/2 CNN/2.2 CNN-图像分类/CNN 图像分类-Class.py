@@ -1,7 +1,7 @@
 # ----------------开发者信息----------------------------
 # 开发者：张涵毓
 # 开发日期：2020年6月2日
-# 内容：CNN-图像分类-API
+# 内容：2.2 CNN-图像分类-Class
 # 修改内容：
 # 修改者：
 # ----------------开发者信息----------------------------
@@ -77,23 +77,36 @@ x_test /= 255  # 归一化
 #  -------------------------- 2、读取数据与数据预处理 -------------------------------
 
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
-from keras import Model,Input
-input=Input(shape=x_train.shape[1:])
-x=Conv2D(32,(3,3),padding='same',activation='relu')
-x=Conv2D(32,(3,3),activation='relu')(x)
-x=MaxPooling2D(pool_size=(2,2))(x)
-x=Dropout(0.25)(x)
-x=Conv2D(64,(3,3),padding='same',activation='relu')(x)
-x=Conv2D(64,(3,3),activation='relu')(x)
-x=MaxPooling2D(pool_size=(2,2))(x)
-x=Dropout(0.25)(x)
-x=Flatten()(x)
-x=Dense(512,activation='relu')(x)
-x=Dropout(0.5)(x)
-y=Dense(num_classes,activation='softmax')(x)
+class CNNic(keras.Model):
+    def __init__(self):
+        super(CNNic,self).__init__(name='CNNic')
+        self.Conv1=Conv2D(32, (3, 3), padding='same', input_shape=x_train.shape[1:],activation='relu')
+        self.Conv2=Conv2D(32,(3, 3),activation='relu')
+        self.Maxpooling=MaxPooling2D(pool_size=(2,2))
+        self.Dropout1=Dropout(0.25)
+        self.Conv3=Conv2D(64,(3,3),padding='same',activation='relu')
+        self.Conv4=Conv2D(64,(3,3),activation='relu')
+        self.Flatten=Flatten()
+        self.Dense1=Dense(512,activation='relu')
+        self.Dropout2=Dropout(0,5)
+        self.Dense2=Dense(num_classes,activation='softmax')
 
-model = Model(inputs=input,outputs=y)
+    def call(self, x):
+        x = self.Conv1(x)
+        x = self.Conv2(x)
+        x = self.Maxpooling(x)
+        x = self.Dropout1(x)
+        x = self.Conv3(x)
+        x = self.Conv4(x)
+        x = self.Maxpooling(x)
+        x = self.Dropout1(x)
+        x = self.Flatten(x)
+        x = self.Dense1(x)
+        x = self.Dropout2(x)
+        x = self.Dense2(x)
+        return x
 
+model = CNNic()
 
 # initiate RMSprop optimizer
 opt = keras.optimizers.rmsprop(lr=0.0001, decay=1e-6)

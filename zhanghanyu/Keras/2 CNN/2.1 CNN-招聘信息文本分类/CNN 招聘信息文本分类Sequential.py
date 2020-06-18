@@ -1,7 +1,7 @@
 # ----------------开发者信息----------------------------
 # 开发者：张涵毓
 # 开发日期：2020年6月1日
-# 内容：CNN-招聘信息文本分类-Class
+# 内容：2.1 CNN-招聘信息文本分类-Sequential
 # 修改内容：
 # 修改者：
 # ----------------开发者信息----------------------------
@@ -18,7 +18,6 @@
 import pandas as pd
 import jieba
 import jieba.analyse as analyse
-import keras
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
 from keras.models import Sequential
@@ -90,48 +89,30 @@ y_train = job_detail_pd['label'].tolist()
 #  -------------------------- 4、建立字典，并使用 -------------------------------
 
 #  -------------------------- 5、训练模型 -------------------------------
+model = Sequential()
+model.add(Embedding(output_dim=32,  # 词向量的维度
+                    input_dim=2000,  # Size of the vocabulary 字典大小
+                    input_length=50  # 每个数字列表的长度
+                    )
+          )
+
+model.add(Conv1D(256,  # 输出大小
+                 3,  # 卷积核大小
+                 padding='same',
+                 activation='relu'))
+model.add(MaxPool1D(3, 3, padding='same'))
+model.add(Conv1D(32, 3, padding='same', activation='relu'))
+model.add(Flatten())
+model.add(Dropout(0.3))
+model.add(BatchNormalization())  # (批)规范化层
+model.add(Dense(256, activation='relu'))
+model.add(Dropout(0.2))
+model.add(Dense(units=10,
+                activation="softmax"))
 
 batch_size = 256
 epochs = 5
 
-class CNNic(keras.Model):
-    def __init__(self):
-        super(CNNic, self).__init__(name='CNN')
-        self.embedding = keras.layers.Embedding(output_dim=32,  # 词向量的维度
-                                                input_dim=2000,  # Size of the vocabulary 字典大小
-                                                input_length=50  # 每个数字列表的长度
-                                               )
-        self.conv1 = keras.layers.Conv1D(256,  # 输出大小
-                                         3,   # 卷积核大小
-                                         padding='same',
-                                         activation='relu'
-                                         )
-        self.maxpool = keras.layers.MaxPool1D(3, 3, padding='same')
-        self.conv2 = keras.layers.Conv1D(32, 3, padding='same', activation='relu')
-        self.flatten = keras.layers.Flatten()
-        self.dropout1 = keras.layers.Dropout(0.3)
-        self.batchnomalization = keras.layers.BatchNormalization()
-        self.dense1 = keras.layers.Dense(units=256,
-                                         activation="relu")
-        self.dropout2 = keras.layers.Dropout(0.2)
-        self.dense2 = keras.layers.Dense(units=10,
-                                         activation="softmax")
-
-    def call(self, x):
-        x = self.embedding(x)
-        x = self.conv1(x)
-        x = self.maxpool(x)
-        x = self.conv2(x)
-        x = self.flatten(x)
-        x = self.dropout1(x)
-        x = self.batchnomalization(x)
-        x = self.dense1(x)
-        x = self.dropout2(x)
-        x = self.dense2(x)
-        return x
-
-model = CNNic()
-print(model)  # 打印网络层次结构
 # 单GPU版本
 model.summary()  # 可视化模型
 model.compile(loss="sparse_categorical_crossentropy",  # 多分类

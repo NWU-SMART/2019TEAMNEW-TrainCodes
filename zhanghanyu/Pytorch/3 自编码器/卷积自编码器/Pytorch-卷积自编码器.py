@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 # 导入mnist数据
 # (X_train, _), (X_test, _) = mnist.load_data() 服务器无法访问
 # 本地读取数据
-# 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'(本地路径)
+# 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(3 自编码器)\\mnist.npz'(本地路径)
 path = 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'
 f = np.load(path)
 ####  以npz结尾的数据集是压缩文件，里面还有其他的文件

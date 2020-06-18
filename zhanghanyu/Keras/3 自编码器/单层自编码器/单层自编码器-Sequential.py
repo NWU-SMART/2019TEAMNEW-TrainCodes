@@ -36,7 +36,7 @@ from keras.utils import np_utils
 # (X_train, _), (X_test, _) = mnist.load_data() 服务器无法访问
 
 # 本地读取数据
-# "D:\研究生\代码\Keras代码\3.AutoEncoder(自编码器)\mnist.npz"(本地路径)
+# "D:\研究生\代码\Keras代码\3.AutoEncoder(3 自编码器)\mnist.npz"(本地路径)
 path = 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'
 f = np.load(path)
 ####  以npz结尾的数据集是压缩文件，里面还有其他的文件
@@ -87,13 +87,14 @@ X_test = X_test.reshape((len(X_test), np.prod(X_test.shape[1:])))
 # 输入、隐藏和输出层神经元个数 (1个隐藏层)
 input_size = 784
 hidden_size = 64
-output_size = 784  # dimenskion 784 = (28*28) --> 64 --> 784 = (28*28)
+output_size = 784  # dimension 784 = (28*28) --> 64 --> 784 = (28*28)
 
 # 定义神经网络层数
 autoencoder=keras.Sequential()
 autoencoder.add(Dense(units=hidden_size, activation='relu'))
 autoencoder.add(Dense(units=output_size, activation='sigmoid'))
 '''
+原
 x = Input(shape=(input_size,))
 h = Dense(hidden_size, activation='relu')(x)
 r = Dense(output_size, activation='sigmoid')(h)
@@ -121,9 +122,10 @@ batch_size = 128
 
 # 训练模型
 history = autoencoder.fit(X_train, X_train,
-                          batch_size=batch_size,
-                          epochs=epochs, verbose=1,
-                          validation_data=(X_test, X_test)
+                          batch_size=batch_size, #每次梯度更新的样本数
+                          epochs=epochs, verbose=1, #训练模型迭代次数；日志展示，整数0:为不在标准输出流输出日志信息
+                                                    #1:显示进度条  2:每个epoch输出一行记录
+                         validation_data=(X_test, X_test)
                          )
 
 #  --------------------- 5、训练 ---------------------
@@ -165,14 +167,14 @@ for i in range(n):
     plt.imshow(X_test[i].reshape(28, 28))
     plt.gray()
     ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False) #不显示x、y轴
 
     # 打印解码图
     ax = plt.subplot(3, n, i + n + 1)
     plt.imshow(decoded_imgs[i].reshape(28, 28)) # 784 转换为 28*28大小的图像
     plt.gray()
     ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False) #不显示x、y轴
 
 plt.show()
 

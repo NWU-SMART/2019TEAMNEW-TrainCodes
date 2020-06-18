@@ -1,8 +1,8 @@
 #--------------         开发者信息--------------------------
 #开发者：徐珂
-#开发日期：2020.6.15
+#开发日期：2020.6.16
 #software：pycharm
-#项目名称：正则自编码器（keras）
+#项目名称：正则自编码器（pytorch）
 #--------------         开发者信息--------------------------
 
 # ----------------------   代码布局： ----------------------
@@ -16,14 +16,10 @@
 # ----------------------   代码布局： ----------------------
 
 #  -------------------------- 1、导入需要包 -------------------------------
-import keras
-import numpy as np
-from keras.models import Sequential
+import torch
+import torch.nn as nn
 import matplotlib.pyplot as plt
-from keras.layers import Input
-from keras.layers import Dense
-from keras import Model
-from keras import regularizers
+import numpy as np
 #  -------------------------- 1、导入需要包 -------------------------------
 
 #  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
@@ -72,43 +68,19 @@ X_test = X_test.reshape((len(X_test), np.prod(X_test.shape[1:])))
 
 
 #  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
-
-
 #  --------------------- 3、构建正则自编码器模型 ---------------------
-input_size = 784
-hidden_size = 32
-output_size = 784
-#  --------------------- 3.1 sequential() ---------------------
-model = Sequential()
-model.add(Dense(32, activation='relu', activity_regularizer=regularizers.l1(10e-5)))
-model.add(Dense(784, activation='sigmoid'))
-model.compile(optimizer='adam', loss='mse')
-#  --------------------- 3.1 sequential() ---------------------
 
-#  ---------------------------- 3.2 API -----------------------
-input = Input(shape = (784,))
-hidden = Dense(32,activation = 'relu',activity_regularizer= regularizers.l1(10e-5))(input)
-output = Dense(784,activation = 'sigmoid')(hidden)
-model = Model(inputs=input, outputs=output)
-model.compile(optimizer= 'adam',loss= 'mse')
-#  ------------------------ 3.2 API ----------------------------
-
-#  --------------------- 3.3、构建正则自编码器class继承模型 -----------------
-inputs = Input(shape=(input_size,))
-class NormalAutoEncoder(keras.Model):
+class Model(nn.Module):
     def __init__(self):
-        super(NormalAutoEncoder,self).__init__()
-        self.dense1 = Dense(32,activation='relu',activity_regularizer=regularizers.l1(10e-5))    # L1正则
-        self.dense2 = Dense(784,activation='sigmoid')
-
-    def call(self, inputs):
-        x = self.dense1(inputs)
-        x = self.dense2(x)
-        return x
-model = NormalAutoEncoder()
-model.compile(optimizer='adam',loss='mse')
-
-#  --------------------- 3.3、构建正则自编码器class继承模型 -----------------
+        super(Model, self).__init__()
+        self.net = torch.nn.Sequential(torch.nn.Linear(784, 32),
+                                       torch.nn.ReLU(),
+                                       torch.nn.Linear(32, 784),
+                                       torch.nn.Sigmoid())
+    def forward(self, x):
+        output = self.net(x)
+        return output
+model = Model()
 
 #  --------------------- 3、构建正则自编码器模型 ---------------------
 

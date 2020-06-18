@@ -28,8 +28,11 @@ if __name__ == "__main__":
     base_model = Sequential(layers=base_model.layers[: -7])
     base_model.add(Convolution2D(512, 1, 1, activation="relu"))
     input=base_model.add(Dropout(0.5))
+
     base_model = SeNetBlock(input)
+
     deepmiml = DeepMIML(L=L, K=K, base_model=base_model)
+
     # deepmiml.model.summary()
                    
     print("Compiling Deep MIML Model...")

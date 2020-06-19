@@ -1,0 +1,116 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"9e5d5b44-b045-46ef-9dc5-2a11faefa5cd\" name=\"Default Changelist\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/simaminghui/Sequential/数字分类/__init__.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1dOaev3C6rAqSLgN8xAPz24ugu8\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/simaminghui\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"__init__\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"2019TEAMNEW-TrainCodes\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/simaminghui/Sequential/数字分类\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/simaminghui/Sequential/数字分类/__init__.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.__init__\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"9e5d5b44-b045-46ef-9dc5-2a11faefa5cd\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1592129618117</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1592129618117</updated>\r\n      <workItem from=\"1592129619200\" duration=\"817000\" />\r\n      <workItem from=\"1592223689881\" duration=\"31000\" />\r\n      <workItem from=\"1592298694063\" duration=\"3718000\" />\r\n      <workItem from=\"1592369931386\" duration=\"48000\" />\r\n      <workItem from=\"1592444056225\" duration=\"467000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"2\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"570\" y=\"248\" key=\"FileChooserDialogImpl\" timestamp=\"1592370000382\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"570\" y=\"248\" key=\"FileChooserDialogImpl/0.0.1536.824@0.0.1536.824\" timestamp=\"1592370000382\" />\r\n    <state x=\"304\" y=\"89\" key=\"SettingsEditor\" timestamp=\"1592444329892\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"304\" y=\"89\" key=\"SettingsEditor/0.0.1536.824@0.0.1536.824\" timestamp=\"1592444329892\" />\r\n    <state x=\"452\" y=\"231\" key=\"git4idea.merge.GitPullDialog\" timestamp=\"1592444337693\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"452\" y=\"231\" key=\"git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824\" timestamp=\"1592444337693\" />\r\n    <state x=\"539\" y=\"344\" key=\"git4idea.remote.GitConfigureRemotesDialog\" timestamp=\"1592444275631\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"539\" y=\"344\" key=\"git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824\" timestamp=\"1592444275631\" />\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/2019TEAMNEW_TrainCodes$__init__.coverage\" NAME=\"__init__ Coverage Results\" MODIFIED=\"1592444415632\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"true\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$/simaminghui/Sequential/数字分类\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 6c025d35c7a4c81a5ea0da4877d6fb64d35ee9f5)
++++ .idea/workspace.xml	(date 1592528239719)
+@@ -1,11 +1,26 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="BranchesTreeState">
++    <expand>
++      <path>
++        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
++      </path>
++      <path>
++        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
++      </path>
++      <path>
++        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
++        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
++      </path>
++    </expand>
++    <select />
++  </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/simaminghui/Sequential/数字分类/__init__.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="数字分类">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -23,8 +38,13 @@
+   <component name="PropertiesComponent">
+     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$/simaminghui" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Sequential" />
+     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
++  </component>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="D:\Pythondaima\2019TEAMNEW-TrainCodes\simaminghui" />
++    </key>
+   </component>
+   <component name="RunManager">
+     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+@@ -69,8 +89,16 @@
+       <workItem from="1592223689881" duration="31000" />
+       <workItem from="1592298694063" duration="3718000" />
+       <workItem from="1592369931386" duration="48000" />
+-      <workItem from="1592444056225" duration="467000" />
++      <workItem from="1592444056225" duration="633000" />
++    </task>
++    <task id="LOCAL-00001" summary="数字分类">
++      <created>1592444602639</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1592444602639</updated>
+     </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -87,15 +115,39 @@
+       </map>
+     </option>
+   </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="数字分类" />
++    <option name="LAST_COMMIT_MESSAGE" value="数字分类" />
++  </component>
+   <component name="WindowStateProjectService">
+-    <state x="570" y="248" key="FileChooserDialogImpl" timestamp="1592370000382">
++    <state x="570" y="248" key="FileChooserDialogImpl" timestamp="1592444699349">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592444699349" />
++    <state width="1342" height="195" key="GridCell.Tab.0.bottom" timestamp="1592444700460">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state width="1342" height="195" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592444700460" />
++    <state width="1342" height="195" key="GridCell.Tab.0.center" timestamp="1592444700460">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state width="1342" height="195" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592444700460" />
++    <state width="1342" height="195" key="GridCell.Tab.0.left" timestamp="1592444700460">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+-    <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592370000382" />
++    <state width="1342" height="195" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592444700460" />
++    <state width="1342" height="195" key="GridCell.Tab.0.right" timestamp="1592444700460">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state width="1342" height="195" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592444700460" />
+     <state x="304" y="89" key="SettingsEditor" timestamp="1592444329892">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>
+     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
++    <state x="359" y="193" key="Vcs.Push.Dialog.v2" timestamp="1592444640502">
++      <screen x="0" y="0" width="1536" height="824" />
++    </state>
++    <state x="359" y="193" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592444640502" />
+     <state x="452" y="231" key="git4idea.merge.GitPullDialog" timestamp="1592444337693">
+       <screen x="0" y="0" width="1536" height="824" />
+     </state>

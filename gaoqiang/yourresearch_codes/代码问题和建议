@@ -1,3 +1,15 @@
 
 2020年6月2日14点34分
 1) 自己运行文章提供的代码，碰到的问题和运行的结果
+
+2020年6月19日21:17分
+1）代码目录（2017.ICCV.MFB+Co-Attention）
+论文名称：2017.ICCV.Multi-modal Factorized Bilinear Pooling with Co-Attention Learning for Visual Question Answering
+作者：    杭州电子科技大学/Zhou Yu, Jun Yu, Jianping Fan, Dacheng Tao
+
+进度：    代码已跑通，model部分弄明白了，其他还在看。
+实验结果：见2017.ICCV.MFB+Co-Attention/results/log/log_run_561003.txt
+          经过13个epoch, Overall Accuracy is: 65.18   other : 56.77   yes/no : 83.10   number : 45.43
+          与作者给出的结果：Model | Base lr | Overall (%) | Yes/No (%) | Number (%) | Other (%)
+                             MFB  |  7e-4   |    65.35    |   83.23    |   45.31    | 57.05
+                              没差多少

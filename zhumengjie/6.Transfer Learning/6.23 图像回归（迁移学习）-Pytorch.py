@@ -5,7 +5,8 @@
 # 开发内容：图像回归（迁移学习）
 #----------------------------------------------------------#
 '''
-存在错误：size mismatch 未解决
+存在错误：size mismatch
+解决方法：在全连接层前加AdaptiveAvgPool2d(output_size=(7, 7))
 '''
 
 # ----------------------   代码布局： ----------------------
@@ -149,6 +150,7 @@ epochs = 5
 #  ----------------------------------- 参数定义---------------------------------------------
 
 # -------------------------------6、模型构建------------------------
+x_train =x_train.permute(0, 3 , 2, 1)
 class VGG16(nn.Module):
 
 
@@ -178,6 +180,7 @@ class VGG16(nn.Module):
         self.conv5_2 = nn.Conv2d(512, 512, 3, padding=(1, 1)) # 512 * 12 * 12
         self.conv5_3 = nn.Conv2d(512, 512, 3, padding=(1, 1)) # 512 * 12 * 12
         self.maxpool5 = nn.MaxPool2d((2, 2), padding=(1, 1)) # pooling 512 * 7 * 7
+        self.avgepool = nn.AdaptiveAvgPool2d(output_size=(7, 7))
         self.relu = nn.ReLU()
         self.softmax = nn.Softmax(dim=1)
 
@@ -229,6 +232,8 @@ class VGG16(nn.Module):
         out = self.relu(out)
         out = self.maxpool5(out) # 7
 
+        out = self.avgepool(out)
+
         # 展平
         out = out.view(out.size(0), -1) # out.size(0）是 batchsize
 
@@ -271,7 +276,7 @@ for t in range(epochs):
         optimizer.step()  # 更新参数
         running_loss += loss.item()
     else:
-        print(f"第{t}代训练损失为：{running_loss/len(loader)}")  # 打印平均损失
+        print(f"Epoch{t}：{running_loss/len(loader)}")  # 打印平均损失
 
 plt.title('model loss')
 plt.ylabel('loss')

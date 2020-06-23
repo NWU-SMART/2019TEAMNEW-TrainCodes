@@ -67,13 +67,13 @@ CNNmodel.add(Conv2D(8, (3, 3), activation='relu', padding='same'))   # 8*7*7 -->
 CNNmodel.add(MaxPooling2D((2, 2), padding='same'))                   # 8*7*7  --> 8*4*4
 
 #解码
-CNNmodel.add(Conv2D(8, (3, 3), activation='relu', padding='same'))
-CNNmodel.add(UpSampling2D((2, 2)))
-CNNmodel.add(Conv2D(8, (3, 3), activation='relu', padding='same'))
-CNNmodel.add(UpSampling2D(2, 2))
-CNNmodel.add(Conv2D(16, (3, 3), activation='relu'))
-CNNmodel.add(UpSampling2D((2, 2)))
-CNNmodel.add(Conv2D(1, (3, 3), activation='sigmoid', padding='same'))
+CNNmodel.add(Conv2D(8, (3, 3), activation='relu', padding='same'))   # 8*4*4-->8*4*4
+CNNmodel.add(UpSampling2D((2, 2)))                                   # 8*4*4-->8*8*8
+CNNmodel.add(Conv2D(8, (3, 3), activation='relu', padding='same'))   # 8*8*8-->8*8*8
+CNNmodel.add(UpSampling2D(2, 2))                                     # 8*8*8-->8*16*16
+CNNmodel.add(Conv2D(16, (3, 3), activation='relu'))                  # 8*16*16-->16*14*14
+CNNmodel.add(UpSampling2D((2, 2)))                                   # 16*14*14-->16*28*28
+CNNmodel.add(Conv2D(1, (3, 3), activation='sigmoid', padding='same'))  # 16*28*28-->1*8*8
 
 model = CNNmodel()
 model.compile(optimizer='adadelta', loss='binary_crossentropy')
@@ -163,14 +163,14 @@ history = CNNmodel.fit(x_train, x_train,batch_size=batch_size,epochs=epochs, ver
 # decoded_imgs 为输出层的结果
 decoded_imgs = CNNmodel.predict(x_test)
 n = 10
-plt.figure(figsize=(20, 6))
-for i in range(n):
+plt.figure(figsize=(20, 6))  # 指定图片的尺寸20*6
+for i in range(n):           # 打印原图
     # 原图
     ax = plt.subplot(3, n, i + 1)
-    plt.imshow(x_test[i].reshape(28, 28))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+    plt.imshow(x_test[i].reshape(28, 28))  # 重新调整矩阵的维数 图像显示
+    plt.gray()                             # 灰度图
+    ax.get_xaxis().set_visible(False)      # x不可见
+    ax.get_yaxis().set_visible(False)      # y不可见
 
     # 解码效果图
     ax = plt.subplot(3, n, i + n + 1)

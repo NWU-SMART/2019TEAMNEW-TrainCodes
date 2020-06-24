@@ -7,11 +7,11 @@
 #  -------------------------- 1、导入需要包 -------------------------------
 from keras.datasets import imdb
 import numpy as np
-from keras import models
-from keras import layers
-from keras import optimizers
-from keras import losses
-from keras import metrics
+from sunqian.Keras import models
+from sunqian.Keras import layers
+from sunqian.Keras import optimizers
+from sunqian.Keras import losses
+from sunqian.Keras import metrics
 import matplotlib.pyplot as plt
 
 #  -------------------------- 1、导入需要包 -------------------------------

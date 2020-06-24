@@ -18,8 +18,8 @@
 from keras.datasets import reuters
 from keras.utils.np_utils import to_categorical
 import numpy as np
-from keras import models
-from keras import layers
+from sunqian.Keras import models
+from sunqian.Keras import layers
 import matplotlib.pyplot as plt
 #  -------------------------- 1、导入需要的包 -------------------------------
 

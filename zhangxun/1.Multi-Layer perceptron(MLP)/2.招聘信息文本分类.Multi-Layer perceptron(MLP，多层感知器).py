@@ -65,7 +65,9 @@ job_detail_pd['Job_Description_key_word'] = job_detail_pd.Job_Description.apply(
 #  -------------------------- 3、分词和提取关键词 -------------------------------
 
 #  -------------------------- 4、建立字典，并使用 -------------------------------
-# 建立2000个词的字典  
+# 建立2000个词的字典
+# 分词器Tokenizer: 是一个用于向量化文本，或将文本转换为序列（即单词在字典中的下标构成的列表，从1算起）的类。
+# Tokenizer实际上只是生成了一个字典，并且统计了词频等信息，并没有把文本转成需要的向量表示
 token = Tokenizer(num_words = 2000)   
 token.fit_on_texts(job_detail_pd['Job_Description_key_word']) #按单词出现次数排序，排序前2000的单词会列入词典中  
  
@@ -81,7 +83,11 @@ y_train = job_detail_pd['label'].tolist()
 #  -------------------------- 5、训练模型 -------------------------------
 batch_size = 256  
 epochs = 5  
-model = Sequential()  
+model = Sequential()
+
+# 嵌入层Embedding: 将正整数（下标）转换为具有固定大小的向量，如[[4],[20]]->[[0.25,0.1],[0.6,-0.2]]，
+# 具体方法参考 Word2vec 之 Skip-Gram 模型。
+# Embedding层只能作为模型的第一层。
 model.add(Embedding(output_dim = 32,  # 词向量的维度  
                      input_dim = 2000, # Size of the vocabulary 字典大小  
                       input_length = 50  # 每个数字列表的长度  
@@ -126,9 +132,9 @@ plot_model(model, to_file='model_MLP_text.png', show_shapes=True)
 from keras.models import load_model  
 # 加载模型  
 # model = load_model('model_MLP_text.h5')  
-print(x_train[0])  
-y_new = model.predict(x_train[0].reshape(1, 50))  
-print(list(y_new[0]).index(max(y_new[0])))  
+print(x_train[0])
+y_new = model.predict(x_train[0].reshape(1, 50))
+print(list(y_new[0]).index(max(y_new[0])))
 print(y_train[0])
 
 

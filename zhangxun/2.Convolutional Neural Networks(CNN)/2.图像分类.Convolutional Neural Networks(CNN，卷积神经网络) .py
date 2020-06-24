@@ -27,10 +27,10 @@ import functools
 # 数据集和代码放一起即可
 def load_data():
     paths = [
-        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\train-labels-idx1-ubyte.gz',
-        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\train-images-idx3-ubyte.gz',
-        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\t10k-labels-idx1-ubyte.gz',
-        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\t10k-images-idx3-ubyte.gz'
+        '.\\MNIST\\train-labels-idx1-ubyte.gz',
+        '.\\MNIST\\train-images-idx3-ubyte.gz',
+        '.\\MNIST\\t10k-labels-idx1-ubyte.gz',
+        '.\\MNIST\\t10k-images-idx3-ubyte.gz'
     ]
 
     with gzip.open(paths[0], 'rb') as lbpath:
@@ -174,6 +174,13 @@ if not os.path.isdir(save_dir):
 model_path = os.path.join(save_dir, model_name)
 model.save(model_path)
 print('Saved trained model at %s ' % model_path)
+
+# 加载本地模型
+# model = load_model('.\\saved_models_cnn\\keras_fashion_trained_model.h5')
+# model.compile(loss='categorical_crossentropy',
+#               optimizer=opt,
+#               metrics=['accuracy'])
+# print("Created model and loaded weights from file")
 
 #  -------------------------- 5、保存模型 -------------------------------
 

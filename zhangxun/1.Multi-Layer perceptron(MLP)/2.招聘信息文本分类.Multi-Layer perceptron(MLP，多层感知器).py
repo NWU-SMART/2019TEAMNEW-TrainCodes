@@ -31,7 +31,7 @@ from keras.layers import BatchNormalization
 
 #  -------------------------- 2、招聘数据数据导入 -------------------------------
 # 文件放置在目录  D:\keras_datasets\job_detail_dataset.csv
-job_detail_pd = pd.read_csv('D:\keras_datasets\job_detail_dataset.csv', encoding='UTF-8')  
+job_detail_pd = pd.read_csv('./job_detail_dataset.csv', encoding='UTF-8')
 print(job_detail_pd.head(5))  
 label = list(job_detail_pd['PositionType'].unique())  # 标签  
 print(label)
@@ -120,8 +120,8 @@ from keras.utils import plot_model
 model.save('model_MLP_text.h5')  # 生成模型文件 'my_model.h5'  
 # 模型可视化  
 plot_model(model, to_file='model_MLP_text.png', show_shapes=True)
-
-
+# ImportError: Failed to import `pydot`. Please install `pydot`. For example with `pip install pydot`.
+# pydot: 用于keras的可视化
 
 from keras.models import load_model  
 # 加载模型  
@@ -132,10 +132,10 @@ print(list(y_new[0]).index(max(y_new[0])))
 print(y_train[0])
 
 
-import matplotlib.pyplot as plt  
+import matplotlib.pyplot as plt
 # 绘制训练 & 验证的准确率值  
-plt.plot(history.history['acc'])  
-plt.plot(history.history['val_acc'])  
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('Model accuracy')  
 plt.ylabel('Accuracy')  
 plt.xlabel('Epoch')  

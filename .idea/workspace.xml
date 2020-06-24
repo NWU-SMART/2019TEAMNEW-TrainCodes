@@ -19,12 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/saved_models_cnn/keras_fashion_trained_model.h5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/tradition_cnn_valid_acc.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) .py" beforeDir="false" afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) .py" afterDir="false" />
-    </list>
+    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -152,6 +147,14 @@
       <workItem from="1592726177428" duration="789000" />
       <workItem from="1592803805143" duration="323000" />
     </task>
+    <task id="LOCAL-00001" summary="6.24 cnn">
+      <created>1592993899616</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592993899616</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,33 +174,35 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="6.24 cnn" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.24 cnn" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1592803922789">
+    <state x="380" y="0" key="CommitChangelistDialog2" timestamp="1592993897663">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592803922789" />
+    <state x="380" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592993897663" />
     <state x="37" y="188" key="FileChooserDialogImpl" timestamp="1592917989455">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="37" y="188" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592917989455" />
     <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592370000382" />
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1592991812996">
+    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1592993906794">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592991812996" />
-    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1592991812996">
+    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1592993906794" />
+    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1592993906794">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592991812996" />
-    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1592991812996">
+    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1592993906794" />
+    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1592993906793">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592991812996" />
-    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1592991812996">
+    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1592993906793" />
+    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1592993906794">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592991812996" />
+    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1592993906794" />
     <state x="237" y="0" key="SettingsEditor" timestamp="1592918365029">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

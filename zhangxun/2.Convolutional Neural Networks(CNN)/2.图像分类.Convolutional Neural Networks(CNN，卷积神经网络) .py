@@ -27,8 +27,10 @@ import functools
 # 数据集和代码放一起即可
 def load_data():
     paths = [
-        'D:\\keras_datasets\\train-labels-idx1-ubyte.gz', 'D:\\keras_datasets\\train-images-idx3-ubyte.gz',
-        'D:\\keras_datasets\\t10k-labels-idx1-ubyte.gz', 'D:\\keras_datasets\\t10k-images-idx3-ubyte.gz'
+        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\train-labels-idx1-ubyte.gz',
+        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\train-images-idx3-ubyte.gz',
+        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\t10k-labels-idx1-ubyte.gz',
+        'E:\\软件学习\\深度学习\\postgraduate study\\my_test_project\\Keras\\2 CNN\\2.2 CNN-图像分类\\MNIST\\t10k-images-idx3-ubyte.gz'
     ]
 
     with gzip.open(paths[0], 'rb') as lbpath:
@@ -179,8 +181,8 @@ print('Saved trained model at %s ' % model_path)
 
 import matplotlib.pyplot as plt
 # 绘制训练 & 验证的准确率值
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['accuracy']) # 由于keras库版本的更新，将acc改为accuracy
+plt.plot(history.history['val_accuracy']) # 由于keras库版本的更新，将val_acc改为val_accuracy
 plt.title('Model accuracy')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
@@ -198,4 +200,4 @@ plt.legend(['Train', 'Valid'], loc='upper left')
 plt.savefig('tradition_cnn_valid_loss.png')
 plt.show()
 
-#  -------------------------- 6、保存模型，显示运行结果 -------------------------------
+#  -------------------------- 6、显示运行结果 -------------------------------

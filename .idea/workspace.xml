@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/zhumengjie/9.SiameseNetwork/6.25 Siamese Network-Pytorch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhumengjie/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.23 图像回归（迁移学习）-Pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.23 图像回归（迁移学习）-Pytorch.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,28 +34,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../code/test.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.6.25 Siamese Network-Pytorch">
-    <configuration name="6.25 Siamese Network-Pytorch" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2019TEAMNEW-TrainCodes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/zhumengjie/9.SiameseNetwork" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zhumengjie/9.SiameseNetwork/6.25 Siamese Network-Pytorch.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2019TEAMNEW-TrainCodes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,31 +57,8 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2019TEAMNEW-TrainCodes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/zhumengjie" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zhumengjie/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.6.25 Siamese Network-Pytorch" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
@@ -147,40 +103,24 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1593066651505">
+    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1592803922789">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593066651505" />
+    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592803922789" />
     <state x="534" y="47" key="FileChooserDialogImpl" timestamp="1592727566488">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="534" y="47" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592727566488" />
     <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592370000382" />
-    <state width="672" height="2" key="GridCell.Tab.0.bottom" timestamp="1593066463188">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="672" height="2" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593066463188" />
-    <state width="672" height="2" key="GridCell.Tab.0.center" timestamp="1593066463188">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="672" height="2" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593066463188" />
-    <state width="672" height="2" key="GridCell.Tab.0.left" timestamp="1593066463188">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="672" height="2" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593066463188" />
-    <state width="672" height="2" key="GridCell.Tab.0.right" timestamp="1593066463188">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="672" height="2" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593066463188" />
     <state x="270" y="18" key="SettingsEditor" timestamp="1592631979704">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="270" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592631979704" />
     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1592989043394">
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1592912718132">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592989043394" />
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592912718132" />
     <state x="375" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1592803823958">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

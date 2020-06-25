@@ -41,6 +41,21 @@ def load_data():
         '../../../数据集、模型、图片/2.CNN/MNIST/t10k-images-idx3-ubyte.gz'
     ]
 
+    # numpy.frombuffer(buffer, dtype=float, count=-1, offset=0)
+
+    # Parameters:
+    # buffer : buffer_like
+    # An object that exposes the buffer interface.
+    #
+    # dtype : data-type, optional
+    # Data-type of the returned array; default: float.
+    #
+    # count : int, optional
+    # Number of items to read. -1 means all data in the buffer.
+    #
+    # offset : int, optional
+    # Start reading the buffer from this offset (in bytes); default: 0.
+
     with gzip.open(paths[0], 'rb') as lbpath:
         y_train = np.frombuffer(lbpath.read(), np.uint8, offset=8)
 
@@ -54,16 +69,18 @@ def load_data():
     with gzip.open(paths[3], 'rb') as imgpath:
         x_test = np.frombuffer(
             imgpath.read(), np.uint8, offset=16).reshape(len(y_test), 28, 28, 1)
+
     return (x_train, y_train), (x_test, y_test)
 
 (x_train, y_train), (x_test, y_test) = load_data()
 batch_size = 32
 num_classes = 10
 epochs = 5
-data_augmentation = True  # 图像增强
+data_augmentation = True  # 数据增强
 num_predictions = 20
 save_dir = os.path.join(os.getcwd(), 'saved_models_cnn') #在当前工作目录下，创建文件夹'saved_models_cnn'
-model_name = 'keras_fashion_trained_model.h5'
+model_name = 'keras_fashion_trained_model.h5' #模型名称
+# H5文件是层次数据格式第5代的版本（Hierarchical Data Format，HDF5），它是用于存储科学数据的一种文件格式和库文件。
 
 # Convert class vectors to binary class matrices. 类别独热编码
 y_train = keras.utils.to_categorical(y_train, num_classes)
@@ -81,8 +98,8 @@ x_test /= 255  # 归一化
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
 
 model = Sequential()
-model.add(Conv2D(32, (3, 3), padding='same',  # 32，(3,3)是卷积核数量和大小
-                 input_shape=x_train.shape[1:]))  # 第一层需要指出图像的大小
+model.add(Conv2D(32, (3, 3), padding='same',  # 32，(3,3)是卷积核数量和大小 # "SAME" = with zero padding
+                 input_shape=x_train.shape[1:]))  # 第一层需要指出图像的大小 # "VALID" = without padding
 model.add(Activation('relu'))
 model.add(Conv2D(32, (3, 3)))
 model.add(Activation('relu'))

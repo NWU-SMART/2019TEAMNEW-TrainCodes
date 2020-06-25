@@ -1,4 +1,12 @@
-# ----------------------   代码布局： ---------------------- 
+# ----------------开发者信息----------------------------
+# 开发者：张迅
+# 开发日期：2020年6月25日
+# 内容：1.MLP-招聘信息文本分类
+# 修改内容：
+# 修改者：
+# ----------------开发者信息----------------------------
+
+# ----------------------   代码布局： ----------------------
 # 1、导入 Keras, matplotlib, numpy, sklearn 和 panda的包
 # 2、招聘数据数据导入
 # 3、分词和提取关键词
@@ -31,7 +39,7 @@ from keras.layers import BatchNormalization
 
 #  -------------------------- 2、招聘数据数据导入 -------------------------------
 # 文件放置在目录  D:\keras_datasets\job_detail_dataset.csv
-job_detail_pd = pd.read_csv('./job_detail_dataset.csv', encoding='UTF-8')
+job_detail_pd = pd.read_csv('../../../数据集、模型、图片/1.MLP/job_detail_dataset.csv', encoding='UTF-8')
 print(job_detail_pd.head(5))  
 label = list(job_detail_pd['PositionType'].unique())  # 标签  
 print(label)

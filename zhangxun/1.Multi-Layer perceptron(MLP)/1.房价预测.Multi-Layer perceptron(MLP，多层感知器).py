@@ -1,4 +1,12 @@
-# ----------------------   代码布局： ---------------------- 
+# ----------------开发者信息----------------------------
+# 开发者：张迅
+# 开发日期：2020年6月25日
+# 内容：1.MLP-房价预测
+# 修改内容：
+# 修改者：
+# ----------------开发者信息----------------------------
+
+# ----------------------   代码布局： ----------------------
 # 1、导入 Keras, matplotlib, numpy, sklearn 和 panda的包
 # 2、房价训练数据导入
 # 3、数据归一化
@@ -31,7 +39,7 @@ import pandas as pd
 
 # 数据放到本地路径
 # D:\\keras_datasets\\boston_housing.npz(本地路径)
-path = 'E:\\软件学习\\深度学习\\postgraduate study\\clone file\\zhangxun\\1.Multi-Layer perceptron(MLP)\\boston_housing.npz'
+path = 'E:/软件学习/深度学习/postgraduate study/数据集、模型、图片/1.MLP/boston_housing.npz'
 f = np.load(path)
 # 404个训练，102个测试
 # 训练数据

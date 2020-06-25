@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="434330d0-d995-4125-a306-8c15aa8f0233" name="New changelist" comment="New changelist">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" afterDir="false" />
-    </list>
+    <list default="true" id="434330d0-d995-4125-a306-8c15aa8f0233" name="New changelist" comment="6.26 0:13" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -272,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593101394007</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="6.26 0:13">
+      <created>1593101610393</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1593101610393</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +304,8 @@
     <MESSAGE value="6.25 22:41" />
     <MESSAGE value="6.25 23:52" />
     <MESSAGE value="New changelist" />
-    <option name="LAST_COMMIT_MESSAGE" value="New changelist" />
+    <MESSAGE value="6.26 0:13" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.26 0:13" />
   </component>
   <component name="WindowStateProjectService">
     <state x="568" y="226" key="#Notifications" timestamp="1592994308381">
@@ -311,14 +316,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="376" y="156" key="#TODO/0.0.1366.728@0.0.1366.728" timestamp="1593080230707" />
-    <state x="207" y="0" key="CommitChangelistDialog2" timestamp="1593101521765">
+    <state x="210" y="0" key="CommitChangelistDialog2" timestamp="1593101819181">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="207" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593101521765" />
-    <state x="223" y="77" width="899" height="620" key="DiffContextDialog" timestamp="1593101268394">
+    <state x="210" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593101819181" />
+    <state x="223" y="77" width="899" height="620" key="DiffContextDialog" timestamp="1593101747942">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="223" y="77" width="899" height="620" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1593101268394" />
+    <state x="223" y="77" width="899" height="620" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1593101747942" />
     <state x="534" y="47" key="FileChooserDialogImpl" timestamp="1592727566488">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

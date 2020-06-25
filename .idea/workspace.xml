@@ -43,8 +43,8 @@
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/MNIST/train-labels-idx1-ubyte.gz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/job_detail_dataset.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/saved_models_cnn/keras_fashion_trained_model.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/tradition_cnn_valid_acc.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/tradition_cnn_valid_loss.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/tradition_cnn_valid_acc.png" beforeDir="false" afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/tradition_cnn_valid_acc.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/tradition_cnn_valid_loss.png" beforeDir="false" afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/tradition_cnn_valid_loss.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593080626066</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="6.25 22:41">
+      <created>1593096130252</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593096130253</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +299,8 @@
     <MESSAGE value="6.25 16；39" />
     <MESSAGE value="6.25 17：27" />
     <MESSAGE value="6.25 18:15" />
-    <option name="LAST_COMMIT_MESSAGE" value="6.25 18:15" />
+    <MESSAGE value="6.25 22:41" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.25 22:41" />
   </component>
   <component name="WindowStateProjectService">
     <state x="568" y="226" key="#Notifications" timestamp="1592994308381">
@@ -303,10 +311,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="376" y="156" key="#TODO/0.0.1366.728@0.0.1366.728" timestamp="1593080230707" />
-    <state x="207" y="0" key="CommitChangelistDialog2" timestamp="1593081742707">
+    <state x="207" y="0" key="CommitChangelistDialog2" timestamp="1593096252367">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="207" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593081742707" />
+    <state x="207" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593096252367" />
     <state x="63" y="54" key="DiffContextDialog" timestamp="1593081741827">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -316,22 +324,22 @@
     </state>
     <state x="534" y="47" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592727566488" />
     <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592370000382" />
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1593095944797">
+    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1593098814398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
-    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1593095944797">
+    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593098814398" />
+    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1593098814398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
-    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1593095944797">
+    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593098814398" />
+    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1593098814398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
-    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1593095944797">
+    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593098814398" />
+    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1593098814398">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
+    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593098814398" />
     <state x="344" y="69" key="RollbackChangesDialog" timestamp="1593080365867">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -345,10 +353,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="464" y="276" key="VCS.ChangelistChooser/0.0.1366.728@0.0.1366.728" timestamp="1593080543166" />
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1593081715460">
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1593096143496">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593081715460" />
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593096143496" />
     <state x="375" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1592803823958">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -1,4 +1,12 @@
-# ----------------------   代码布局： ---------------------- 
+# ----------------开发者信息----------------------------
+# 开发者：张迅
+# 开发日期：2020年6月25日
+# 内容：2.CNN-招聘信息文本分类
+# 修改内容：
+# 修改者：
+# ----------------开发者信息----------------------------
+
+# ----------------------   代码布局： ----------------------
 # 1、导入 Keras, matplotlib, numpy, sklearn 和 panda的包
 # 2、招聘数据数据导入
 # 3、分词和提取关键词
@@ -31,7 +39,7 @@ from keras.layers import BatchNormalization
 
 #  -------------------------- 2、招聘数据数据导入 -------------------------------
 # 文件放置在目录  D:\keras_datasets\job_detail_dataset.csv
-job_detail_pd = pd.read_csv('D:\keras_datasets\job_detail_dataset.csv', encoding='UTF-8')  
+job_detail_pd = pd.read_csv('../../../数据集、模型、图片/2.CNN/job_detail_dataset.csv', encoding='UTF-8')
 print(job_detail_pd.head(5))  
 label = list(job_detail_pd['PositionType'].unique())  # 标签  
 print(label)
@@ -137,10 +145,10 @@ print(list(y_new[0]).index(max(y_new[0])))
 print(y_train[0])
 
 
-import matplotlib.pyplot as plt  
+import matplotlib.pyplot as plt
 # 绘制训练 & 验证的准确率值  
-plt.plot(history.history['acc'])  
-plt.plot(history.history['val_acc'])  
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('Model accuracy')  
 plt.ylabel('Accuracy')  
 plt.xlabel('Epoch')  

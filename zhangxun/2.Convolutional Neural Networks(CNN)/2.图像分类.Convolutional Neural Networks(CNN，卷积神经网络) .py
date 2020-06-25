@@ -1,4 +1,12 @@
-# ----------------------   代码布局： ---------------------- 
+# ----------------开发者信息----------------------------
+# 开发者：张迅
+# 开发日期：2020年6月25日
+# 内容：2.CNN-图像分类
+# 修改内容：
+# 修改者：
+# ----------------开发者信息----------------------------
+
+# ----------------------   代码布局： ----------------------
 # 1、导入 Keras, matplotlib, numpy, sklearn 和 panda的包
 # 2、招聘数据数据导入
 # 3、分词和提取关键词
@@ -27,10 +35,10 @@ import functools
 # 数据集和代码放一起即可
 def load_data():
     paths = [
-        '.\\MNIST\\train-labels-idx1-ubyte.gz',
-        '.\\MNIST\\train-images-idx3-ubyte.gz',
-        '.\\MNIST\\t10k-labels-idx1-ubyte.gz',
-        '.\\MNIST\\t10k-images-idx3-ubyte.gz'
+        '../../../数据集、模型、图片/2.CNN/MNIST/train-labels-idx1-ubyte.gz',
+        '../../../数据集、模型、图片/2.CNN/MNIST/train-images-idx3-ubyte.gz',
+        '../../../数据集、模型、图片/2.CNN/MNIST/t10k-labels-idx1-ubyte.gz',
+        '../../../数据集、模型、图片/2.CNN/MNIST/t10k-images-idx3-ubyte.gz'
     ]
 
     with gzip.open(paths[0], 'rb') as lbpath:
@@ -54,7 +62,7 @@ num_classes = 10
 epochs = 5
 data_augmentation = True  # 图像增强
 num_predictions = 20
-save_dir = os.path.join(os.getcwd(), 'saved_models_cnn')
+save_dir = os.path.join(os.getcwd(), 'saved_models_cnn') #在当前工作目录下，创建文件夹'saved_models_cnn'
 model_name = 'keras_fashion_trained_model.h5'
 
 # Convert class vectors to binary class matrices. 类别独热编码

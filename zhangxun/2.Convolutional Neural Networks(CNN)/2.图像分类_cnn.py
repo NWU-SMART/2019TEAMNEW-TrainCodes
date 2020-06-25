@@ -26,7 +26,6 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 import os
 import functools
-
 # os.environ["CUDA_VISIBLE_DEVICES"] = "2"  # 使用第3块显卡
 #  -------------------------- 1、导入需要包 -------------------------------
 

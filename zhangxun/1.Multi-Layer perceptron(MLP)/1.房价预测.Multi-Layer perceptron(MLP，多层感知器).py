@@ -31,7 +31,7 @@ import pandas as pd
 
 # 数据放到本地路径
 # D:\\keras_datasets\\boston_housing.npz(本地路径)
-path = 'E:\\软件学习\\深度学习\\postgraduate study\\clone file\\zhangxun\\1.Multi-Layer perceptron(MLP)\\boston_housing.npz'
+path = 'E:/软件学习/深度学习/postgraduate study/数据集、模型、图片/1.MLP/boston_housing.npz'
 f = np.load(path)
 # 404个训练，102个测试
 # 训练数据

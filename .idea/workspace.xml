@@ -19,10 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
+    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="6.25 18:15">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/1.房价预测.Multi-Layer perceptron(MLP，多层感知器).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/1.房价预测.Multi-Layer perceptron(MLP，多层感知器).py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/2.招聘信息文本分类.Multi-Layer perceptron(MLP，多层感知器).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/2.招聘信息文本分类.Multi-Layer perceptron(MLP，多层感知器).py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/Valid_acc.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/Valid_loss.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/boston_housing.npz" beforeDir="false" />
@@ -31,8 +33,10 @@
       <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/model_MLP_text.h5" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/model_MLP_text.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/1.招聘信息文本分类.Convolutional Neural Networks(CNN，卷积神经网络).pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/1.招聘信息文本分类.Convolutional Neural Networks(CNN，卷积神经网络).py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) .pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) .py" beforeDir="false" afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) .py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) .py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/MNIST/t10k-images-idx3-ubyte.gz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/MNIST/t10k-labels-idx1-ubyte.gz" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/MNIST/train-images-idx3-ubyte.gz" beforeDir="false" />
@@ -68,13 +72,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../code/test.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) ">
+  <component name="RunManager" selected="Python.2.图像分类_cnn">
     <configuration name="1.房价预测.Multi-Layer perceptron(MLP，多层感知器)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2019TEAMNEW-TrainCodes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -138,6 +143,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="2.图像分类_cnn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="2019TEAMNEW-TrainCodes" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2019TEAMNEW-TrainCodes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -162,6 +188,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.2.图像分类_cnn" />
         <item itemvalue="Python.2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) " />
         <item itemvalue="Python.2.招聘信息文本分类.Multi-Layer perceptron(MLP，多层感知器)" />
         <item itemvalue="Python.1.房价预测.Multi-Layer perceptron(MLP，多层感知器)" />
@@ -226,7 +253,21 @@
       <option name="project" value="LOCAL" />
       <updated>1593079124247</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="6.25 18:15">
+      <created>1593080112299</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1593080112299</updated>
+    </task>
+    <task id="LOCAL-00007" summary="6.25 18:15">
+      <created>1593080626066</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1593080626066</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,47 +291,64 @@
     <MESSAGE value="6.24 22.55" />
     <MESSAGE value="6.25 16；39" />
     <MESSAGE value="6.25 17：27" />
-    <option name="LAST_COMMIT_MESSAGE" value="6.25 17：27" />
+    <MESSAGE value="6.25 18:15" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.25 18:15" />
   </component>
   <component name="WindowStateProjectService">
     <state x="568" y="226" key="#Notifications" timestamp="1592994308381">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="568" y="226" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1592994308381" />
-    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1593079122367">
+    <state x="376" y="156" key="#TODO" timestamp="1593080230707">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593079122367" />
+    <state x="376" y="156" key="#TODO/0.0.1366.728@0.0.1366.728" timestamp="1593080230707" />
+    <state x="207" y="0" key="CommitChangelistDialog2" timestamp="1593081742707">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="207" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593081742707" />
+    <state x="63" y="54" key="DiffContextDialog" timestamp="1593081741827">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="63" y="54" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1593081741827" />
     <state x="534" y="47" key="FileChooserDialogImpl" timestamp="1592727566488">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="534" y="47" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592727566488" />
     <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592370000382" />
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1593077444319">
+    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1593095944797">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593077444319" />
-    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1593077444318">
+    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
+    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1593095944797">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593077444318" />
-    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1593077444318">
+    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
+    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1593095944797">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593077444318" />
-    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1593077444319">
+    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
+    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1593095944797">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593077444319" />
+    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593095944797" />
+    <state x="344" y="69" key="RollbackChangesDialog" timestamp="1593080365867">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="344" y="69" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1593080365867" />
     <state x="270" y="18" key="SettingsEditor" timestamp="1592631979704">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="270" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592631979704" />
     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1593077292196">
+    <state x="464" y="276" key="VCS.ChangelistChooser" timestamp="1593080543166">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593077292196" />
+    <state x="464" y="276" key="VCS.ChangelistChooser/0.0.1366.728@0.0.1366.728" timestamp="1593080543166" />
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1593081715460">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593081715460" />
     <state x="375" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1592803823958">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

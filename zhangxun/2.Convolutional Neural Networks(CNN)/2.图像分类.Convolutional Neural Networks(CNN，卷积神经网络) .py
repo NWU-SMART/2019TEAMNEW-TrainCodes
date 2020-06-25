@@ -98,8 +98,38 @@ x_test /= 255  # 归一化
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
 
 model = Sequential()
-model.add(Conv2D(32, (3, 3), padding='same',  # 32，(3,3)是卷积核数量和大小 # "SAME" = with zero padding
-                 input_shape=x_train.shape[1:]))  # 第一层需要指出图像的大小 # "VALID" = without padding
+
+# pytorch:
+# torch.nn.Conv2d(in_channels,
+#        		  out_channels,
+#       		  kernel_size,
+#         		  stride=1,
+#         		  padding=0,
+#         		  dilation=1,
+#         		  groups=1,
+#         		  bias=True)
+
+# keras:
+# keras.layers.Conv2D(filters, # 整数，输出空间的维度 (out_channels)
+#                     # 当使用该层作为模型第一层时，需要提供 input_shape 参数 (in_channels)
+#                     kernel_size, # 一个整数，或者 2 个整数表示的元组或列表
+#                     strides=(1, 1), # 一个整数，或者 2 个整数表示的元组或列表
+#                     padding='valid', # "SAME" = with zero padding  "VALID" = without padding
+#                     data_format=None,
+#                     dilation_rate=(1, 1),
+#                     activation=None, # 要使用的激活函数，如果你不指定，则不使用激活函数 (即线性激活： a(x) = x)
+#                     use_bias=True, # 布尔值，该层是否使用偏置向量
+#                     kernel_initializer='glorot_uniform',
+#                     bias_initializer='zeros',
+#                     kernel_regularizer=None,
+#                     bias_regularizer=None,
+#                     activity_regularizer=None,
+#                     kernel_constraint=None,
+#                     bias_constraint=None)
+
+
+model.add(Conv2D(32, (3, 3), padding='same',  # 32，(3,3)是卷积核数量和大小
+                 input_shape=x_train.shape[1:]))  # 第一层需要指出图像的大小
 model.add(Activation('relu'))
 model.add(Conv2D(32, (3, 3)))
 model.add(Activation('relu'))

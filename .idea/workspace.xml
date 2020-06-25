@@ -219,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593077266613</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="6.25 17：27">
+      <created>1593079124247</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1593079124247</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,10 +257,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="568" y="226" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1592994308381" />
-    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1593077264053">
+    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1593079122367">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593077264053" />
+    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593079122367" />
     <state x="534" y="47" key="FileChooserDialogImpl" timestamp="1592727566488">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

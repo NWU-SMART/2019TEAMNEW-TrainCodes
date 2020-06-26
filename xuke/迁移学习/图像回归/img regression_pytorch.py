@@ -67,6 +67,7 @@ y_test_label = min_max_scaler.transform(y_test_pd)[:, 0]
 
 y_train = Variable(torch.from_numpy(y_train_label))    # 变为variable数据类型
 y_test = Variable(torch.from_numpy(y_test_label))
+
 #  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
 
 #  ----------------------------- 3、迁移学习建模 ---------------------------

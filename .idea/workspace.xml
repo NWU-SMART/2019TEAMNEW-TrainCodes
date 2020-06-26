@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="图像回归(keras)">
-      <change afterPath="$PROJECT_DIR$/xuke/图像分类/pytorch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuke/房屋预测/Pytorch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuke/房屋预测/keras.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuke/迁移学习/图像分类/img classfication_keras.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/xuke/迁移学习/图像分类/img classfication_pytorch.py" afterDir="false" />
+    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/xuke/迁移学习/img classfication_keras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/图像分类/pytorch/pytorch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/房屋预测/Pytorch/Pytorch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/房屋预测/keras/keras.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/迁移学习/img classfication_keras.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/迁移学习/img classfication_pytorch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/迁移学习/图像回归/img regression_pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/xuke/迁移学习/图像回归/img regression_pytorch.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,28 +84,7 @@
       <option name="project" value="LOCAL" />
       <updated>1592870698800</updated>
     </task>
-    <task id="LOCAL-00002" summary="图像回归(keras)">
-      <created>1593057995774</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1593057995774</updated>
-    </task>
-    <task id="LOCAL-00003" summary="图像回归(keras)">
-      <created>1593058026590</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1593058026590</updated>
-    </task>
-    <task id="LOCAL-00004" summary="图像回归(pytorch)">
-      <created>1593162334556</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1593162334556</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,15 +105,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CNN(keras)" />
-    <MESSAGE value="图像回归(keras)" />
-    <MESSAGE value="图像回归(pytorch)" />
-    <option name="LAST_COMMIT_MESSAGE" value="图像回归(pytorch)" />
+    <option name="LAST_COMMIT_MESSAGE" value="CNN(keras)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="302" y="6" key="CommitChangelistDialog2" timestamp="1593162333376">
+    <state x="302" y="6" key="CommitChangelistDialog2" timestamp="1592870697865">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1593162333376" />
+    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592870697865" />
     <state x="507" y="219" key="FileChooserDialogImpl" timestamp="1592465867063">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -154,14 +121,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1593162343307">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592810216248">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1593162343307" />
-    <state x="452" y="231" key="git4idea.merge.GitPullDialog" timestamp="1593160908883">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592810216248" />
+    <state x="452" y="231" key="git4idea.merge.GitPullDialog" timestamp="1592896943705">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1593160908883" />
+    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592896943705" />
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1592444275631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -20,8 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="6.25">
-      <change beforePath="$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gaoqiang/ResNet/keras_resnet.py" beforeDir="false" afterPath="$PROJECT_DIR$/gaoqiang/ResNet/keras_resnet.py" afterDir="false" />
@@ -286,7 +284,7 @@
       <workItem from="1592725725052" duration="382000" />
       <workItem from="1592726177428" duration="789000" />
       <workItem from="1592803805143" duration="323000" />
-      <workItem from="1593164976914" duration="434000" />
+      <workItem from="1593164976914" duration="719000" />
     </task>
     <task id="LOCAL-00001" summary="6.24 22.31">
       <created>1593009130028</created>
@@ -337,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593080626066</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="6.25">
+      <created>1593165538560</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1593165538560</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,7 +368,8 @@
     <MESSAGE value="6.25 16；39" />
     <MESSAGE value="6.25 17：27" />
     <MESSAGE value="6.25 18:15" />
-    <option name="LAST_COMMIT_MESSAGE" value="6.25 18:15" />
+    <MESSAGE value="6.25" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.25" />
   </component>
   <component name="WindowStateProjectService">
     <state x="568" y="226" key="#Notifications" timestamp="1592994308381">
@@ -374,10 +380,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="376" y="156" key="#TODO/0.0.1366.728@0.0.1366.728" timestamp="1593080230707" />
-    <state x="207" y="0" key="CommitChangelistDialog2" timestamp="1593081742707">
+    <state x="91" y="0" key="CommitChangelistDialog2" timestamp="1593165475212">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="207" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593081742707" />
+    <state x="91" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593165475212" />
     <state x="63" y="54" key="DiffContextDialog" timestamp="1593081741827">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -424,15 +430,23 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="375" y="191" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1593164984215" />
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593165352838">
+    <state x="444" y="128" key="git4idea.merge.GitMergeDialog" timestamp="1593165675983">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593165352838" />
+    <state x="444" y="128" key="git4idea.merge.GitMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1593165675983" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593165710247">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593165710247" />
     <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592444337693" />
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1592444275631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592444275631" />
+    <state x="456" y="258" key="git4idea.ui.GitStashDialog" timestamp="1593165766123">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="456" y="258" key="git4idea.ui.GitStashDialog/0.0.1366.728@0.0.1366.728" timestamp="1593165766123" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

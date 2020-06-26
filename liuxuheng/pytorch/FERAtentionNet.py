@@ -163,11 +163,11 @@ class FERAttentionNet(nn.Module):
         self.num_classes = num_classes
         self.num_filters = num_filters
 
-        # Attention module
+        # Attention Models
         self.attention_map = AttentionResNet(in_channels=num_channels, out_channels=num_classes, pretrained=True)
 
 
-        # Feature module
+        # Feature Models
         self.conv_input = nn.Conv2d(in_channels=num_channels, out_channels=num_classes, kernel_size=9, stride=1, padding=4, bias=True)
         # 输入128x128x3的图像I，然后卷积，输入通道3，输出通道1，特征图大小不变，得到特征图128x128x1
 
@@ -178,7 +178,7 @@ class FERAttentionNet(nn.Module):
         # Conv2d(1, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)) ，得到特征图Gft，大小128x128x1
 
 
-        # Recostruction module
+        # Recostruction Models
         self.reconstruction = nn.Sequential(
             ConvRelu(2*num_classes+num_channels, num_filters),
             # Conv2d(5, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
@@ -199,7 +199,7 @@ class FERAttentionNet(nn.Module):
         # Attention map
         g_att = self.attention_map(x)  # 输入原图到U-net网络，获取特征图Gatt
 
-        # Feature module
+        # Feature Models
         out = self.conv_input(x)  # 输入原图获取特征图
         residual = out
         out = self.feature(out)  # 输入8个残差块

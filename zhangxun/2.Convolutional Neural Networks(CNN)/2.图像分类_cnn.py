@@ -89,13 +89,13 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
 
-x_train = x_train.astype('float32')
-x_test = x_test.astype('float32')
+x_train = x_train.astype('float32') # astype: 转换数组的数据类型
+x_test = x_test.astype('float32') #int32、float64是Numpy库自己的一套数据类型
 
 x_train /= 255  # 归一化
 x_test /= 255  # 归一化
 
-#  数据可视化
+# ------- 数据可视化 -------
 
 import matplotlib.pyplot as plt
 import torch
@@ -126,12 +126,16 @@ plt.xticks([]) #x轴坐标设置为空
 plt.yticks([]) #y轴坐标设置为空
 plt.show() #将plt.imshow()处理后的图像显示出来
 
+# ------- 数据可视化 -------
+
 
 #  -------------------------- 2、读取数据与数据预处理 -------------------------------
 
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
 
 model = Sequential()
+
+# pytorch和keras在卷积层的区别:
 
 # pytorch:
 # torch.nn.Conv2d(in_channels,
@@ -198,6 +202,10 @@ model.compile(loss='categorical_crossentropy',
 
 if not data_augmentation:
     print('Not using data augmentation.')
+
+    # fit函数返回一个History的对象，其History.history属性记录了损失函数和其他指标的数值随epoch变化的情况，
+    # 如果有验证集的话，也包含了验证集的这些指标变化情况
+
     history = model.fit(x_train, y_train,
               batch_size=batch_size,
               epochs=epochs,
@@ -257,6 +265,8 @@ else:
     #               workers=1,
     #               pickle_safe=False,
     #               initial_epoch=0)
+    # datagen.flow:
+    # 接收numpy数组和标签为参数, 生成经过数据提升或标准化后的batch数据, 并在一个无限循环中不断的返回batch数据
 
     history = model.fit_generator(datagen.flow(x_train, y_train,  # 按batch_size大小从x,y生成增强数据
                                      batch_size=batch_size),  

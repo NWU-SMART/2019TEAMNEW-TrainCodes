@@ -12,6 +12,7 @@
 import gzip
 import numpy as np
 import torch
+import torchvision
 from torch import nn
 from torch.nn import functional as F
 from torch import optim
@@ -20,6 +21,8 @@ import matplotlib.pyplot as plt
 from torch.autograd import Variable
 
 #  -------------------------- 1、封装的方法 -------------------------------
+
+device = torch.device('cuda')
 
 def plot_curve(data): #绘制下降曲线
     fig = plt.figure()
@@ -39,8 +42,9 @@ def plot_image(x, y, name):
 def one_hot(label, depth=10): #label转onehot （独热码:有多少个状态就有多少位置，每个位置是出现的概率，第一个位置一般表示0
     # 故1., 0., 0., ..., 0., 0., 0.表示是0的概率为1）
     out = torch.zeros(label.size(0), depth).to(device)
-    idx = torch.cuda.LongTensor(label).view(-1, 1).to(device)
-    out.scatter_(dim=1, index=idx, value=1).to(device)
+    label = label.to(device)
+    idx = label.view(-1, 1)
+    out.scatter_(dim=1, index=idx, value=1)
     return out
 
 def label(one_hot): #onehot转label
@@ -86,13 +90,15 @@ def load_data():
     return (x_train, y_train), (x_test, y_test)
 
 
-(x_train, y_train), (x_test, y_test) = load_data() # we get numpy-type datas
+(x_train, y_train), (x_test, y_test) = load_data()
 
 x_train = x_train.astype('float32') # astype: 转换数组的数据类型
 x_test = x_test.astype('float32') # int32、float64是Numpy库自己的一套数据类型
 
 x_train /= 255  # 归一化
 x_test /= 255  # 归一化
+
+# we got numpy-type datas, x: [60000, 1, 28, 28], y: [60000]
 
 # -------------- 设置超参 --------------
 
@@ -136,27 +142,29 @@ fig_loss_path = os.path.join(save_dir, fig_loss_name) #loss图路径名
 
 # -------------- convert to tensor --------------
 """
-x_train = Variable(torch.from_numpy(x_train))  # 这样才能使用gpu加速
-x_test = Variable(torch.from_numpy(x_test))
+Variable是对tensor的封装。Variable有三个属性：
+.data：tensor本身
+.grad：对应tensor的梯度
+.grad_fn：该Variable是通过什么方式获得的
+
+x_train = Variable(torch.from_numpy(x_train))  # Variable(变量) 才可用GPU进行加速计算
+x_test = Variable(torch.from_numpy(x_test)) #torch.from_numpy()方法把数组转换成张量，且二者共享内存
 y_train = torch.LongTensor(y_train)
 y_test = torch.LongTensor(y_test)
 """
 
 x_train = torch.tensor(x_train)
-y_train = torch.tensor(y_train)
 x_test = torch.tensor(x_test)
-y_test = torch.tensor(y_test)
+y_train = torch.LongTensor(y_train)
+y_test = torch.LongTensor(y_test)
+
+# we got tensor-type datas, x: [60000, 1, 28, 28], y: [60000]
 
 # -------------- 数据可视化 --------------
 
-y_train_onehot = one_hot(y_train)
+plot_image(x_train, y_train, 'train_image')
 
-plot_image(x_train, y_train_onehot, 'train_image')
-
-y_test_onehot = one_hot(y_test)
-
-plot_image(x_test, y_test_onehot, 'test_image')
-
+plot_image(x_test, y_test, 'test_image')
 
 
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
@@ -190,7 +198,7 @@ class CNNModel(nn.Module):
             nn.ReLU(),
             nn.Dropout(0.5),
             nn.Linear(512, 10),
-            nn.Softmax
+            nn.Softmax()
         )
 
 
@@ -203,15 +211,21 @@ class CNNModel(nn.Module):
         return out
 
 
-device = torch.device('cuda')
-
 model = CNNModel().to(device)
 
 optimizer = optim.Adam(model.parameters(), lr=0.0001, betas=(0.9, 0.999), eps=1e-08, weight_decay=1e-6)
 
 criteion = nn.CrossEntropyLoss().to(device)
 
+x_train = x_train.to(device)
+y_train = y_train.to(device)
+x_test = x_test.to(device)
+y_test = y_test.to(device)
 
+dataset = torch.utils.data.TensorDataset(x_train, y_train)
+train_loader = torch.utils.data.DataLoader(dataset=dataset, batch_size=1024, shuffle=True, num_workers=0)
+dataset = torch.utils.data.TensorDataset(x_test, y_test)
+test_loader = torch.utils.data.DataLoader(dataset=dataset, batch_size=1024, shuffle=True, num_workers=0)
 
 #  -------------------------- 4、训练 -------------------------------
 
@@ -221,18 +235,15 @@ model.train()
 
 train_loss = [] #更好可视化； train_loss为list类型
 
-x = x_train
-y = y_train
-
-x, y = x.to(device), y.to(device)
-
 for epoch in range(10): #开始训练，range括号内为对数据集迭代的次数
 
-        out = model(x) #正向传播
-        #print("out.shape:", out.shape) #torch.Size([1800, 10])
-        y_onehot = one_hot(y)
-        loss = criteion(out, y_onehot) #计算误差(代价函数) MeanSquaredError均方误差
+    for batch_idx, (x_train, y_train) in enumerate(train_loader):
 
+        out = model(x_train) #正向传播
+        #print("out.shape:", out.shape) #torch.Size([1024, 10])
+        #print("y_train:", y_train.shape) #torch.Size([1024])
+        y_onehot = one_hot(y_train)
+        loss = criteion(out, y_train) #计算误差(代价函数)
         #print("loss.shape:", loss.shape) #torch.Size([]) loss is a 0-dim tensor
 
         optimizer.zero_grad() #清零梯度
@@ -254,13 +265,11 @@ model.eval()
 x = x_train
 y = y_train
 
-x, y = x.to(device), y.to(device)
-
 out = model(x)
 pred = out.argmax(dim=1)
 
 total_correct = 0
-total_num = 1800
+total_num = 1024
 
 total_correct += pred.eq(y).sum().float().item()
 
@@ -272,15 +281,13 @@ print('train acc:', acc) #训练精度
 x = x_test
 y = y_test
 
-x, y = x.to(device), y.to(device)
-
 out = model(x)
 
 # out: [b, 10] => pred: [b]
 pred = out.argmax(dim=1) # argmax:返回最大数的索引
 
 total_correct = 0
-total_num = 2062-1800
+total_num = 10000
 
 total_correct += pred.eq(y).sum().float().item()
 
@@ -289,7 +296,7 @@ print('test acc:', acc) #测试精度
 
 x, y = x.cpu(), y.cpu()
 print("生成测试图片...")
-plot_image(x, pred, 'test image', 261)
+plot_image(x, pred, 'test image')
 
 
 

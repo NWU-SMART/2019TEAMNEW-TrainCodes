@@ -5,9 +5,7 @@
 # 修改内容：
 # 修改者：
 
-
-
-#  -------------------------- 0、导入需要包 -------------------------------
+#  -------------------------- 0、导入的包 -------------------------------
 
 import gzip
 import numpy as np
@@ -24,19 +22,21 @@ from torch.autograd import Variable
 
 device = torch.device('cuda')
 
-def plot_curve(data): #绘制下降曲线
-    fig = plt.figure()
+def plot_curve(data, path): #绘制曲线
+    fig = plt.figure() #新建一个画布
     plt.plot(range(len(data)), data, color='blue')
     plt.legend(['value'], loc='upper right')
     plt.xlabel('step')
     plt.ylabel('value')
+    plt.savefig(path) #这个savefig一定要放在show之前
     plt.show()
 
-def plot_image(x, y, name):
+def plot_image(x, y, name, path):
     plt.imshow(x[0][0], cmap='winter', interpolation='none') #imshow()函数实现热图绘制
     plt.title("{}: {} ".format("name", y[0].item())) #设置标题
     plt.xticks([]) #x轴坐标设置为空
     plt.yticks([]) #y轴坐标设置为空
+    plt.savefig(path) #这个savefig一定要放在show之前
     plt.show() #将plt.imshow()处理后的图像显示出来
 
 def one_hot(label, depth=10): #label转onehot （独热码:有多少个状态就有多少位置，每个位置是出现的概率，第一个位置一般表示0
@@ -71,7 +71,6 @@ def load_data():
         './MNIST/t10k-labels-idx1-ubyte.gz',
         './MNIST/t10k-images-idx3-ubyte.gz'
     ]
-
 
     with gzip.open(paths[0], 'rb') as lbpath:
         y_train = np.frombuffer(lbpath.read(), np.uint8, offset=8)
@@ -132,13 +131,18 @@ fig_save_dir = './saved_figures_cnn'
 
 fig_acc_name = 'valid_acc.png'
 fig_loss_name = 'valid_loss.png'
+fig_train_data_name = 'train_image.png'
+fig_test_data_name = 'test_image.png'
+fig_test_name = 'test.png'
 
 if not os.path.isdir(fig_save_dir): # 判断是否是一个目录(而不是文件)
     os.makedirs(fig_save_dir) # 创造一个单层目录
 
-fig_acc_path = os.path.join(save_dir, fig_acc_name) #acc图路径名
-fig_loss_path = os.path.join(save_dir, fig_loss_name) #loss图路径名
-
+fig_acc_path = os.path.join(fig_save_dir, fig_acc_name) #acc图路径名
+fig_loss_path = os.path.join(fig_save_dir, fig_loss_name) #loss图路径名
+fig_train_data_path = os.path.join(fig_save_dir, fig_train_data_name)
+fig_test_data_path = os.path.join(fig_save_dir, fig_test_data_name)
+fig_test_path = os.path.join(fig_save_dir, fig_test_name)
 
 # -------------- convert to tensor --------------
 """
@@ -162,9 +166,9 @@ y_test = torch.LongTensor(y_test)
 
 # -------------- 数据可视化 --------------
 
-plot_image(x_train, y_train, 'train_image')
+plot_image(x_train, y_train, 'train_image', fig_train_data_path)
 
-plot_image(x_test, y_test, 'test_image')
+plot_image(x_test, y_test, 'test_image', fig_test_data_path)
 
 
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
@@ -222,6 +226,10 @@ y_train = y_train.to(device)
 x_test = x_test.to(device)
 y_test = y_test.to(device)
 
+# torchvision.datasets: 是用来进行数据加载的，提供下载、预处理等功能。PyTorch团队在这个包中帮我们提前处理好了很多很多图片数据集。
+# torch.utils.data.TensorDataset :直接赋数据
+# torch.utils.data.Dataloader: 提供了对batch的处理，以及shuffle
+
 dataset = torch.utils.data.TensorDataset(x_train, y_train)
 train_loader = torch.utils.data.DataLoader(dataset=dataset, batch_size=1024, shuffle=True, num_workers=0)
 dataset = torch.utils.data.TensorDataset(x_test, y_test)
@@ -237,49 +245,50 @@ train_loss = [] #更好可视化； train_loss为list类型
 
 for epoch in range(10): #开始训练，range括号内为对数据集迭代的次数
 
-    for batch_idx, (x_train, y_train) in enumerate(train_loader):
+    for batch_idx, (x, y) in enumerate(train_loader):
 
-        out = model(x_train) #正向传播
+        out = model(x) #正向传播
         #print("out.shape:", out.shape) #torch.Size([1024, 10])
         #print("y_train:", y_train.shape) #torch.Size([1024])
-        y_onehot = one_hot(y_train)
-        loss = criteion(out, y_train) #计算误差(代价函数)
+        #y_onehot = one_hot(y)
+        loss = criteion(out, y) # CrossEntropyLoss的y不用onehot!
         #print("loss.shape:", loss.shape) #torch.Size([]) loss is a 0-dim tensor
 
+        # 更新三连
         optimizer.zero_grad() #清零梯度
-        loss.backward() #反向传播，计算梯度
-        optimizer.step() #更新参数  w' = w - lr*grad
+        loss.backward() #反向传播  grad = ...
+        optimizer.step() #更新参数  w' = w - lr * grad
 
         train_loss.append(loss.item())
         print("epoch:", epoch, "loss:", loss.item()) #输出计算过程
 
 print("生成loss随epoch变化曲线图...")
-plot_curve(train_loss) #画出代价函数随训练次数变化曲线图
+plot_curve(train_loss, fig_loss_path) #画出代价函数随训练次数变化曲线图
 
 # testing
 
 model.eval()
 
-#训练集精度
+#训练集
 
-x = x_train
-y = y_train
+x = x_train[:5000]
+y = y_train[:5000]
 
 out = model(x)
 pred = out.argmax(dim=1)
 
 total_correct = 0
-total_num = 1024
+total_num = 5000
 
 total_correct += pred.eq(y).sum().float().item()
 
 acc = total_correct / total_num
 print('train acc:', acc) #训练精度
 
-#测试集精度
+#测试集
 
-x = x_test
-y = y_test
+x = x_test[:5000]
+y = y_test[:5000]
 
 out = model(x)
 
@@ -287,7 +296,7 @@ out = model(x)
 pred = out.argmax(dim=1) # argmax:返回最大数的索引
 
 total_correct = 0
-total_num = 10000
+total_num = 5000
 
 total_correct += pred.eq(y).sum().float().item()
 
@@ -296,8 +305,7 @@ print('test acc:', acc) #测试精度
 
 x, y = x.cpu(), y.cpu()
 print("生成测试图片...")
-plot_image(x, pred, 'test image')
-
+plot_image(x, pred, 'test image', fig_test_path)
 
 
 #  -------------------------- 5、保存和加载模型 -------------------------------
@@ -312,35 +320,5 @@ print('Saved trained model at %s ' % model_path)
 model.load_state_dict(torch.load(model_path))
 print("Created model and loaded weights from file at %s " % model_path)
 
-
-#  -------------------------- 6、显示运行结果 -------------------------------
-
-"""
-
-# 绘制训练 & 验证的准确率值
-plt.plot('accuracy')
-plt.plot(['val_accuracy'])
-
-plt.title('Model accuracy')
-plt.ylabel('Accuracy')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Valid'], loc='upper left') # plt.legend: 给图加上图例
-#plt.savefig('tradition_cnn_valid_acc.png') #默认保存在当前工作目录下
-plt.savefig(fig_acc_path)
-plt.show()
-
-# 绘制训练 & 验证的损失值
-plt.plot(['loss'])
-plt.plot(['val_loss'])
-
-plt.title('Model loss')
-plt.ylabel('Loss')
-plt.xlabel('Epoch')
-plt.legend(['Train', 'Valid'], loc='upper left') # plt.legend: 给图加上图例
-#plt.savefig('tradition_cnn_valid_loss.png') # 默认保存在当前工作目录下
-plt.savefig(fig_loss_path)
-plt.show()
-
-"""
 
 # end of file

@@ -19,7 +19,7 @@ import torch.utils.data as Data
 #  -------------------------- 1、导入需要包 -------------------------------
 
 #  --------------------- 2、读取手写体数据及与图像预处理 ---------------------
-path = 'C:\\Users\\HP\\Desktop\\每周代码学习\\自编码器\\mnist.npz'
+path = 'C:\\Users\\HP\\Desktop\\每周代码学习\\3 自编码器\\mnist.npz'
 f = np.load(path)
 # 以npz结尾的数据集是压缩文件，里面还有其他的文件
 # 使用：f.files 命令进行查看,输出结果为 ['x_test', 'x_train', 'y_train', 'y_test']

@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="434330d0-d995-4125-a306-8c15aa8f0233" name="New changelist" comment="6.26 0:18">
+    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,111 +18,21 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1dOaev3C6rAqSLgN8xAPz24ugu8" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../code/test.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../code/imageClass.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.2.图像分类_cnn">
-    <configuration name="1.房价预测.Multi-Layer perceptron(MLP，多层感知器)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2019TEAMNEW-TrainCodes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/1.房价预测.Multi-Layer perceptron(MLP，多层感知器).py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) " type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2019TEAMNEW-TrainCodes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) .py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="2.招聘信息文本分类.Multi-Layer perceptron(MLP，多层感知器)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2019TEAMNEW-TrainCodes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zhangxun/1.Multi-Layer perceptron(MLP)/2.招聘信息文本分类.Multi-Layer perceptron(MLP，多层感知器).py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="2.图像分类_cnn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2019TEAMNEW-TrainCodes" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/zhangxun/2.Convolutional Neural Networks(CNN)/2.图像分类_cnn.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2019TEAMNEW-TrainCodes" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -165,10 +57,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.2.图像分类_cnn" />
-        <item itemvalue="Python.2.图像分类.Convolutional Neural Networks(CNN，卷积神经网络) " />
-        <item itemvalue="Python.2.招聘信息文本分类.Multi-Layer perceptron(MLP，多层感知器)" />
-        <item itemvalue="Python.1.房价预测.Multi-Layer perceptron(MLP，多层感知器)" />
         <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
@@ -178,7 +66,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="434330d0-d995-4125-a306-8c15aa8f0233" name="New changelist" comment="" />
+      <changelist id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="" />
       <created>1592129618117</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -188,116 +76,19 @@
       <workItem from="1592298694063" duration="3718000" />
       <workItem from="1592369931386" duration="48000" />
       <workItem from="1592444056225" duration="467000" />
-      <workItem from="1592541663730" duration="217000" />
-      <workItem from="1592555748294" duration="710000" />
-      <workItem from="1592624844196" duration="4460000" />
-      <workItem from="1592725725052" duration="382000" />
-      <workItem from="1592726177428" duration="789000" />
-      <workItem from="1592803805143" duration="323000" />
     </task>
-    <task id="LOCAL-00001" summary="6.24 22.31">
-      <created>1593009130028</created>
+    <task id="LOCAL-00001" summary="CNN(keras)">
+      <created>1592870698800</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1593009130028</updated>
+      <updated>1592870698800</updated>
     </task>
-    <task id="LOCAL-00002" summary="6.24 22.55">
-      <created>1593010565350</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1593010565350</updated>
-    </task>
-    <task id="LOCAL-00003" summary="6.25 16；39">
-      <created>1593074407619</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1593074407619</updated>
-    </task>
-    <task id="LOCAL-00004" summary="6.25 17：27">
-      <created>1593077266613</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1593077266613</updated>
-    </task>
-    <task id="LOCAL-00005" summary="6.25 17：27">
-      <created>1593079124247</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1593079124247</updated>
-    </task>
-    <task id="LOCAL-00006" summary="6.25 18:15">
-      <created>1593080112299</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1593080112299</updated>
-    </task>
-    <task id="LOCAL-00007" summary="6.25 18:15">
-      <created>1593080626066</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1593080626066</updated>
-    </task>
-    <task id="LOCAL-00008" summary="6.25 22:41">
-      <created>1593096130252</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1593096130253</updated>
-    </task>
-    <task id="LOCAL-00009" summary="6.25 23:52">
-      <created>1593100329278</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1593100329278</updated>
-    </task>
-    <task id="LOCAL-00010" summary="New changelist">
-      <created>1593101358888</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1593101358888</updated>
-    </task>
-    <task id="LOCAL-00011" summary="New changelist">
-      <created>1593101394007</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1593101394007</updated>
-    </task>
-    <task id="LOCAL-00012" summary="6.26 0:13">
-      <created>1593101610393</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1593101610393</updated>
-    </task>
-    <task id="LOCAL-00013" summary="6.26 0:13">
-      <created>1593101849455</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1593101849456</updated>
-    </task>
-    <task id="LOCAL-00014" summary="6.26 0:18">
-      <created>1593101934470</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1593101934470</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -312,101 +103,35 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="6.24 22.31" />
-    <MESSAGE value="6.24 22.55" />
-    <MESSAGE value="6.25 16；39" />
-    <MESSAGE value="6.25 17：27" />
-    <MESSAGE value="6.25 18:15" />
-    <MESSAGE value="6.25 22:41" />
-    <MESSAGE value="6.25 23:52" />
-    <MESSAGE value="New changelist" />
-    <MESSAGE value="6.26 0:13" />
-    <MESSAGE value="6.26 0:18" />
-    <option name="LAST_COMMIT_MESSAGE" value="6.26 0:18" />
+    <MESSAGE value="CNN(keras)" />
+    <option name="LAST_COMMIT_MESSAGE" value="CNN(keras)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="568" y="226" key="#Notifications" timestamp="1592994308381">
+    <state x="302" y="6" key="CommitChangelistDialog2" timestamp="1592870697865">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592870697865" />
+    <state x="507" y="219" key="FileChooserDialogImpl" timestamp="1592465867063">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="568" y="226" key="#Notifications/0.0.1366.728@0.0.1366.728" timestamp="1592994308381" />
-    <state x="376" y="156" key="#TODO" timestamp="1593080230707">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="376" y="156" key="#TODO/0.0.1366.728@0.0.1366.728" timestamp="1593080230707" />
-    <state x="175" y="0" key="CommitChangelistDialog2" timestamp="1593101933751">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="175" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593101933751" />
-    <state x="223" y="77" width="899" height="620" key="DiffContextDialog" timestamp="1593101747942">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="223" y="77" width="899" height="620" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1593101747942" />
-    <state x="534" y="47" key="FileChooserDialogImpl" timestamp="1592727566488">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="534" y="47" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592727566488" />
+    <state x="507" y="219" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592465867063" />
     <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592370000382" />
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom" timestamp="1593101487127">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="304" y="89" key="SettingsEditor" timestamp="1592444329892">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1593101487127" />
-    <state width="1344" height="174" key="GridCell.Tab.0.center" timestamp="1593101487127">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1593101487127" />
-    <state width="1344" height="174" key="GridCell.Tab.0.left" timestamp="1593101487127">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1593101487127" />
-    <state width="1344" height="174" key="GridCell.Tab.0.right" timestamp="1593101487127">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1344" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1593101487127" />
-    <state x="344" y="69" key="RollbackChangesDialog" timestamp="1593080365867">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="344" y="69" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1593080365867" />
-    <state x="270" y="18" key="SettingsEditor" timestamp="1592631979704">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="270" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592631979704" />
     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
-    <state x="464" y="276" key="VCS.ChangelistChooser" timestamp="1593080543166">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592810216248">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592810216248" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593229106870">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="464" y="276" key="VCS.ChangelistChooser/0.0.1366.728@0.0.1366.728" timestamp="1593080543166" />
-    <state x="513" y="232" key="VCS.EditChangelistDialog" timestamp="1593100767334">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="513" y="232" key="VCS.EditChangelistDialog/0.0.1366.728@0.0.1366.728" timestamp="1593100767334" />
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1593101944208">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593101944208" />
-    <state x="375" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1592803823958">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="375" y="191" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592803823958" />
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593101900384">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593101900384" />
-    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592444337693" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593229106870" />
+    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592896943705" />
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1592444275631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592444275631" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py</url>
-          <line>17</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

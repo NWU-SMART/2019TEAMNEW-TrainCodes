@@ -104,7 +104,7 @@ class AutoEncoder(nn.module):
 """
 X_train = X_train.reshape(X_train.shape[0], 28, 28, 1)
 X_test = X_test.reshape(X_test.shape[0], 28, 28, 1)
-class AutoEncoder(nn.module): 
+class AutoEncoder(nn.Models): 
     def __init__(self):
         super(AutoEncoder,self).__init__()
          self.conv1=nn.Sequential(

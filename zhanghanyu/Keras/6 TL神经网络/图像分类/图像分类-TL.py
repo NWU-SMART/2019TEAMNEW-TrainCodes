@@ -69,7 +69,7 @@ save_dir = os.path.join(os.getcwd(), 'saved_models_transfer_learning')
 model_name = 'keras_fashion_transfer_learning_trained_model.h5'
 
 
-# 将类别弄成独热编码
+# 将类别变成独热编码
 y_train = keras.utils.to_categorical(y_train, num_classes)
 y_test = keras.utils.to_categorical(y_test, num_classes)
 
@@ -77,7 +77,7 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 # x_train = x_train.astype('float32')
 # x_test = x_test.astype('float32')
 # 由于mist的输入数据维度是(num, 28, 28)，vgg16 需要三维图像,因为扩充一下mnist的最后一维
-# 用cv2.COLOR_GRAY2RGB方法
+# 用cv2.COLOR_GRAY2RGB方法进行颜色空间转换
 X_train = [cv2.cvtColor(cv2.resize(i, (48, 48)), cv2.COLOR_GRAY2RGB) for i in x_train]
 X_test = [cv2.cvtColor(cv2.resize(i, (48, 48)), cv2.COLOR_GRAY2RGB) for i in x_test]
 
@@ -141,6 +141,7 @@ if not data_augmentation:
 else:
     print('Using real-time data augmentation.')
     # This will do preprocessing and realtime data augmentation:
+    #图片生成器
     datagen = ImageDataGenerator(
         featurewise_center=False,  # 使输入数据集去中心化（均值为0）, 按feature执行
         samplewise_center=False,  # 使输入数据的每个样本均值为0

@@ -30,14 +30,24 @@ def plot_curve(data): #绘制下降曲线
     plt.ylabel('value')
     plt.show()
 
+def plot_image(x, y, name)
+    plt.imshow(x[0][0], cmap='winter', interpolation='none') #imshow()函数实现热图绘制
+    plt.title("{}: {} ".format("name", y[0].item())) #设置标题
+    plt.xticks([]) #x轴坐标设置为空
+    plt.yticks([]) #y轴坐标设置为空
+    plt.show() #将plt.imshow()处理后的图像显示出来
 
 def one_hot(label, depth=10): #label转onehot （独热码:有多少个状态就有多少位置，每个位置是出现的概率，第一个位置一般表示0
     # 故1., 0., 0., ..., 0., 0., 0.表示是0的概率为1）
     out = torch.zeros(label.size(0), depth).to(device)
-    idx = torch.cuda.LongTensor(label).view(-1, 1).to(device)
+    idx = torch.LongTensor(label).view(-1, 1).to(device)
     out.scatter_(dim=1, index=idx, value=1).to(device)
     return out
 
+def label(one_hot): #onehot转label
+    out = torch.topk(one_hot, 1)[1].squeeze(1)
+    #topk:将高维数组沿某一维度(该维度共N项),选出最大(最小)的K项并排序。返回排序结果和index信息
+    return out
 
 #  -------------------------- 2、读取数据与数据预处理 -------------------------------
 
@@ -140,22 +150,13 @@ y_test = torch.tensor(y_test)
 
 # -------------- 数据可视化 --------------
 
-y_train_onehot = torch.topk(y_train, 1)[1].squeeze(1) # one-hot转label
+y_train_onehot = one_hot(y_train)
 
-plt.imshow(x_train[0][0], cmap='winter', interpolation='none') #imshow()函数实现热图绘制
-plt.title("{}: {} ".format("train image", y_train_onehot[0].item())) #设置标题
-plt.xticks([]) #x轴坐标设置为空
-plt.yticks([]) #y轴坐标设置为空
-plt.show() #将plt.imshow()处理后的图像显示出来
+plot_image(x_train, y_train_onehot, 'train_image')
 
-y_test_onehot = torch.topk(y_test, 1)[1].squeeze(1) # one-hot转label
+y_test_onehot = one_hot(y_test)
 
-plt.imshow(x_test[0][0], cmap='winter', interpolation='none') #imshow()函数实现热图绘制
-plt.title("{}: {} ".format("test image", y_test_onehot[0].item())) #设置标题
-plt.xticks([]) #x轴坐标设置为空
-plt.yticks([]) #y轴坐标设置为空
-plt.show() #将plt.imshow()处理后的图像显示出来
-
+plot_image(x_test, y_test_onehot, 'test_image')
 
 
 
@@ -314,10 +315,10 @@ print("Created model and loaded weights from file at %s " % model_path)
 
 #  -------------------------- 6、显示运行结果 -------------------------------
 
-
+"""
 
 # 绘制训练 & 验证的准确率值
-plt.plot(['accuracy'])
+plt.plot('accuracy')
 plt.plot(['val_accuracy'])
 
 plt.title('Model accuracy')
@@ -339,5 +340,7 @@ plt.legend(['Train', 'Valid'], loc='upper left') # plt.legend: 给图加上图�
 #plt.savefig('tradition_cnn_valid_loss.png') # 默认保存在当前工作目录下
 plt.savefig(fig_loss_path)
 plt.show()
+
+"""
 
 #  -------------------------- 6、显示运行结果 -------------------------------

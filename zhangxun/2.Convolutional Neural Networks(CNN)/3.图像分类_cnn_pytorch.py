@@ -30,7 +30,7 @@ def plot_curve(data): #绘制下降曲线
     plt.ylabel('value')
     plt.show()
 
-def plot_image(x, y, name)
+def plot_image(x, y, name):
     plt.imshow(x[0][0], cmap='winter', interpolation='none') #imshow()函数实现热图绘制
     plt.title("{}: {} ".format("name", y[0].item())) #设置标题
     plt.xticks([]) #x轴坐标设置为空
@@ -40,7 +40,7 @@ def plot_image(x, y, name)
 def one_hot(label, depth=10): #label转onehot （独热码:有多少个状态就有多少位置，每个位置是出现的概率，第一个位置一般表示0
     # 故1., 0., 0., ..., 0., 0., 0.表示是0的概率为1）
     out = torch.zeros(label.size(0), depth).to(device)
-    idx = torch.LongTensor(label).view(-1, 1).to(device)
+    idx = torch.cuda.LongTensor(label).view(-1, 1).to(device)
     out.scatter_(dim=1, index=idx, value=1).to(device)
     return out
 

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/xuke/迁移学习/img classfication_keras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +20,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1dOaev3C6rAqSLgN8xAPz24ugu8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -116,14 +118,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="376" y="156" key="#TODO/0.0.1366.728@0.0.1366.728" timestamp="1593080230707" />
-    <state x="207" y="0" key="CommitChangelistDialog2" timestamp="1593081742707">
+    <state x="207" y="0" key="CommitChangelistDialog2" timestamp="1593423043861">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="207" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593081742707" />
+    <state x="207" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593423043861" />
+    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592870697865" />
     <state x="63" y="54" key="DiffContextDialog" timestamp="1593081741827">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592870697865" />
     <state x="507" y="219" key="FileChooserDialogImpl" timestamp="1592465867063">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -141,10 +143,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="375" y="191" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592803823958" />
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593077368548">
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593422928813">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593077368548" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593422928813" />
     <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592444337693" />
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1592444275631">
       <screen x="0" y="0" width="1536" height="824" />

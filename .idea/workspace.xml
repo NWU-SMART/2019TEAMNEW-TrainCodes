@@ -1,92 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="6.29 2019IEEE 使用OSNet做行人重识别-pytorch，运行test.py即可">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_25_14_44_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_25_14_44__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datamanager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/dataset.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/cuhk01.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/cuhk02.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/cuhk03.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/dukemtmcreid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/grid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/ilids.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/market1501.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/msmt17.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/prid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/sensereid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/image/viper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/video/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/video/dukemtmcvidreid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/video/ilidsvid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/video/mars.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/datasets/video/prid2011.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/sampler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/data/transforms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/engine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/image/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/image/softmax.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/image/triplet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/video/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/video/softmax.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/engine/video/triplet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/losses/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/losses/cross_entropy_loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/losses/hard_mine_triplet_loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/accuracy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/distance.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/rank.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/rank_cylib/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/rank_cylib/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/rank_cylib/rank_cy.pyx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/rank_cylib/setup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/metrics/rank_cylib/test_cython.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/densenet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/hacnn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/inceptionresnetv2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/inceptionv4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/mlfn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/mobilenetv2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/mudeep.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/nasnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/osnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/osnet_ain.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/pcb.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/resnet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/resnet_ibn_a.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/resnet_ibn_b.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/resnetmid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/senet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/shufflenet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/shufflenetv2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/squeezenet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/models/xception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/optim/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/optim/lr_scheduler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/optim/optimizer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/optim/radam.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/avgmeter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/feature_extractor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/loggers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/model_complexity.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/reidtools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/rerank.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/tools.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/zhumengjie/OSNet/torchreid/utils/torchtools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2019TEAMNEW-TrainCodes.iml" afterDir="false" />
+    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2020_6_19_0019_9_01__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhumengjie/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.23 图像回归（迁移学习）-Pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.23 图像回归（迁移学习）-Pytorch.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../code/test.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -166,14 +85,6 @@
       <workItem from="1592726177428" duration="789000" />
       <workItem from="1592803805143" duration="323000" />
     </task>
-    <task id="LOCAL-00001" summary="6.26 实现自定义contrastive loss及多输入多输出模型-Keras">
-      <created>1593160777265</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1593160777265</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,11 +102,6 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="6.26 实现自定义contrastive loss及多输入多输出模型-Keras" />
-    <MESSAGE value="6.29 2019IEEE 使用OSNet做行人重识别-pytorch，运行test.py即可" />
-    <option name="LAST_COMMIT_MESSAGE" value="6.29 2019IEEE 使用OSNet做行人重识别-pytorch，运行test.py即可" />
-  </component>
   <component name="WindowStateProjectService">
     <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1592803922789">
       <screen x="0" y="0" width="1366" height="728" />
@@ -211,10 +117,10 @@
     </state>
     <state x="270" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592631979704" />
     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1593160914826">
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1592912718132">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593160914826" />
+    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592912718132" />
     <state x="375" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1592803823958">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

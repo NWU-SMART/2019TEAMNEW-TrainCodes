@@ -42,7 +42,7 @@ class ResNet:
             bnEps: 防止BN层出现除以0的异常
             bnMom: Controls the momentum for the moving average.
         Return:
-            x: Return the output of the residual module.
+            x: Return the output of the residual Models.
         '''
 
         # 获取的结果为F(x)+x,这里输入的信号为x(直接跳转)，F(x)为经过多个卷积处理函数

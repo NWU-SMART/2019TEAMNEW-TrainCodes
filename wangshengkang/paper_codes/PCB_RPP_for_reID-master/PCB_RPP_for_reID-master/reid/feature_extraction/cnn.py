@@ -19,7 +19,7 @@ def extract_cnn_feature(model, inputs, modules=None, return_mask = False):
             mask = mask.data.cpu()
             return outputs, mask
         return outputs
-    # Register forward hook for each module
+    # Register forward hook for each Models
     outputs = OrderedDict()
     handles = []
     for m in modules:

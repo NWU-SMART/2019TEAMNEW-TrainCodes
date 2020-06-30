@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jiangyuan/论文代码/2018.CVPR.A Compact Deep Learning Model for Robust Facial Expression Recognition/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/zhanghanyu/Pytorch/6 TL神经网络/图像回归.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +21,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1dOaev3C6rAqSLgN8xAPz24ugu8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -107,12 +111,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CNN(keras)" />
@@ -139,10 +144,10 @@
     </state>
     <state x="321" y="128" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593229199509" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592810216248" />
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593229106870">
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593513904620">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593229106870" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593513904620" />
     <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592896943705" />
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1592444275631">
       <screen x="0" y="0" width="1536" height="824" />

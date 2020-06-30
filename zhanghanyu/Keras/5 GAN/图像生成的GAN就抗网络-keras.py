@@ -40,7 +40,8 @@ from IPython import display
 # (X_train, _), (X_test, _) = mnist.load_data() 服务器无法访问
 # 本地读取数据
 
-path = 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'
+path = 'D:\\研究生\\代码\\Keras代码\\3.AutoEncoder(自编码器)\\mnist.npz'#手写体图像数据集
+
 f = np.load(path)
 ####  以npz结尾的数据集是压缩文件，里面还有其他的文件
 ####  使用：f.files 命令进行查看,输出结果为 ['x_test', 'x_train', 'y_train', 'y_test']
@@ -94,7 +95,7 @@ dopt = Adam(lr=1e-5)
 
 #  --------------------- 4、定义生成器 ---------------------
 
-K.set_image_dim_ordering('th')  # 用theano的图片输入顺序
+K.set_image_dim_ordering('th')  # 用theano的图片输入顺序：保证使用的通道顺序和配置的通道顺序一致
 
 # 生成1 * 28 * 28的图片
 nch = 200
@@ -102,14 +103,14 @@ nch = 200
 # CNN生成图片
 # 通过100维的
 
-g_input = Input(shape=[100])  # 输入100维的向量
+g_input = Input(shape=[100])  # 输入100维的向量：接受随机噪声生成图片
 # 100 维 --> 39200 (nch=200*14*14)， 权重 (100+1)* 39200 (input_dimendion + bias) * output_dimension
 H = Dense(nch*14*14, kernel_initializer='glorot_normal')(g_input)  # Glorot正态分布初始化权重
 H = BatchNormalization()(H)
 H = Activation('relu')(H)
 
 # 39200 --> 200 * 14 * 14
-H = Reshape( [nch, 14, 14] )(H)  # 转成200 * 14 * 14
+H = Reshape([nch, 14, 14])(H)  # 转成200 * 14 * 14
 
 # 上采样 200 * 14 * 14 --> 200 * 28 * 28
 H = UpSampling2D(size=(2, 2))(H)
@@ -130,7 +131,7 @@ g_V = Activation('sigmoid')(H)
 
 # 生成generator模块
 generator = Model(g_input,g_V)
-generator.compile(loss='binary_crossentropy', optimizer=opt)
+generator.compile(loss='binary_crossentropy', optimizer=opt)#二分类交叉熵
 generator.summary()
 
 #  --------------------- 4、定义生成器 ---------------------
@@ -143,7 +144,7 @@ d_input = Input(shape=shp)
 
 # 1 * 28 * 28 --> 256 * 14 * 14, 权重参数 (28-5+1) * 256 = 6656
 H = Convolution2D(256, (5, 5), activation="relu", strides=(2, 2), padding="same")(d_input)
-H = LeakyReLU(0.2)(H)
+H = LeakyReLU(0.2)(H)  #Leaky ReLU是给所有负值赋予一个非零斜率
 H = Dropout(dropout_rate)(H)
 
 # 256 * 14 * 14 --> 512 * 7 * 7
@@ -158,9 +159,9 @@ H = LeakyReLU(0.2)(H)
 H = Dropout(dropout_rate)(H)
 
 # 256 --> 2 (true or false)
-d_V = Dense(2,activation='softmax')(H)
+d_V = Dense(2, activation='softmax')(H)
 
-# 判别discriminator模块
+# 生成判别discriminator模块
 discriminator = Model(d_input,d_V)
 discriminator.compile(loss='categorical_crossentropy', optimizer=dopt)
 discriminator.summary()
@@ -171,7 +172,7 @@ discriminator.summary()
 
 #  --------------------- 6、构造生成对抗网络 ---------------------
 
-# 冷冻训练层(定义make_trainable函数。在交替训练过程中，不需要训练辨别器，在训练生成器时)
+# 冷冻训练层(定义make_trainable函数。在交替训练过程中，在训练生成器时，不需要训练辨别器，)
 def make_trainable(net, val):
     net.trainable = val
     for l in net.layers:
@@ -235,17 +236,17 @@ print(XT.shape) # (10000, 1, 28, 28)
 # GAN （generator+discriminator）  （生成器+判别器）
 
 ########### ------------------- 预训练辨别器  -----------------------------
-# 预训练辨别器
+
 noise_gen = np.random.uniform(0,1,size=[XT.shape[0],100]) # 生成XT.shape[0]个随机样本
 generated_images = generator.predict(noise_gen)  # 生成器产生图片样本
 
 # 真实图像为XT，生成图像为generated_images
-X = np.concatenate((XT, generated_images))
+X = np.concatenate((XT, generated_images))#按轴axis连接array组成一个新的array
 n = XT.shape[0]
 
 y = np.zeros([2*n,2])  # 构造辨别器标签 one-hot encode
 y[:n,1] = 1  # 真实图像标签 [1 0]
-y[n:,0] = 1  # 生成图像标签 [0 1]
+y[n: ,0] = 1  # 生成图像标签 [0 1]
 
 # 使得判别器可用
 make_trainable(discriminator,True)
@@ -289,7 +290,7 @@ def train_for_n(nb_epoch=5000, plt_frq=25, BATCH_SIZE=32):
         y[BATCH_SIZE:, 0] = 1
 
         make_trainable(discriminator, True)  # 让判别器神经网络各层可用
-        d_loss = discriminator.train_on_batch(X, y)  # discriminator 判别器训练
+        d_loss = discriminator.train_on_batch(X, y)  # 判别器训练
         losses["d"].append(d_loss)  # 存储辨别器损失loss
         ### ------ 训练辨别器 ----------------
 
@@ -310,7 +311,7 @@ def train_for_n(nb_epoch=5000, plt_frq=25, BATCH_SIZE=32):
             plot_loss(losses)
             plot_gen()
 
-train_for_n(nb_epoch=1000, plt_frq=10,BATCH_SIZE=128)
+train_for_n(nb_epoch=1000, plt_frq=10,BATCH_SIZE=128)#输出训练数据
 
 #  --------------------- 8、输出训练数据 ---------------------
 

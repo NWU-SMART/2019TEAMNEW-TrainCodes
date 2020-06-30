@@ -1,0 +1,181 @@
+Index: zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#----------------------------------------------------------#\r\n# 开发者：朱梦婕\r\n# 开发日期：2020年6月22日\r\n# 开发框架：Pytorch\r\n# 开发内容：图像分类（迁移学习）\r\n#----------------------------------------------------------#\r\n\r\n# ----------------------   代码布局： ----------------------\r\n# 1、导入 torch, numpy, gzip和 cv2的包\r\n# 2、读取数据及与图像预处理\r\n# 3、参数定义\r\n# 4、迁移学习建模\r\n# 5、模型训练\r\n# 6、模型测试\r\n# ----------------------   代码布局： ----------------------\r\n\r\n#  -------------------------- 1、导入需要包 -------------------------------\r\nimport gzip\r\nimport numpy as np\r\nimport torch\r\nimport torch.nn as nn\r\nimport torchvision.models as models\r\nimport cv2\r\nimport matplotlib.pyplot as plt\r\n#  -------------------------- 导入需要包 -------------------------------\r\n\r\n#  --------------------- 2、读取数据及与图像预处理 ---------------------\r\n\r\n# path = 'D:\\\\keras_datasets\\\\'\r\n\r\n# 函数：数据加载\r\ndef load_data():\r\n    paths = [\r\n        'train-labels-idx1-ubyte.gz', 'train-images-idx3-ubyte.gz',\r\n        't10k-labels-idx1-ubyte.gz', 't10k-images-idx3-ubyte.gz'\r\n    ]\r\n\r\n    # 将文件解压并划分为数据集\r\n    with gzip.open(paths[0], 'rb') as lbpath:\r\n        y_train = np.frombuffer(lbpath.read(), np.uint8, offset=8)\r\n\r\n    with gzip.open(paths[1], 'rb') as imgpath:\r\n        x_train = np.frombuffer(\r\n            imgpath.read(), np.uint8, offset=16).reshape(len(y_train), 28, 28, 1)\r\n\r\n    with gzip.open(paths[2], 'rb') as lbpath:\r\n        y_test = np.frombuffer(lbpath.read(), np.uint8, offset=8)\r\n\r\n    with gzip.open(paths[3], 'rb') as imgpath:\r\n        x_test = np.frombuffer(\r\n            imgpath.read(), np.uint8, offset=16).reshape(len(y_test), 28, 28, 1)\r\n\r\n    return (x_train, y_train), (x_test, y_test)\r\n\r\n(x_train, y_train), (x_test, y_test) = load_data()     # 加载数据集\r\n# 由于mist的输入数据维度是(num, 28, 28)，vgg16 需要三维图像,因为扩充一下mnist的最后一维\r\n'''\r\ncv2.resize：将原图放大到48*48\r\ncv2.cvtColor(p1,p2) ：是颜色空间转换函数，p1是需要转换的图片，p2是转换成何种格式。\r\ncv2.COLOR_BGR2RGB 将BGR格式转换成RGB格式\r\ncv2.COLOR_GRAY2RGB 将灰度图片转化为格式\r\ncv2.COLOR_BGR2GRAY 将BGR格式转换成灰度图片\r\n'''\r\nX_train = [cv2.cvtColor(cv2.resize(i, (48, 48)), cv2.COLOR_GRAY2RGB) for i in x_train]\r\nX_test = [cv2.cvtColor(cv2.resize(i, (48, 48)), cv2.COLOR_GRAY2RGB) for i in x_test]\r\n\r\nx_train = np.asarray(X_train)\r\nx_test = np.asarray(X_test)\r\n\r\nx_train = x_train.astype('float32')\r\nx_test = x_test.astype('float32')\r\n\r\nx_train /= 255  # 归一化\r\nx_test /= 255  # 归一化\r\n\r\n# 转换为tensor形式\r\nx_train = torch.FloatTensor(x_train)\r\ny_train = torch.FloatTensor(y_train)\r\nx_test = torch.FloatTensor(x_test)\r\ny_test = torch.FloatTensor(y_test)\r\n#  --------------------- 2、读取数据及与图像预处理 ---------------------\r\n\r\n#  ---------------------------------3、参数定义 --------------------------------\r\n\r\nbatch_size = 32\r\nnum_classes = 10\r\nepochs = 5\r\nnum_predictions = 20\r\n\r\n#  ----------------------------------- 参数定义---------------------------------------------\r\n\r\n# -------------------------------4、模型构建------------------------\r\nmodel = models.vgg16(pretrained=True)  # 使用VGG16的权重\r\n\r\n# 特征层中参数都固定住，不会发生梯度的更新\r\nfor parma in model.parameters():\r\n    parma.requires_grad = False\r\n\r\n# pytorch输入图片的尺寸必须是CxHxW，所以使用premute方法把[60000, 1, 28, 28]变为[60000, 28, 28, 1]\r\nx_train =x_train.permute(0, 3 , 2, 1)\r\n\r\n# 重新定义最后的三个全连接层，也就是分类层，7*7*512是vgg16最后一个卷积层的输出大小\r\nmodel.classifier = torch.nn.Sequential(torch.nn.Linear(7 * 7 * 512, 256),\r\n                                       torch.nn.ReLU(),\r\n                                       torch.nn.Dropout(0.5),\r\n                                       torch.nn.Linear(256, 10),\r\n                                       torch.nn.Softmax()\r\n                                       )\r\n\r\nprint(model)  # 查看模型\r\n# -------------------------------模型构建------------------------\r\n\r\n# -------------------------------5、模型训练------------------------\r\n# 使用gpu\r\nmodel = model.cuda(device='1')\r\nx_train = x_train.cuda()\r\ny_train = y_train.cuda()\r\n\r\noptimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # 优化器\r\nloss_func = torch.nn.CrossEntropyLoss()                   # 损失函数\r\n\r\nprint(\"-----------训练开始-----------\")\r\n\r\nfor i in range(epochs):\r\n    # 预测结果\r\n    pred = model(x_train)\r\n    # 计算损失\r\n    loss = loss_func(pred, y_train.long())\r\n    # 梯度归零\r\n    optimizer.zero_grad()\r\n    # 反向传播\r\n    loss.backward()\r\n    # 梯度更新\r\n    optimizer.step()\r\n    print(i, loss.item())\r\n\r\nprint(\"-----------训练结束-----------\")\r\ntorch.save(model.state_dict(), \"torch_transferlearning.pkl\")  # 保存模型参数\r\n# -------------------------------模型训练------------------------\r\n\r\n#  -------------------------- 6、模型测试 -------------------------------\r\nprint(\"-----------测试开始-----------\")\r\n\r\nmodel.load_state_dict(torch.load('torch_transferlearning.pkl')) # 加载训练好的模型参数\r\nfor i in range(epochs):\r\n    # 预测结果\r\n    pred = model(x_test)\r\n    # 计算损失\r\n    loss = loss_func(pred, y_test.long())\r\n    # 打印迭代次数和损失\r\n    print(i, loss.item())\r\n\r\nprint(\"-----------测试结束-----------\")\r\n# -------------------------------模型测试------------------------\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py	(revision e5033a6fa793222964aba5156abd819dcf0604ad)
++++ zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py	(date 1592913615341)
+@@ -22,6 +22,8 @@
+ import torchvision.models as models
+ import cv2
+ import matplotlib.pyplot as plt
++import os
++os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # 使用第1个GPU
+ #  -------------------------- 导入需要包 -------------------------------
+ 
+ #  --------------------- 2、读取数据及与图像预处理 ---------------------
+@@ -100,7 +102,8 @@
+ x_train =x_train.permute(0, 3 , 2, 1)
+ 
+ # 重新定义最后的三个全连接层，也就是分类层，7*7*512是vgg16最后一个卷积层的输出大小
+-model.classifier = torch.nn.Sequential(torch.nn.Linear(7 * 7 * 512, 256),
++model.classifier = torch.nn.Sequential(torch.nn.AdaptiveAvgPool2d(output_size=(7, 7)),
++                                       torch.nn.Linear(7 * 7 * 512, 256),
+                                        torch.nn.ReLU(),
+                                        torch.nn.Dropout(0.5),
+                                        torch.nn.Linear(256, 10),
+@@ -111,44 +114,36 @@
+ # -------------------------------模型构建------------------------
+ 
+ # -------------------------------5、模型训练------------------------
+-# 使用gpu
+-model = model.cuda(device='1')
++# GPU
++model = model.cuda()
+ x_train = x_train.cuda()
+ y_train = y_train.cuda()
+ 
+ optimizer = torch.optim.Adam(model.parameters(), lr=1e-4) # 优化器
+ loss_func = torch.nn.CrossEntropyLoss()                   # 损失函数
+ 
+-print("-----------训练开始-----------")
+-
+-for i in range(epochs):
+-    # 预测结果
+-    pred = model(x_train)
+-    # 计算损失
+-    loss = loss_func(pred, y_train.long())
+-    # 梯度归零
+-    optimizer.zero_grad()
+-    # 反向传播
+-    loss.backward()
+-    # 梯度更新
+-    optimizer.step()
+-    print(i, loss.item())
++#使用dataloader载入数据，小批量进行迭代，要不然计算机算不过来
++import torch.utils.data as Data
++torch_dataset = Data.TensorDataset(x_train, y_train)
++loader = Data.DataLoader(dataset=torch_dataset, batch_size=1024, shuffle=True, num_workers=0)
+ 
+-print("-----------训练结束-----------")
+-torch.save(model.state_dict(), "torch_transferlearning.pkl")  # 保存模型参数
+-# -------------------------------模型训练------------------------
++loss_list = [] # 建立一个loss的列表，以保存每一次loss的数值
++for t in range(5):
++    running_loss = 0
++    for step, (x_train, y_train) in enumerate(loader):
++        train_prediction = model(x_train)
++        loss = loss_func(train_prediction, y_train)  # 计算损失
++        loss_list.append(loss) # 使用append()方法把每一次的loss添加到loss_list中
++        optimizer.zero_grad()  # 由于pytorch的动态计算图，所以在进行梯度下降更新参数的时候，梯度并不会自动清零。需要在每个batch候清零梯度
++        loss.backward()  # 反向传播，计算参数
++        optimizer.step()  # 更新参数
++        running_loss += loss.item()
++    else:
++        print(f"Epoch{t}：{running_loss/len(loader)}")  # 打印平均损失
+ 
+-#  -------------------------- 6、模型测试 -------------------------------
+-print("-----------测试开始-----------")
+-
+-model.load_state_dict(torch.load('torch_transferlearning.pkl')) # 加载训练好的模型参数
+-for i in range(epochs):
+-    # 预测结果
+-    pred = model(x_test)
+-    # 计算损失
+-    loss = loss_func(pred, y_test.long())
+-    # 打印迭代次数和损失
+-    print(i, loss.item())
+-
+-print("-----------测试结束-----------")
+-# -------------------------------模型测试------------------------
++plt.title('model loss')
++plt.ylabel('loss')
++plt.xlabel('epoch')
++plt.plot(loss_list, 'c-')
++plt.show()
++#   ---------------------- 训练模型 --------------------------
+Index: zhumengjie/test.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\na=1\r\nb=2\r\nprint(a+b)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- zhumengjie/test.py	(revision e5033a6fa793222964aba5156abd819dcf0604ad)
++++ zhumengjie/test.py	(date 1593064374176)
+@@ -1,4 +1,4 @@
++from keras.layers import Input
+ 
+-a=1
+-b=2
+-print(a+b)
+\ No newline at end of file
++inp = Input(shape = (28, 28, 1), name='FeatureNet_ImageInput')
++print(inp)
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"9e5d5b44-b045-46ef-9dc5-2a11faefa5cd\" name=\"Default Changelist\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/zhumengjie/9.SiameseNetwork/6.25 Siamese Network-Pytorch.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/zhumengjie/test.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/zhumengjie/test.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"1dOaev3C6rAqSLgN8xAPz24ugu8\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/../code/test.py\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable\" />\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.6.25 Siamese Network-Pytorch\">\r\n    <configuration name=\"6.25 Siamese Network-Pytorch\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"2019TEAMNEW-TrainCodes\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/zhumengjie/9.SiameseNetwork\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/zhumengjie/9.SiameseNetwork/6.25 Siamese Network-Pytorch.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"__init__\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"2019TEAMNEW-TrainCodes\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/simaminghui/Sequential/数字分类\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/simaminghui/Sequential/数字分类/__init__.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"test\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"2019TEAMNEW-TrainCodes\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/zhumengjie\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/zhumengjie/test.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.6.25 Siamese Network-Pytorch\" />\r\n        <item itemvalue=\"Python.test\" />\r\n        <item itemvalue=\"Python.__init__\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"9e5d5b44-b045-46ef-9dc5-2a11faefa5cd\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1592129618117</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1592129618117</updated>\r\n      <workItem from=\"1592129619200\" duration=\"817000\" />\r\n      <workItem from=\"1592223689881\" duration=\"31000\" />\r\n      <workItem from=\"1592298694063\" duration=\"3718000\" />\r\n      <workItem from=\"1592369931386\" duration=\"48000\" />\r\n      <workItem from=\"1592444056225\" duration=\"467000\" />\r\n      <workItem from=\"1592541663730\" duration=\"217000\" />\r\n      <workItem from=\"1592555748294\" duration=\"710000\" />\r\n      <workItem from=\"1592624844196\" duration=\"4460000\" />\r\n      <workItem from=\"1592725725052\" duration=\"382000\" />\r\n      <workItem from=\"1592726177428\" duration=\"789000\" />\r\n      <workItem from=\"1592803805143\" duration=\"323000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"1\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"WindowStateProjectService\">\r\n    <state x=\"188\" y=\"0\" key=\"CommitChangelistDialog2\" timestamp=\"1593066651505\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"188\" y=\"0\" key=\"CommitChangelistDialog2/0.0.1366.728@0.0.1366.728\" timestamp=\"1593066651505\" />\r\n    <state x=\"534\" y=\"47\" key=\"FileChooserDialogImpl\" timestamp=\"1592727566488\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"534\" y=\"47\" key=\"FileChooserDialogImpl/0.0.1366.728@0.0.1366.728\" timestamp=\"1592727566488\" />\r\n    <state x=\"570\" y=\"248\" key=\"FileChooserDialogImpl/0.0.1536.824@0.0.1536.824\" timestamp=\"1592370000382\" />\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.bottom\" timestamp=\"1593066463188\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728\" timestamp=\"1593066463188\" />\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.center\" timestamp=\"1593066463188\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728\" timestamp=\"1593066463188\" />\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.left\" timestamp=\"1593066463188\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728\" timestamp=\"1593066463188\" />\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.right\" timestamp=\"1593066463188\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state width=\"672\" height=\"2\" key=\"GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728\" timestamp=\"1593066463188\" />\r\n    <state x=\"270\" y=\"18\" key=\"SettingsEditor\" timestamp=\"1592631979704\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"270\" y=\"18\" key=\"SettingsEditor/0.0.1366.728@0.0.1366.728\" timestamp=\"1592631979704\" />\r\n    <state x=\"304\" y=\"89\" key=\"SettingsEditor/0.0.1536.824@0.0.1536.824\" timestamp=\"1592444329892\" />\r\n    <state x=\"275\" y=\"100\" key=\"Vcs.Push.Dialog.v2\" timestamp=\"1592989043394\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"275\" y=\"100\" key=\"Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728\" timestamp=\"1592989043394\" />\r\n    <state x=\"375\" y=\"191\" key=\"com.intellij.ide.util.TipDialog\" timestamp=\"1592803823958\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"375\" y=\"191\" key=\"com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728\" timestamp=\"1592803823958\" />\r\n    <state x=\"402\" y=\"204\" key=\"git4idea.merge.GitPullDialog\" timestamp=\"1592803937013\">\r\n      <screen x=\"0\" y=\"0\" width=\"1366\" height=\"728\" />\r\n    </state>\r\n    <state x=\"402\" y=\"204\" key=\"git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728\" timestamp=\"1592803937013\" />\r\n    <state x=\"452\" y=\"231\" key=\"git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824\" timestamp=\"1592444337693\" />\r\n    <state x=\"539\" y=\"344\" key=\"git4idea.remote.GitConfigureRemotesDialog\" timestamp=\"1592444275631\">\r\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\r\n    </state>\r\n    <state x=\"539\" y=\"344\" key=\"git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824\" timestamp=\"1592444275631\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py</url>\r\n          <line>17</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision e5033a6fa793222964aba5156abd819dcf0604ad)
++++ .idea/workspace.xml	(date 1593067248879)
+@@ -2,8 +2,6 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/zhumengjie/9.SiameseNetwork/6.25 Siamese Network-Pytorch.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/zhumengjie/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhumengjie/test.py" afterDir="false" />
+     </list>
+@@ -129,6 +127,14 @@
+       <workItem from="1592726177428" duration="789000" />
+       <workItem from="1592803805143" duration="323000" />
+     </task>
++    <task id="LOCAL-00001" summary="6.25 孪生网络-Pytorch">
++      <created>1593066939569</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1593066939569</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -146,11 +152,15 @@
+     </option>
+     <option name="oldMeFiltersMigrated" value="true" />
+   </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="6.25 孪生网络-Pytorch" />
++    <option name="LAST_COMMIT_MESSAGE" value="6.25 孪生网络-Pytorch" />
++  </component>
+   <component name="WindowStateProjectService">
+-    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1593066651505">
++    <state x="188" y="0" key="CommitChangelistDialog2" timestamp="1593066938191">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>
+-    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593066651505" />
++    <state x="188" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593066938191" />
+     <state x="534" y="47" key="FileChooserDialogImpl" timestamp="1592727566488">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>
+@@ -177,10 +187,10 @@
+     </state>
+     <state x="270" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592631979704" />
+     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
+-    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1592989043394">
++    <state x="275" y="100" key="Vcs.Push.Dialog.v2" timestamp="1593066949882">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>
+-    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592989043394" />
++    <state x="275" y="100" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593066949882" />
+     <state x="375" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1592803823958">
+       <screen x="0" y="0" width="1366" height="728" />
+     </state>

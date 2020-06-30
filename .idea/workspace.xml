@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/jiangyuan/论文代码/2018.CVPR.A Compact Deep Learning Model for Robust Facial Expression Recognition/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zhanghanyu/Keras/5 GAN/图像生成的GAN就抗网络-keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/zhanghanyu/Keras/5 GAN/图像生成的GAN就抗网络-keras.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +20,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1dOaev3C6rAqSLgN8xAPz24ugu8" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,13 +28,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../code/test.py" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.path.for.package.tslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\pythonwork\2019TEAMNEW-TrainCodes\sunqian\Keras" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -85,95 +80,73 @@
       <workItem from="1592298694063" duration="3718000" />
       <workItem from="1592369931386" duration="48000" />
       <workItem from="1592444056225" duration="467000" />
-      <workItem from="1592541663730" duration="217000" />
-      <workItem from="1592555748294" duration="710000" />
-      <workItem from="1592624844196" duration="4460000" />
-      <workItem from="1592725725052" duration="382000" />
-      <workItem from="1592726177428" duration="789000" />
-      <workItem from="1592803805143" duration="323000" />
-      <workItem from="1593475310291" duration="6981000" />
-      <workItem from="1593513161749" duration="110000" />
+      <workItem from="1593343282779" duration="335000" />
     </task>
-    <task id="LOCAL-00001" summary="6.29 2019_CARP论文代码">
-      <created>1593426183143</created>
+    <task id="LOCAL-00001" summary="CNN(keras)">
+      <created>1592870698800</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1593426183144</updated>
+      <updated>1592870698800</updated>
     </task>
-    <task id="LOCAL-00002" summary="6.29 论文代码">
-      <created>1593427175046</created>
+    <task id="LOCAL-00002" summary="6.27Keras函数式API">
+      <created>1593229185767</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1593427175046</updated>
+      <updated>1593229185768</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="6.29 2019_CARP论文代码" />
-    <MESSAGE value="6.29 论文代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="6.29 论文代码" />
+    <MESSAGE value="CNN(keras)" />
+    <MESSAGE value="6.27Keras函数式API" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.27Keras函数式API" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="105" y="0" key="CommitChangelistDialog2" timestamp="1593427101208">
+    <state x="269" y="0" key="CommitChangelistDialog2" timestamp="1593229183511">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="105" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593427101208" />
-    <state x="534" y="47" key="FileChooserDialogImpl" timestamp="1592727566488">
+    <state x="269" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593229183511" />
+    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592870697865" />
+    <state x="507" y="219" key="FileChooserDialogImpl" timestamp="1592465867063">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="534" y="47" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592727566488" />
+    <state x="507" y="219" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592465867063" />
     <state x="570" y="248" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592370000382" />
-    <state x="270" y="18" key="SettingsEditor" timestamp="1592631979704">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="304" y="89" key="SettingsEditor" timestamp="1592444329892">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592631979704" />
     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
-    <state x="275" y="72" key="Vcs.Push.Dialog.v2" timestamp="1593428170853">
+    <state x="321" y="128" key="Vcs.Push.Dialog.v2" timestamp="1593229199509">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="72" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593428170853" />
-    <state x="375" y="191" key="com.intellij.ide.util.TipDialog" timestamp="1593513162359">
+    <state x="321" y="128" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593229199509" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592810216248" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593229106870">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="375" y="191" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1593513162359" />
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593513282027">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593513282027" />
-    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592444337693" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593229106870" />
+    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592896943705" />
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1592444275631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592444275631" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/zhumengjie/6.Transfer Learning/6.22 图像分类（迁移学习）-Pytorch.py</url>
-          <line>17</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

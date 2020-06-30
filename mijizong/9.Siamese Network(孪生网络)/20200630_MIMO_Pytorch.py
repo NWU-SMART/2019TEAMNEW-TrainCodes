@@ -2,7 +2,7 @@
 #  -*- coding: utf-8 -*-
 #  @Time: 2020/6/30
 #  @Author: MiJizong
-#  @Content: MIMO——Pytorch
+#  @Content: MIMO——Pytorch 
 #  @Version: 1.0
 #  @FileName: 1.0.py
 #  @Software: PyCharm

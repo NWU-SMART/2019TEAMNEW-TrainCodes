@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="图像回归(keras)">
-      <change afterPath="$PROJECT_DIR$/xuke/MIMO/MIMO_pytorch.py" afterDir="false" />
+    <list default="true" id="9e5d5b44-b045-46ef-9dc5-2a11faefa5cd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/MIMO/MIMO_keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/xuke/MIMO/MIMO_keras.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/图像分类/pytorch/pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/xuke/图像分类/pytorch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/房屋预测/Pytorch/Pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/xuke/房屋预测/Pytorch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/房屋预测/keras/keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/xuke/房屋预测/keras.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/迁移学习/img classfication_keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/xuke/迁移学习/图像分类/img classfication_keras.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xuke/迁移学习/img classfication_pytorch.py" beforeDir="false" afterPath="$PROJECT_DIR$/xuke/迁移学习/图像分类/img classfication_pytorch.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +28,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../code/imageClass.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\pythonwork\2019TEAMNEW-TrainCodes\sunqian\Keras" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -82,6 +80,7 @@
       <workItem from="1592298694063" duration="3718000" />
       <workItem from="1592369931386" duration="48000" />
       <workItem from="1592444056225" duration="467000" />
+      <workItem from="1593343282779" duration="335000" />
     </task>
     <task id="LOCAL-00001" summary="CNN(keras)">
       <created>1592870698800</created>
@@ -90,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592870698800</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="6.27Keras函数式API">
+      <created>1593229185767</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1593229185768</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,27 +107,24 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CNN(keras)" />
-    <option name="LAST_COMMIT_MESSAGE" value="CNN(keras)" />
+    <MESSAGE value="6.27Keras函数式API" />
+    <option name="LAST_COMMIT_MESSAGE" value="6.27Keras函数式API" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="517" y="215" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1593497519102">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="269" y="0" key="CommitChangelistDialog2" timestamp="1593229183511">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1593497519102" />
-    <state x="302" y="6" key="CommitChangelistDialog2" timestamp="1593415726577">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1593415726577" />
+    <state x="269" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593229183511" />
+    <state x="302" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1592870697865" />
     <state x="507" y="219" key="FileChooserDialogImpl" timestamp="1592465867063">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -131,18 +134,16 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="304" y="89" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592444329892" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592810216248">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="321" y="128" key="Vcs.Push.Dialog.v2" timestamp="1593229199509">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="321" y="128" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593229199509" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1592810216248" />
-    <state x="562" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593415740368">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog" timestamp="1593229106870">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="562" y="329" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1593415740368" />
-    <state x="452" y="231" key="git4idea.merge.GitPullDialog" timestamp="1593497379632">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1593497379632" />
+    <state x="402" y="204" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1593229106870" />
+    <state x="452" y="231" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1592896943705" />
     <state x="539" y="344" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1592444275631">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -35,7 +35,6 @@ import keras.backend as K
 class ResNet:
 
     # ------------------ 定义ResNet的残差模块residual_module -------------
-    @staticmethod
     def residual_module(x, K, stride, chanDim, reduce=False, reg=1e-4, bnEps=2e-5, bnMom=0.9):
         """
         The residual module of the ResNet architecture.
@@ -97,7 +96,6 @@ class ResNet:
     # ------------------ 定义ResNet的残差模块residual_module -------------
 
     # ------------------ 定义ResNet的网络构建模块build -------------
-    @staticmethod
     def build(width, height, depth, classes, stages, filters, reg=1e-4, bnEps=2e-5, bnMom=0.9, dataset="cifar"):
 
         # --- 初始化输入的高、宽和深度

@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/liaiping/yourresearch_codes" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/zhumengjie/OSNet/torchreid" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/zhumengjie/OSNet" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/zhumengjie/10.ResNet/Keras" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -25,7 +25,7 @@ device = torch.device('cuda')
 def plot_curve(data, path): #绘制曲线
     fig = plt.figure() #新建一个画布
     plt.plot(range(len(data)), data, color='blue')
-    plt.legend(['value'], loc='upper right')
+    plt.legend(['value'], loc='upper right') #legend图例
     plt.xlabel('step')
     plt.ylabel('value')
     plt.savefig(path) #这个savefig一定要放在show之前
@@ -33,7 +33,7 @@ def plot_curve(data, path): #绘制曲线
 
 def plot_image(x, y, name, path):
     plt.imshow(x[0][0], cmap='winter', interpolation='none') #imshow()函数实现热图绘制
-    plt.title("{}: {} ".format("name", y[0].item())) #设置标题
+    plt.title("{}: {} ".format(name, y[0].item())) #设置标题
     plt.xticks([]) #x轴坐标设置为空
     plt.yticks([]) #y轴坐标设置为空
     plt.savefig(path) #这个savefig一定要放在show之前
@@ -107,36 +107,34 @@ epochs = 5
 data_augmentation = True  # 数据增强
 num_predictions = 20
 
-# -------------- 设置模型、图像保存路径名 --------------
+# -------------- 设置模型、图片保存路径名 --------------
 
-# # 本地path
+# # 模型本地path
 # save_dir = 'E:\\软件学习\\深度学习\\postgraduate study\\数据集、模型、图片\\2.CNN\\saved_models_cnn'
-
 # google colab上的path
-save_dir = './saved_models_cnn'
+model_save_dir = './saved_models_cnn'
+
+if not os.path.isdir(model_save_dir): # 判断是否是一个目录(而不是文件)
+    os.makedirs(model_save_dir) # 创造一个单层目录
 
 model_name = 'trained_model.h5'
 # H5文件是层次数据格式第5代的版本（Hierarchical Data Format，HDF5），它是用于存储科学数据的一种文件格式和库文件。
 
-if not os.path.isdir(save_dir): # 判断是否是一个目录(而不是文件)
-    os.makedirs(save_dir) # 创造一个单层目录
+model_path = os.path.join(model_save_dir, model_name) #模型路径名
 
-model_path = os.path.join(save_dir, model_name) #模型路径名
-
-# # 本地path
+# # 图片本地path
 # fig_save_dir = 'E:\\软件学习\\深度学习\\postgraduate study\\数据集、模型、图片\\2.CNN\\saved_figures_cnn'
-
 # google colab上的path
 fig_save_dir = './saved_figures_cnn'
+
+if not os.path.isdir(fig_save_dir): # 判断是否是一个目录(而不是文件)
+    os.makedirs(fig_save_dir) # 创造一个单层目录
 
 fig_acc_name = 'valid_acc.png'
 fig_loss_name = 'valid_loss.png'
 fig_train_data_name = 'train_image.png'
 fig_test_data_name = 'test_image.png'
 fig_test_name = 'test.png'
-
-if not os.path.isdir(fig_save_dir): # 判断是否是一个目录(而不是文件)
-    os.makedirs(fig_save_dir) # 创造一个单层目录
 
 fig_acc_path = os.path.join(fig_save_dir, fig_acc_name) #acc图路径名
 fig_loss_path = os.path.join(fig_save_dir, fig_loss_name) #loss图路径名
@@ -151,15 +149,16 @@ Variable是对tensor的封装。Variable有三个属性：
 .grad：对应tensor的梯度
 .grad_fn：该Variable是通过什么方式获得的
 
-x_train = Variable(torch.from_numpy(x_train))  # Variable(变量) 才可用GPU进行加速计算
+x_train = Variable(torch.from_numpy(x_train))  # Variable(变量) 才可用GPU进行加速计算？
 x_test = Variable(torch.from_numpy(x_test)) #torch.from_numpy()方法把数组转换成张量，且二者共享内存
 y_train = torch.LongTensor(y_train)
 y_test = torch.LongTensor(y_test)
 """
 
+print(x_train.dtype, y_train.dtype) # float32 uint8
 x_train = torch.tensor(x_train)
 x_test = torch.tensor(x_test)
-y_train = torch.LongTensor(y_train)
+y_train = torch.LongTensor(y_train) #这里必须是LongTensor, why?
 y_test = torch.LongTensor(y_test)
 
 # we got tensor-type datas, x: [60000, 1, 28, 28], y: [60000]
@@ -167,9 +166,7 @@ y_test = torch.LongTensor(y_test)
 # -------------- 数据可视化 --------------
 
 plot_image(x_train, y_train, 'train_image', fig_train_data_path)
-
 plot_image(x_test, y_test, 'test_image', fig_test_data_path)
-
 
 #  -------------------------- 3、搭建传统CNN模型 -------------------------------
 
@@ -204,7 +201,6 @@ class CNNModel(nn.Module):
             nn.Linear(512, 10),
             nn.Softmax()
         )
-
 
     def forward(self, x):
 
@@ -260,7 +256,8 @@ for epoch in range(10): #开始训练，range括号内为对数据集迭代的�
         optimizer.step() #更新参数  w' = w - lr * grad
 
         train_loss.append(loss.item())
-        print("epoch:", epoch, "loss:", loss.item()) #输出计算过程
+
+    print("epoch:", epoch, "loss:", loss.item()) #输出计算过程
 
 print("生成loss随epoch变化曲线图...")
 plot_curve(train_loss, fig_loss_path) #画出代价函数随训练次数变化曲线图

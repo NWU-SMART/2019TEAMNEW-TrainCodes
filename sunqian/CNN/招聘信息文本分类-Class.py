@@ -1,7 +1,7 @@
 # ----------------开发者信息--------------------------------#
 # 开发人员：孙迁
-# 开发日期：2020/7/1
-#  文件名称：招聘信息文本分类-Sequential.py
+# 开发日期：2020/7/6
+#  文件名称：招聘信息文本分类-Class.py
 # 开发工具：PyCharm
 # ----------------开发者信息--------------------------------#
 
@@ -10,7 +10,7 @@
 # 2、导入招聘文本数据
 # 3、分词并提取关键字
 # 4、建立并使用字典
-# 5、训练模型(Sequential)
+# 5、训练模型(Class)
 # 6、保存模型与训练可视化
 # ----------------------   代码布局： ----------------------
 
@@ -18,15 +18,13 @@
 import pandas as pd
 import jieba
 import jieba.analyse as analyse
-from pandas import DataFrame
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing import sequence
-from keras.models import Sequential
 from keras.layers import Dense,Dropout,Activation,Flatten,MaxPool1D,Conv1D
 from keras.layers.embeddings import Embedding
 from keras.utils import multi_gpu_model
 from keras.models import load_model
-from keras import  regularizers#正则化
+from keras import  regularizers # 正则化
 import matplotlib.pyplot as plt
 import numpy as np
 from keras.utils import plot_model
@@ -70,7 +68,7 @@ job_detail_pd['Job_Description_key_word']=job_detail_pd.Job_Description.apply(ke
 #  ------------------------------4、建立并使用字典-------------------------------------------------
 # 建立2000个词的字典
 token=Tokenizer(num_words=2000)
-token.fit_on_sequences(job_detail_pd['Job_Description_key_word'])#按单词出现次数排序，排序前2000的单词会列入词典中
+token.fit_on_texts(job_detail_pd['Job_Description_key_word'])#按单词出现次数排序，排序前2000的单词会列入词典中
 
 # 使用token字典将“文字”转化为“数字列表”
 Job_Description_Seq=token.texts_to_sequences(job_detail_pd['Job_Description_key_word'])
@@ -79,80 +77,82 @@ Job_Description_Seq_Padding=sequence.pad_sequences(Job_Description_Seq,maxlen=50
 x_train=Job_Description_Seq_Padding
 y_train=job_detail_pd['label'].tolist()
 
-print('训练数据',x_train)
-print('训练标签',y_train)
-print('训练数据：',x_train.shape,x_train.ndim)
-
-
-# 将数据保存,以便后面进行训练
-x_train =DataFrame(x_train)
-y_train = DataFrame(y_train)
+x_train = np.array(x_train)
+y_train = np.array(y_train)
 #  ----------------------------- 4、建立并使用字典--------------------------------------------------
 
 
-#  ------------------------------- 5、训练模型(Sequential)-------------------------------
+#  ------------------------------- 5、训练模型(API)-------------------------------
 batch_size=256
 epochs=5
-model=Sequential()
-model.add(Embedding(output_dim=32, # 词向量的维度
-                    input_dim=2000, # 字典大小
-                    input_length=50 # 每个数字列表的长度
-                    )
-          )
-model.add(Conv1D(256, # 输出大小
-                 3, # 卷积核大小
-                 padding='same',
-                 activation='relu'))
-model.add(MaxPool1D(3,3,padding='same'))
-model.add(Conv1D(32,3,padding='same',activation='relu'))
-model.add(Flatten())#平展
-model.add(Dropout(0.3))
-model.add(BatchNormalization()) #（批）规范化层
-model.add(Dense(units=256, activation="relu"))
-model.add(Dropout(0.2))
-model.add(Dense(units=10,
-                activation="softmax"))
 
-model.summary() #可视化模型
-#单GPU版本
-#编译模型
-model.compile(loss="sparse_categorical_crossentropy",#多分类交叉熵损失函数
+from keras import Model,Input
+class CNNic(Model):
+    def __init__(self):
+        super(CNNic, self).__init__(name='CNN')
+        self.embedding = Embedding(output_dim=32, # 词向量的维度
+                                   input_dim=2000, # 字典大小
+                                   input_length=50) # 每个数字列表的长度
+        self.conv1 = Conv1D(256, # 输出大小
+                            3, # 卷积核大小
+                            padding='same',
+                            activation='relu')
+        self.maxpool = MaxPool1D(3,3,padding='same')
+        self.conv2 = Conv1D(32,3,padding='same',activation='relu')
+        self.flatten = Flatten()
+        self.dropout1 = Dropout(0.3)
+        self.batchnormalization = BatchNormalization()
+        self.dense1 = Dense(units=256,activation='relu')
+        self.dropout2 = Dropout(0.2)
+        self.dense2 = Dense(units=10,activation='softmax')
+
+    def call(self,x):
+        x = self.embedding(x)
+        x = self.conv1(x)
+        x = self.maxpool(x)
+        x = self.conv2(x)
+        x = self.flatten(x)
+        x = self.dropout1(x)
+        x = self.batchnormalization(x)
+        x = self.dense1(x)
+        x = self.dropout2(x)
+        x = self.dense2(x)
+        return x
+model = CNNic()
+print(model)
+
+# 单GPU版本
+# 编译模型
+model.compile(loss="sparse_categorical_crossentropy",# 多分类交叉熵损失函数
               optimizer="adam",#优化器
               metrics=["accuracy"])
-#训练模型
+# 训练模型
 history=model.fit(
     x_train,
     y_train,
     batch_size=batch_size,
     epochs=epochs,
     verbose=2,
-    validation_split=0.2 # 将训练集的20%用作验证集
+    validation_split=0.2
+    # 将训练集的20%用作验证集
 )
+model.summary() # 可视化模型
 #  ------------------------------- 5、训练模型 -------------------------------
 
 #  ------------------------------- 6、保存模型与训练可视化 -------------------------------
-#保存模型
-model.save('model_CNN_text.h5') # 生成模型文件'my_model.h5'
-#模型可视化
-plot_model(model,to_file='model_CNN_text.png',show_shapes=True)
-
-# 模型的预测功能
+# 保存模型的权重
+model.save_weights('model_CNN_Class_text.h5') # 生成模型文件'my_model.h5'
 # 加载模型
-model=load_model('model_CNN_text.h5')
-print(x_train[0])
-y_new=model.predict(x_train[0].reshape(1,50))
-print(list(y_new[0]).index(max(y_new[0])))
-print(y_train[0])
-
+# model=model.load_weights('model_CNN_Class_text.h5')
 # 训练过程可视化
 # 绘制训练和验证的准确率值
-plt.plot(history.history['acc'])
-plt.plot(history.history['val_acc'])
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
 plt.title('Model accuracy')
 plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend(['Train','Valid'],loc='upper left')
-plt.savefig('Valid_acc.png')
+plt.savefig('Class_Valid_acc.png')
 plt.show()
 
 # 绘制训练和验证的损失值
@@ -162,6 +162,6 @@ plt.title('Model loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss')
 plt.legend(['Train','Valid'],loc='upper left')
-plt.savefig('Valid_loss.png')
+plt.savefig('Class_Valid_loss.png')
 plt.show()
 # -------------------------- 6、保存模型与训练可视化-------------------------------

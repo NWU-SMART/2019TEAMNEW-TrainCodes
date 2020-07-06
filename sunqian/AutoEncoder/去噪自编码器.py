@@ -1,11 +1,12 @@
 # ----------------开发者信息--------------------------------#
 # 开发人员：孙迁
-# 开发日期：2020/7/3
-# 文件名称：卷积自编码器.py
+# 开发日期：2020/7/4
+# 文件名称：去噪自编码器.py
 # 开发工具：PyCharm
 # ----------------开发者信息--------------------------------#
 
 # ----------------------   代码布局： ----------------------
+# 与卷积自编码器类似，区别在于要对图像进行加噪预处理
 # 1、导入需要的包
 # 2、导入数据、图像预处理
 # 3、构建自编码器模型
@@ -49,6 +50,17 @@ print(X_test.shape[0], 'test samples')
 # 60000 train samples
 # 10000 test samples
 # -------输出结果--------------
+
+# 加噪
+noise_factor = 0.5
+X_train_noisy = X_train + noise_factor * np.random.normal(loc=0.0,scale=1.0,size=X_train.shape)
+X_test_noisy = X_test + noise_factor * np.random.normal(loc=0.0,scale=1.0,size=X_test.shape)
+# 使用截取函数将范围外的数强制转化为范围内的数。
+# def clip(a, a_min, a_max, out=None):
+# 将数组a中的所有数限定到范围a_min和a_max中，
+# 即az中所有比a_min小的数都会强制变为a_min，a中所有比a_max大的数都会强制变为a_max.
+X_train_noisy = np.clip(X_train_noisy,0.,1.)
+X_test_noisy= np.clip(X_test_noisy,0.,1.)
 #  -------------------------- 2、导入数据、图像预处理--------------------------------------------
 
 #  -------------------------- 3、构建自编码器模型 -------------------------------------------
@@ -64,7 +76,7 @@ h = MaxPooling2D((2, 2), padding='same')(conv1_3) # 8*7*7-->8*4*4
 # 解码器
 conv2_1 = Conv2D(8, (3, 3), activation='relu', padding='same')(h) # 8*4*4-->8*4*4
 up1 = UpSampling2D((2, 2))(conv2_1) # 8*4*4-->8*8*8
-conv2_2 = Conv2D(8, (3, 3),activation='relu', padding='same')(up1) #8*8*8-->8*8*8
+conv2_2 = Conv2D(8, (3, 3),activation='relu', padding='same')(up1) # 8*8*8-->8*8*8
 up2 = UpSampling2D((2, 2))(conv2_2) # 8*8*8-->8*16*16
 conv2_3 = Conv2D(16, (3, 3),activation='relu')(up2) # 8*16*16-->16*14*14(not same)
 up3 = UpSampling2D((2, 2))(conv2_3) # 16*14*14-->16*28*28
@@ -78,21 +90,21 @@ autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy') # 损失�
 #  -------------------------- 4、模型训练------------------------------------------
 epochs = 3
 batch_size = 128
-history = autoencoder.fit(X_train,X_train,
+history = autoencoder.fit(X_train_noisy, X_train,
                           batch_size=batch_size,
                           epochs=epochs,
                           verbose=2,
-                          validation_data=(X_test,X_test))
+                          validation_data=(X_test_noisy, X_test))
 #  -------------------------- 4、模型训练------------------------------------------
 
 #  -------------------------- 5、查看自编码器的解码效果 ------------------------------------------
-decoded_imgs = autoencoder.predict(X_test)
+decoded_imgs = autoencoder.predict(X_test_noisy)
 n = 10
 plt.figure(figsize=(20, 6))
 for i in range(n):
     # 打印原图
     ax = plt.subplot(3, n, i+1)
-    plt.imshow(X_test[i].reshape(28, 28))
+    plt.imshow(X_test_noisy[i].reshape(28, 28))
     plt.gray()
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
@@ -115,6 +127,6 @@ plt.title('model loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train','Valid'],loc='upper right')
-plt.savefig('CNNAutoEncoder_valid_loss.png')
+plt.savefig('DenoiseAutoEncoder_valid_loss.png')
 plt.show()
 # ----------------------------6、训练过程可视化-----------------------------------------------

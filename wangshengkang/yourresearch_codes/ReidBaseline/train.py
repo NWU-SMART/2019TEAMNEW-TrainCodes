@@ -117,3 +117,105 @@ use_gpu = torch.cuda.is_available()  # 看gpu是否可用
 since = time.time()  # 获取当前时间
 inputs, classes = next(iter(dataloaders['train']))  # 迭代读取
 print(time.time() - since)  # 打印出代码运行时间
+
+y_loss = {'train': [], 'val': []}  # loss history 创建损失字典
+y_err = {}
+y_err['train'] = []
+y_err['val'] = []
+
+
+# 训练的函数
+def train_model(model, criterion, optimizer, scheduler, num_epochs=25):
+    since = time.time()  # 获取系统时间
+
+    # best_model_wts = model.state_dict()
+    # best_acc = 0.0
+    warm_up = 0.1  # We start from the 0.1*lrRate
+    # round返回浮点数x的四舍五入值。
+    warm_iteration = round(dataset_sizes['train'] / opt.batchsize) * opt.warm_epoch  # first 5 epoch
+
+    for epoch in range(num_epochs):  # 开始训练
+        print('Epoch {}/{}'.format(epoch, num_epochs - 1))  # 打印epoch数
+        print('-' * 10)  # 打印分割线
+
+        # Each epoch has a training and validation phase
+        for phase in ['train', 'val']:
+            if phase == 'train':
+                scheduler.step()
+                model.train(True)  # Set model to training mode
+            else:
+                model.train(False)  # Set model to evaluate mode
+
+            running_loss = 0.0
+            running_corrects = 0.0
+            # Iterate over data.
+            for data in dataloaders[phase]:
+                # get the inputs
+                inputs, labels = data  # 获得图片和标签
+                now_batch_size, c, h, w = inputs.shape  # 获取N,C,H,W
+                if now_batch_size < opt.batchsize:  # skip the last batch
+                    continue  # 跳出去，进行下一次循环
+                # print(inputs.shape)
+                # wrap them in Variable
+                if use_gpu:  # 将数据和标签用Variable包装，并且放到gpu中
+                    inputs = Variable(inputs.cuda().detach())
+                    labels = Variable(labels.cuda().detach())
+                else:
+                    inputs, labels = Variable(inputs), Variable(labels)
+                # zero the parameter gradients
+                optimizer.zero_grad()
+                # forward
+                if phase == 'val':
+                    with torch.no_grad():
+                        outputs = model(inputs)
+                else:
+                    outputs = model(inputs)
+
+                _, preds = torch.max(outputs.data, 1)  # 求每一行的最大值，以及最大值的列标，列标作为标签
+                loss = criterion(outputs, labels)  # 计算损失
+
+                # backward + optimize only if in training phase
+                if epoch < opt.warm_epoch and phase == 'train':
+                    warm_up = min(1.0, warm_up + 0.9 / warm_iteration)
+                    loss *= warm_up
+
+                if phase == 'train':
+                    loss.backward()  # backward
+                    optimizer.step()  # optimizer
+
+                # statistics
+                if int(version[0]) > 0 or int(version[2]) > 3:  # for the new version like 0.4.0, 0.5.0 and 1.0.0
+                    running_loss += loss.item() * now_batch_size
+                else:  # for the old version like 0.3.0 and 0.3.1
+                    running_loss += loss.data[0] * now_batch_size
+                running_corrects += float(torch.sum(preds == labels.data))
+
+            epoch_loss = running_loss / dataset_sizes[phase]
+            epoch_acc = running_corrects / dataset_sizes[phase]
+
+            # 打印每个epoch的损失和准确率
+            print('{} Loss: {:.4f} Acc: {:.4f}'.format(
+                phase, epoch_loss, epoch_acc))
+
+            y_loss[phase].append(epoch_loss)
+            y_err[phase].append(1.0 - epoch_acc)
+            # deep copy the model
+            if phase == 'val':
+                last_model_wts = model.state_dict()
+                if epoch % 10 == 9:  # 每十次epoch保存一次网络
+                    save_network(model, epoch)
+
+        time_elapsed = time.time() - since
+        print('Training complete in {:.0f}m {:.0f}s'.format(
+            time_elapsed // 60, time_elapsed % 60))
+        print()
+
+    time_elapsed = time.time() - since
+    print('Training complete in {:.0f}m {:.0f}s'.format(
+        time_elapsed // 60, time_elapsed % 60))
+    # print('Best val Acc: {:4f}'.format(best_acc))
+
+    # load best model weights
+    model.load_state_dict(last_model_wts)
+    save_network(model, 'last')
+    return model

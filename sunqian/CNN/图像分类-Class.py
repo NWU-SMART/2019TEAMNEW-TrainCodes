@@ -1,14 +1,14 @@
 # ----------------开发者信息--------------------------------#
 # 开发人员：孙迁
-# 开发日期：2020/7/2
-# 文件名称：图像分类.py
+# 开发日期：2020/7/7
+# 文件名称：图像分类-Class.py
 # 开发工具：PyCharm
 # ----------------开发者信息--------------------------------#
 
 # ----------------------   代码布局： ----------------------
 # 1、导入需要的包
 # 2、导入数据、数据预处理
-# 3、构建模型
+# 3、构建模型(Class)
 # 4、训练模型并保存
 # 5、训练可视化
 # ----------------------   代码布局： ----------------------
@@ -54,7 +54,7 @@ data_augmentation = True # 图像增强
 num_prediction = 20
 # os.getcwd()返回当前进程的工作目录
 save_dir = os.path.join(os.getcwd(),'saved_models_cnn')  #os.path.join()函数连接两个或更多的路径名组件
-model_name = 'keras_fashion_trained_model.h5'
+model_name = 'keras_fashion_trained_model_Class.h5'
 
 # 将类别转换成独热编码
 y_train = keras.utils.to_categorical(y_train,num_classes)
@@ -66,42 +66,55 @@ x_test = x_test.astype('float32')
 # 归一化
 x_train /=255
 x_test /=255
+
+print(x_train.shape)
+# 输出结果
+# (60000, 28, 28, 1)
 #  -------------------------- 2、导入数据、数据预处理--------------------------------------------
 
-#  -------------------------- 3、构建模型 -------------------------------------------
-model = Sequential()
-model.add(Conv2D(32, (3, 3), # 32,(3,3)是卷积核数量和大小
-                 padding='same',
-                 input_shape=x_train.shape[1:]))
-# 第一层需要指出图像的大小
-model.add(Activation('relu'))
-model.add(Conv2D(32,(3,3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
+#  -------------------------- 3、构建模型(Class)-------------------------------------------
+from keras import Model,Input
+class ImageClassify(keras.Model):
+    def __init__(self):
+        super(ImageClassify,self).__init__()
+        self.conv1 = Conv2D(32,(3,3),padding='same',input_shape=x_train.shape[1:],activation='relu')
+        self.conv2 = Conv2D(32,(3,3),activation='relu')
+        self.maxpool1 =MaxPooling2D(pool_size=(2,2))
+        self.dropout1 = Dropout(0.25)
+        self.conv3 = Conv2D(64,(3,3),padding='same',activation='relu')
+        self.conv4 = Conv2D(64,(3,3),activation='relu')
+        self.maxpool2 = MaxPooling2D(pool_size=(2,2))
+        self.dropout2 = Dropout(0.25)
+        self.flatten = Flatten()
+        self.dense1 = Dense(512,activation='relu')
+        self.dropout3 = Dropout(0.5)
+        self.dense2 = Dense(num_classes,activation='softmax')
 
-model.add(Conv2D(64,(3,3),padding='same'))
-model.add(Activation('relu'))
-model.add(Conv2D(64,(3,3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2,2)))
-model.add(Dropout(0.25))
-
-model.add(Flatten())
-model.add(Dense(512))
-model.add(Activation('relu'))
-model.add(Dropout(0.5))
-model.add(Dense(num_classes))
-model.add(Activation('softmax'))
+    def call(self, inputs):
+        x = self.conv1(inputs)
+        x = self.conv2(x)
+        x = self.maxpool1(x)
+        x = self.dropout1(x)
+        x = self.conv3(x)
+        x = self.conv4(x)
+        x = self.maxpool2(x)
+        x = self.dropout2(x)
+        x = self.flatten(x)
+        x = self.dense1(x)
+        x = self.dropout3(x)
+        x = self.dense2(x)
+        return x
+model = ImageClassify()
+print(model)
 
 # 初始化RMSprop优化器
-opt = keras.optimizers.RMSprop(lr=0.0001,decay=1e-6) #lr指学习率learning rate decay指学习率每次更新的下降率
+opt = keras.optimizers.RMSprop(lr=0.0001,decay=1e-6) # lr指学习率learning rate decay指学习率每次更新的下降率
 # 使用RMSprop优化器
 model.compile(loss='categorical_crossentropy',
               optimizer=opt,
               metrics=['accuracy'])
 model.summary()
-#  -------------------------- 3、构建模型 ------------------------------------------
+#  -------------------------- 3、构建模型(Class)------------------------------------------
 
 #  -------------------------- 4、训练模型------------------------------------------
 if not data_augmentation:
@@ -164,7 +177,7 @@ plt.title('Model Accuracy')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train','Valid'],loc='upper left')
-plt.savefig('tradition_cnn_valid_acc.png')
+plt.savefig('Class_cnn_valid_acc.png')
 plt.show()
 
 # 绘制训练和验证的损失值
@@ -174,7 +187,7 @@ plt.title('Model Loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train','Valid'],loc='upper left')
-plt.savefig('tradition_cnn_valid_loss.png')
+plt.savefig('Class_cnn_valid_loss.png')
 plt.show()
 # 训练精度可达到85%，验证精度可达到87%
 #  -------------------------- 5、训练可视化 ------------------------------------------

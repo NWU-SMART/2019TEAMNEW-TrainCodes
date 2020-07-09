@@ -99,21 +99,19 @@ K.set_image_dim_ordering('th')  # 用theano的图片输入顺序
 nch = 200
 
 # CNN生成图片
-# 通过100维的
-
 g_input = Input(shape=[100])  # 输入100维的向量
 # 100 维 --> 39200 (nch=200*14*14)， 权重 (100+1)* 39200 (input_dimendion + bias) * output_dimension
-H = Dense(nch*14*14, kernel_initializer='glorot_normal')(g_input)  # Glorot正态分布初始化权重
-H = BatchNormalization()(H)
+H = Dense(nch*14*14, kernel_initializer='glorot_normal')(g_input)  # 全连接层，Glorot正态分布初始化权重
+H = BatchNormalization()(H)    # 在每一层输入的时候，加入归一化层，先做一个归一化处理，再到网络的下一层
 H = Activation('relu')(H)
 
 # 39200 --> 200 * 14 * 14
-H = Reshape( [nch, 14, 14] )(H)  # 转成200 * 14 * 14
+H = Reshape( [nch, 14, 14] )(H)  # 转成200 * 14 * 14图片
 
 # 上采样 200 * 14 * 14 --> 200 * 28 * 28
 H = UpSampling2D(size=(2, 2))(H)
 
-# 二维卷积 200 * 28 * 28 --> 100 * 28 * 28
+# 二维卷积 200 * 28 * 28 --> 100 * 28 * 28 尺度无变化
 H = Convolution2D(100, (3, 3), padding="same", kernel_initializer='glorot_normal')(H)
 H = BatchNormalization()(H)
 H = Activation('relu')(H)
@@ -123,7 +121,7 @@ H = Convolution2D(50, (3, 3), padding="same", kernel_initializer='glorot_normal'
 H = BatchNormalization()(H)
 H = Activation('relu')(H)
 
-# 二维卷积 50 * 28 * 28 --> 1 * 28 * 28
+# 二维卷积 50 * 28 * 28 --> 1 * 28 * 28 生成了一幅28*28的图像
 H = Convolution2D(1, (1, 1), padding="same", kernel_initializer='glorot_normal')(H)
 g_V = Activation('sigmoid')(H)
 
@@ -157,7 +155,7 @@ H = LeakyReLU(0.2)(H)
 H = Dropout(dropout_rate)(H)
 
 # 256 --> 2 (true or false)
-d_V = Dense(2,activation='softmax')(H)
+d_V = Dense(2,activation='softmax')(H)   # 全连接，变为一维
 
 # 判别discriminator模块
 discriminator = Model(d_input,d_V)
@@ -176,21 +174,15 @@ def make_trainable(net, val):
     for l in net.layers:
         l.trainable = val
 
-make_trainable(discriminator, False)
+make_trainable(discriminator, False)  # 固定D训练G
 
 # 构造GAN
 gan_input = Input(shape=[100])  # 输入数据
-H = generator(gan_input)  # 生成新的图像，生成器  1 * 100 --> 1 * 28 * 28
-gan_V = discriminator(H)  # 判别器  1 * 28 * 28  --> 1 * 2 (输入 [0 1]为真实图像, [1 0]为生成图像)
-
-# 输入gan_input，生成图像，然后判别器判别输出结果为gan_V （整体GAN网络包括：生成器和判别器）
-GAN = Model(gan_input, gan_V)
-
-# GAN的Loss
-GAN.compile(loss='categorical_crossentropy', optimizer=opt)
-
-# GAN网络结果输出
-GAN.summary()
+H = generator(gan_input)        # 生成新的图像，生成器  1 * 100 --> 1 * 28 * 28
+gan_V = discriminator(H)        # 判别器  1 * 28 * 28  --> 1 * 2 (输入 [0 1]为真实图像, [1 0]为生成图像)
+GAN = Model(gan_input, gan_V)   # 输入gan_input，生成图像，然后判别器判别输出结果为gan_V （整体GAN网络包括：生成器和判别器）
+GAN.compile(loss='categorical_crossentropy', optimizer=opt)   # GAN的Loss
+GAN.summary()   # GAN网络结果输出
 
 #  --------------------- 6、构造生成对抗网络 ---------------------
 
@@ -233,15 +225,12 @@ print(XT.shape) # (10000, 1, 28, 28)
 # discriminator  （判别器）
 # GAN （generator+discriminator）  （生成器+判别器）
 
-########### ------------------- 预训练辨别器  -----------------------------
+#------------------------- 预训练辨别器  -----------------------------
 # 预训练辨别器
-noise_gen = np.random.uniform(0,1,size=[XT.shape[0],100]) # 生成XT.shape[0]个随机样本
-generated_images = generator.predict(noise_gen)  # 生成器产生图片样本
-
-# 真实图像为XT，生成图像为generated_images
-X = np.concatenate((XT, generated_images))
+noise_gen = np.random.uniform(0,1,size=[XT.shape[0],100]) # 噪音生成XT.shape[0]个随机样本
+generated_images = generator.predict(noise_gen)  # 生成器根据噪音产生图片样本
+# X = np.concatenate((XT, generated_images))     # 真实图像为XT，生成图像为generated_images
 n = XT.shape[0]
-
 y = np.zeros([2*n,2])  # 构造辨别器标签 one-hot encode
 y[:n,1] = 1  # 真实图像标签 [1 0]
 y[n:,0] = 1  # 生成图像标签 [0 1]
@@ -278,14 +267,14 @@ def train_for_n(nb_epoch=5000, plt_frq=25, BATCH_SIZE=32):
         ### ---- 生成器生成样本generated_images -----
         image_batch = X_train[np.random.randint(0, X_train.shape[0], size=BATCH_SIZE), :, :, :]
         noise_gen = np.random.uniform(0, 1, size=[BATCH_SIZE, 100])
-        generated_images = generator.predict(noise_gen)  # generator 生成器
+        generated_images = generator.predict(noise_gen)  # generator 生成器根据噪音生成图片
         ### ---- 生成器生成样本generated_images -----
 
         ### ------ 训练辨别器 ---------------
         X = np.concatenate((image_batch, generated_images))
         y = np.zeros([2 * BATCH_SIZE, 2])
-        y[0:BATCH_SIZE, 1] = 1
-        y[BATCH_SIZE:, 0] = 1
+        y[0:BATCH_SIZE, 1] = 1   # 真实图片
+        y[BATCH_SIZE:, 0] = 1    # 生成图片
 
         make_trainable(discriminator, True)  # 让判别器神经网络各层可用
         d_loss = discriminator.train_on_batch(X, y)  # discriminator 判别器训练

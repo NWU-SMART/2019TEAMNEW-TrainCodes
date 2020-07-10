@@ -1,7 +1,7 @@
 # ----------------开发者信息----------------------------
 # 开发者：张迅
 # 开发日期：2020年6月25日
-# 内容：2.CNN-招聘信息文本分类
+# 内容：MLP-招聘信息文本分类
 # 修改内容：
 # 修改者：
 # ----------------开发者信息----------------------------
@@ -39,7 +39,7 @@ from keras.layers import BatchNormalization
 
 #  -------------------------- 2、招聘数据数据导入 -------------------------------
 # 文件放置在目录  D:\keras_datasets\job_detail_dataset.csv
-job_detail_pd = pd.read_csv('../../../数据集、模型、图片/2.CNN/job_detail_dataset.csv', encoding='UTF-8')
+job_detail_pd = pd.read_csv('../../../数据集、模型、图片/1.MLP/job_detail_dataset.csv', encoding='UTF-8')
 print(job_detail_pd.head(5))  
 label = list(job_detail_pd['PositionType'].unique())  # 标签  
 print(label)
@@ -73,7 +73,9 @@ job_detail_pd['Job_Description_key_word'] = job_detail_pd.Job_Description.apply(
 #  -------------------------- 3、分词和提取关键词 -------------------------------
 
 #  -------------------------- 4、建立字典，并使用 -------------------------------
-# 建立2000个词的字典  
+# 建立2000个词的字典
+# 分词器Tokenizer: 是一个用于向量化文本，或将文本转换为序列（即单词在字典中的下标构成的列表，从1算起）的类。
+# Tokenizer实际上只是生成了一个字典，并且统计了词频等信息，并没有把文本转成需要的向量表示
 token = Tokenizer(num_words = 2000)   
 token.fit_on_texts(job_detail_pd['Job_Description_key_word']) #按单词出现次数排序，排序前2000的单词会列入词典中  
  
@@ -87,61 +89,60 @@ y_train = job_detail_pd['label'].tolist()
 #  -------------------------- 4、建立字典，并使用 -------------------------------
 
 #  -------------------------- 5、训练模型 -------------------------------
-model = Sequential()  
-model.add(Embedding(output_dim = 32,  # 词向量的维度  
-                   input_dim = 2000,  # Size of the vocabulary 字典大小  
-                   input_length = 50  # 每个数字列表的长度  
-                                     )    
-                 )  
-  
-model.add(Conv1D(256,  # 输出大小  
-                  3,   # 卷积核大小  
-                  padding='same',   
-                  activation='relu'))  
-model.add(MaxPool1D(3,3,padding='same'))  
-model.add(Conv1D(32, 3, padding='same', activation='relu'))  
-model.add(Flatten())  
-model.add(Dropout(0.3))  
-model.add(BatchNormalization()) # (批)规范化层  
-model.add(Dense(256,activation='relu'))  
-model.add(Dropout(0.2))  
-model.add(Dense(units = 10,  
-                 activation = "softmax"))  
-  
 batch_size = 256  
 epochs = 5  
-   
-# 单GPU版本  
-model.summary()  # 可视化模型  
+model = Sequential()
+
+# 嵌入层Embedding: 将正整数（下标）转换为具有固定大小的向量，如[[4],[20]]->[[0.25,0.1],[0.6,-0.2]]，
+# 具体方法参考 Word2vec 之 Skip-Gram 模型。
+# Embedding层只能作为模型的第一层。
+model.add(Embedding(output_dim = 32,  # 词向量的维度  
+                     input_dim = 2000, # Size of the vocabulary 字典大小  
+                      input_length = 50  # 每个数字列表的长度  
+                     )    
+           )  
+    
+model.add(Dropout(0.2))   
+model.add(Flatten())  # 平展  
+model.add(Dense(units = 256,  
+                 activation = "relu"))  
+model.add(Dropout(0.25))  
+model.add(Dense(units = 10,  
+                activation = "softmax"))  
+  
+print(model.summary())  # 打印模型  
+# CPU版本  
 model.compile(loss = "sparse_categorical_crossentropy",  # 多分类  
-                  optimizer = "adam",  
-                  metrics = ["accuracy"])  
- 
+          optimizer = "adam",  
+          metrics = ["accuracy"]  
+)  
+  
 history = model.fit(  
-               x_train,   
-               y_train,  
-               batch_size=batch_size,  
-              epochs=epochs,  
-              validation_split = 0.2  
-              # 训练集的20%用作验证集  
-              )
+         x_train,   
+         y_train,   
+         batch_size = batch_size,  
+         epochs = epochs,  
+         verbose = 2,  
+         validation_split = 0.2  # 训练集的20%用作验证集  
+ )
 #  -------------------------- 5、训练模型 -------------------------------
 
 
 #  -------------------------- 6、保存模型，显示运行结果 -------------------------------
 from keras.utils import plot_model  
 # 保存模型  
-model.save('model_CNN_text.h5')  #  生成模型文件 'my_model.h5'  
+model.save('model_MLP_text.h5')  # 生成模型文件 'my_model.h5'  
 # 模型可视化  
-plot_model(model, to_file='model_CNN_text.png', show_shapes=True)
-
+plot_model(model, to_file='model_MLP_text.png', show_shapes=True)
+# ImportError: Failed to import `pydot`. Please install `pydot`. For example with `pip install pydot`.
+# pydot: 用于keras的可视化
 
 from keras.models import load_model  
 # 加载模型  
-# model = load_model('model_CNN_text.h5')  
-print(x_train[0])  
-y_new = model.predict(x_train[0].reshape(1, 50))  
-print(list(y_new[0]).index(max(y_new[0])))  
+# model = load_model('model_MLP_text.h5')  
+print(x_train[0])
+y_new = model.predict(x_train[0].reshape(1, 50))
+print(list(y_new[0]).index(max(y_new[0])))
 print(y_train[0])
 
 
@@ -155,7 +156,7 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')  
 plt.savefig('Valid_acc.png')  
 plt.show()  
-  
+   
 # 绘制训练 & 验证的损失值  
 plt.plot(history.history['loss'])  
 plt.plot(history.history['val_loss'])  
@@ -165,5 +166,4 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Valid'], loc='upper left')  
 plt.savefig('Valid_loss.png')  
 plt.show()
-
 #  -------------------------- 6、保存模型，显示运行结果 -------------------------------

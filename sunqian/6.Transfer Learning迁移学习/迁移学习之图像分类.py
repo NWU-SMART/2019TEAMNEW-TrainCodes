@@ -66,28 +66,35 @@ y_test = keras.utils.to_categorical(y_test, num_classes)
 
 # 由于mnist的输入数据维度是(num, 28, 28)，vgg16 需要三维图像,所以扩充mnist的最后一维
 import cv2
+# cv2.cvtColor(img,cv2.COLOR_GRAY2RGB) --> 图像颜色空间转换，将灰色图像转为彩色图像
+# cv2.resize(img,image2,dsize) 图像缩放，参数为(输入原始图像，输入新图像，图像的大小)
 x_train = [cv2.cvtColor(cv2.resize(i, (48, 48)), cv2.COLOR_GRAY2RGB) for i in x_train]
 x_test = [cv2.cvtColor(cv2.resize(i, (48, 48)), cv2.COLOR_GRAY2RGB) for i in x_test]
 
+# 将list转换为numpy.asarrary
 x_train = np.asarray(x_train)
 x_test = np.asarray(x_test)
 
+# 归一化
 x_train = x_train.astype('float32')
 x_test = x_test.astype('float32')
-
-# 归一化
-x_train /=255
-x_test /=255
+x_train /=255.
+x_test /=255.
 print(x_train.shape)  # 结果为(60000, 48, 48, 3)
 #  -------------------------- 2、导入数据、数据预处理--------------------------------------------
 
 #  -------------------------- 3、迁移学习建模 -------------------------------------------
-# 使用vgg16模型，include_top=False表示不包含最后的3个全连接层。input_shape=x_train.shape[1:]第一层需要指出图像大小
+# VGG16包含13个卷积层和3个全连接层，是一个已经建立好的model，可以直接拿来用，VGG19包含16个卷积层和3个全连接层
+# 将VGG16模型下载存放在本地C:\Users\sunqian\.keras\models下
+# 使用vGG16模型，include_top=False表示不包含最后的3个全连接层。
+# weights:初始化神经网络参数，None表示随机初始化，imagenet表示在ImageNet训练之后的参数。input_shape=x_train.shape[1:]第一层需要指出图像大小
 base_model = applications.VGG16(include_top=False, weights='imagenet', input_shape=x_train.shape[1:])
+# 查看模型
+base_model.summary()
+print(base_model.output)
 
 # 建立CNN模型
 model = Sequential()
-print(base_model.output)
 model.add(Flatten(input_shape=base_model.output_shape[1:]))
 
 # 7*7*512 --> 256
@@ -188,7 +195,7 @@ plt.title('Model Accuracy')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train','Valid'],loc='upper left')
-plt.savefig('tradition_cnn_valid_acc.png')
+plt.savefig('transfer_learning_valid_acc.png')
 plt.show()
 
 # 绘制训练和验证的损失值
@@ -198,7 +205,7 @@ plt.title('Model Loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['Train','Valid'],loc='upper left')
-plt.savefig('tradition_cnn_valid_loss.png')
+plt.savefig('transfer_learning_valid_loss.png')
 plt.show()
-# 训练精度可达到85%，验证精度可达到87%
+# 训练精度可达到89%，验证精度可达到90%
 #  -------------------------- 5、训练可视化 ------------------------------------------

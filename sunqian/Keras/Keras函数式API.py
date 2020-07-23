@@ -94,14 +94,14 @@ num_samples = 1000
 max_length = 100
 text = np.random.randint(1,text_vocabulary_size,size=(num_samples,max_length))
 question = np.random.randint(1,question_vocabulary_size,size=(num_samples,max_length))
-answers = np.random.randint(answer_vocabulary_size,size=(num_samples))
+answers = np.random.randint(answer_vocabulary_size,size=num_samples)
 # 回答是one-hot编码的，不是整数
 answers = to_categorical(answers,answer_vocabulary_size)
 
 # 使用输入组成的列表来拟合
 # model.fit([text,question],answers,epochs=10,batch_size=128)
 # 使用输入组成的字典来拟合（只有对输入进行命名之后才能用这种方法）
- model.fit({'text':text,'question':question},answers,epochs=10,batch_sie=128)
+ model.fit({'text':text,'question':question},answers,epochs=10,batch_size=128)
 #  -------------------------- 3、多输入模型 -------------------------------
 
 
@@ -166,14 +166,3 @@ model.fit(posts,{'age':age_targets,
           batch_size=64)
 
 #  -------------------------- 4、多输出模型-------------------------------
-
-
-#  -------------------------- 5、-------------------------------
-
-
-#  -------------------------- 5、 -------------------------------
-
-#  -------------------------- 6、 -------------------------------
-
-
-#  -------------------------- 6、-------------------------------
